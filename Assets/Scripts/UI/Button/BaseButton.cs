@@ -40,6 +40,7 @@ namespace UI
 
       private void OnDisable()
       {
+
           button.onClick.RemoveListener(OnClick);
       }
 

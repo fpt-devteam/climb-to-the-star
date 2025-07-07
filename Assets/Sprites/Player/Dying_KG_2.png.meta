@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -118,12 +118,12 @@ TextureImporter:
       name: Dying_KG_2_0
       rect:
         serializedVersion: 2
-        x: 28
+        x: 29
         y: 0
-        width: 41
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 39
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: Dying_KG_2_1
       rect:
         serializedVersion: 2
-        x: 104
+        x: 105
         y: 0
-        width: 59
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 57
+        height: 55
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: Dying_KG_2_2
       rect:
         serializedVersion: 2
-        x: 202
+        x: 203
         y: 0
-        width: 59
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 57
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -186,10 +186,10 @@ TextureImporter:
         serializedVersion: 2
         x: 307
         y: 0
-        width: 66
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 36
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: Dying_KG_2_4
       rect:
         serializedVersion: 2
-        x: 407
+        x: 408
         y: 0
-        width: 68
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 66
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: Dying_KG_2_5
       rect:
         serializedVersion: 2
-        x: 507
+        x: 508
         y: 0
-        width: 68
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 66
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: efe98e61aec15224a825fc4b9a4a154e
     internalID: 0
     vertices: []
     indices: 
