@@ -5,6 +5,9 @@ using UnityEngine;
 public class StateMachine
 {
     public StateNode current;
+
+    public StateNode previous;
+
     Dictionary<Type, StateNode> nodes;
 
     public StateMachine()
@@ -40,7 +43,8 @@ public class StateMachine
 
     public void SetState(IState state)
     {
-        current = nodes[state.GetType()];
+        var node = GetOrAddNode(state);
+        current = node;
         current.State?.OnEnter();
     }
 

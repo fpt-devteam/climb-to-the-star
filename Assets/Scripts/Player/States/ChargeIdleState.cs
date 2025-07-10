@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
-public class WalkingState : BasePlayerState
+public class ChargeIdleState : BasePlayerState
 {
     private Animator animator;
 
-    public WalkingState(PlayerController playerController)
+    public ChargeIdleState(PlayerController playerController)
         : base(playerController)
     {
         animator = playerController.GetComponent<Animator>();
@@ -12,12 +13,12 @@ public class WalkingState : BasePlayerState
 
     public override void OnEnter()
     {
-        animator.Play("Walk");
-        Debug.Log("Walking");
+        animator.Play("ChargeIdle");
+        Debug.Log("ChargeIdle");
     }
 
     public override void FixedUpdate()
     {
-        playerController.HandleMovement();
+        playerController.HandleCharge();
     }
 }

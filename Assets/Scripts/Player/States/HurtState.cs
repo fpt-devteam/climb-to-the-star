@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : BasePlayerState
+public class HurtState : BasePlayerState
 {
     private Animator animator;
+    private float currentHealth;
 
-    public AttackState(PlayerController playerController)
+    public HurtState(PlayerController playerController)
         : base(playerController)
     {
         animator = playerController.GetComponent<Animator>();
@@ -13,9 +14,16 @@ public class AttackState : BasePlayerState
 
     public override void OnEnter()
     {
-        animator.Play("Attack_1");
+        currentHealth = playerController.GetComponent<Player>().CurrentHealth();
+        if (currentHealth <= 0)
+        {
+            playerController.stateMachine.SetState(new DieState(playerController));
+            return;
+        }
+
+        animator.Play("Hurt");
         playerController.StartCoroutine(ExitToDefault());
-        Debug.Log("Attacking");
+        Debug.Log("Hurt");
     }
 
     private IEnumerator ExitToDefault()

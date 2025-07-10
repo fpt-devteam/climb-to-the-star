@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private List<ISkill> skills = new List<ISkill>();
+    public Transform AttackPoint => attackPoint;
+
     [SerializeField]
     private float maxHealth = 100;
 
@@ -37,53 +38,83 @@ public class Player : MonoBehaviour
     private Slider staminaBar;
 
     [SerializeField]
-    public Transform AttackPoint => attackPoint;
+    private float immuneTimer = 0f;
 
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
-    }
+    [SerializeField]
+    private float immuneDuration = 0.5f;
+
+    private bool isShielding = false;
 
     public void Die()
     {
         Debug.Log("Player died");
     }
 
-    public void Heal(float healthAmount) =>
-        currentHealth = Math.Max(maxHealth, currentHealth + healthAmount);
+    public float HealthPercentage() => currentHealth / maxHealth;
 
-    public void TakeStamina(float staminaAmount) =>
-        currentStamina = Math.Max(0f, currentStamina - staminaAmount);
+    public float CurrentHealth() => currentHealth;
 
-    public void LevelUp()
-    {
-        Restart();
-        // maxHealth += 10f;
-        // damage += 2f;
-        // jumpForce += 1f;
-    }
+    public bool IsHurt() => immuneTimer > 0f;
 
-    public void Restart()
+    public bool IsDead() => currentHealth <= 0f;
+
+    void Awake()
     {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
+        immuneTimer = 0f;
     }
 
     void Update()
     {
-        GenerateStamina();
+        immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
         UpdateHealthSlider();
         UpdateStaminaSlider();
+    }
+
+    public void StartShield() => isShielding = true;
+
+    public void StopShield() => isShielding = false;
+
+    public void HandleCharge()
+    {
+        currentStamina = Math.Min(maxStamina, currentStamina + 1f * Time.deltaTime);
+    }
+
+    public void RestoreStamina(float staminaAmount)
+    {
+        currentStamina = Math.Min(maxStamina, currentStamina + staminaAmount);
+    }
+
+    public void RestoreHealth(float healthAmount)
+    {
+        currentHealth = Math.Min(maxHealth, currentHealth + healthAmount);
+    }
+
+    public void DeductStamina(float staminaAmount)
+    {
+        if (currentStamina < staminaAmount)
+            return;
+
+        currentStamina -= staminaAmount;
+    }
+
+    public void DeductHealth(float damageAmount)
+    {
+        if (immuneTimer > 0 || isShielding)
+            return;
+
+        currentHealth -= damageAmount;
+        immuneTimer = immuneDuration;
+
+        if (currentHealth <= 0)
+            Die();
     }
 
     private void UpdateHealthSlider()
     {
         Image fillImage = healthBar.fillRect.GetComponent<Image>();
-        healthBar.value = currentHealth / maxHealth;
+        healthBar.value = HealthPercentage();
 
         if (fillImage != null)
         {
@@ -100,12 +131,6 @@ public class Player : MonoBehaviour
                 fillImage.color = Color.red;
             }
         }
-    }
-
-    private void GenerateStamina()
-    {
-        currentStamina += 1f * Time.deltaTime;
-        currentStamina = Math.Min(maxStamina, currentStamina);
     }
 
     private void UpdateStaminaSlider()
@@ -130,17 +155,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddSkill(ISkill skill)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        skill.Initialize(this);
-        skills.Add(skill);
-    }
-
-    public void ExecuteSkill(int skillIndex)
-    {
-        if (skillIndex >= 0 && skillIndex < skills.Count)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            skills[skillIndex].Execute();
+            DeductHealth(10f);
         }
     }
 }

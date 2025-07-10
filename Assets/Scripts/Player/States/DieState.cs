@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : BasePlayerState
+public class DieState : BasePlayerState
 {
     private Animator animator;
 
-    public AttackState(PlayerController playerController)
+    public DieState(PlayerController playerController)
         : base(playerController)
     {
         animator = playerController.GetComponent<Animator>();
@@ -13,14 +13,14 @@ public class AttackState : BasePlayerState
 
     public override void OnEnter()
     {
-        animator.Play("Attack_1");
+        animator.Play("Die");
         playerController.StartCoroutine(ExitToDefault());
-        Debug.Log("Attacking");
+        Debug.Log("Die");
     }
 
     private IEnumerator ExitToDefault()
     {
-        yield return new WaitForSeconds(0.4f);
-        playerController.stateMachine.SetState(new IdleState(playerController));
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
     }
 }

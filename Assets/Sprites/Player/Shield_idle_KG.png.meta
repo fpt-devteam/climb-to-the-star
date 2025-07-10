@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -112,12 +112,12 @@ TextureImporter:
       name: Shield_idle_KG_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 12
         y: 0
-        width: 60
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 58
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Shield_idle_KG_1
       rect:
         serializedVersion: 2
-        x: 110
+        x: 111
         y: 0
-        width: 62
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 60
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: Shield_idle_KG_2
       rect:
         serializedVersion: 2
-        x: 212
+        x: 213
         y: 0
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 59
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: Shield_idle_KG_3
       rect:
         serializedVersion: 2
-        x: 311
+        x: 312
         y: 0
-        width: 61
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 59
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 030cb39219db6b84d9856a80df097f62
     internalID: 0
     vertices: []
     indices: 
@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shield_idle_KG_0: -3073705644441079661
+      Shield_idle_KG_1: 8813596621933222433
+      Shield_idle_KG_2: 1793917462258622204
+      Shield_idle_KG_3: -7915531531030293457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform AttackPoint => player.AttackPoint;
+
+    public StateMachine stateMachine;
+
     private IPlayerInput playerInput;
+
     private IPlayerMovement playerMovement;
-    private IPlayerSkill playerSkill;
+
     private Player player;
 
     private Rigidbody2D rb;
+
     private Animator animator;
 
     private bool isGrounded = false;
+    private bool isFacingRight = true;
 
     // factory (...conditions, map) => return Movement();
     // observer (...conditions, map) => return Movement();
     // map: state mua to vai lon, mua bth, bang, etc...
 
-    [SerializeField]
-    private Transform attackPoint;
-    public Transform AttackPoint => attackPoint;
-
-    public StateMachine stateMachine;
-
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -32,9 +33,6 @@ public class PlayerController : MonoBehaviour
         playerMovement = new NormalMovement();
         playerMovement.Initialize(player);
 
-        playerSkill = new Skill1();
-        playerSkill.Initialize(player);
-
         stateMachine = new StateMachine();
 
         var idleState = new IdleState(this);
@@ -43,51 +41,103 @@ public class PlayerController : MonoBehaviour
         var landingState = new LandingState(this);
         var walkingState = new WalkingState(this);
         var attackState = new AttackState(this);
+        var hurtState = new HurtState(this);
+        var dieState = new DieState(this);
+        var dashState = new DashState(this);
+        var chargeIdleState = new ChargeIdleState(this);
+        var shieldIdleState = new ShieldIdleState(this);
+        var victoryState = new VictoryState(this);
 
         stateMachine.AddTransition(idleState, jumpState, new FuncPredicate(CanJump));
         stateMachine.AddTransition(idleState, walkingState, new FuncPredicate(IsWalking));
+        stateMachine.AddTransition(idleState, attackState, new FuncPredicate(IsAttacking));
+        stateMachine.AddTransition(idleState, dashState, new FuncPredicate(CanDash));
+
+        stateMachine.AddTransition(idleState, hurtState, new FuncPredicate(player.IsHurt));
+
+        stateMachine.AddTransition(
+            idleState,
+            chargeIdleState,
+            new FuncPredicate(() => CanCharge() && IsCharging())
+        );
+        stateMachine.AddTransition(
+            idleState,
+            shieldIdleState,
+            new FuncPredicate(() => CanShield() && IsShielding())
+        );
+
+        stateMachine.AddTransition(
+            chargeIdleState,
+            idleState,
+            new FuncPredicate(() => !IsCharging())
+        );
+
+        stateMachine.AddTransition(
+            shieldIdleState,
+            idleState,
+            new FuncPredicate(() => !IsShielding())
+        );
+
         stateMachine.AddTransition(jumpState, fallState, new FuncPredicate(IsFalling));
         stateMachine.AddTransition(fallState, landingState, new FuncPredicate(IsGrounded));
-        stateMachine.AddTransition(walkingState, jumpState, new FuncPredicate(CanJump));
+
         stateMachine.AddTransition(walkingState, idleState, new FuncPredicate(IsIdling));
-        stateMachine.AddTransition(idleState, attackState, new FuncPredicate(IsAttacking));
+        stateMachine.AddTransition(walkingState, jumpState, new FuncPredicate(CanJump));
         stateMachine.AddTransition(walkingState, attackState, new FuncPredicate(IsAttacking));
+        stateMachine.AddTransition(walkingState, dashState, new FuncPredicate(CanDash));
+        stateMachine.AddTransition(walkingState, chargeIdleState, new FuncPredicate(CanCharge));
+        stateMachine.AddTransition(walkingState, shieldIdleState, new FuncPredicate(CanShield));
 
         stateMachine.SetState(idleState);
     }
 
-    private void Update()
-    {
-        playerSkill.Update();
-    }
+    void Update() { }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         stateMachine.FixedUpdate();
+        isFacingRight = playerInput.GetMovementInput() >= 0f;
     }
 
-    public void HandleMovement()
-    {
-        var moveDirection = Input.GetAxisRaw("Horizontal");
-        playerMovement.Move(moveDirection);
-    }
+    public void HandleMovement() => playerMovement.Move(playerInput.GetMovementInput());
+
+    public void HandleDash() => playerMovement.Dash(isFacingRight ? 1 : -1);
 
     public void HandleJump() => playerMovement.Jump();
 
-    public void HandleDash() => playerMovement.Dash();
+    public void HandleCharge() => player.HandleCharge();
 
-    public void HandleSkill() => playerSkill.Execute();
+    public void StartShield() => player.StartShield();
+
+    public void StopShield() => player.StopShield();
+
+    public bool IsGrounded() => isGrounded;
+
+    public bool IsWalking() => playerInput.GetMovementInput() != 0 && isGrounded;
+
+    public bool IsIdling() => playerInput.GetMovementInput() == 0 && isGrounded;
+
+    public bool IsShielding() => playerInput.IsShieldHeld();
+
+    public bool IsCharging() => playerInput.IsChargeHeld();
+
+    public bool IsFalling() => rb.linearVelocity.y < -0.01f;
+
+    public bool IsAttacking() => IsGrounded() && playerInput.IsAttackPressed();
+
+    public bool CanJump() => isGrounded && playerInput.IsJumpPressed();
+
+    public bool CanDash() => isGrounded && playerInput.IsDashPressed();
+
+    public bool CanCharge() => isGrounded && playerInput.IsChargePressed();
+
+    public bool CanShield() => isGrounded && playerInput.IsShieldPressed();
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-        }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            player.TakeDamage(10f);
         }
     }
 
@@ -98,23 +148,4 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
-
-    public bool IsWalking() => playerInput.MovementInput != 0;
-
-    public bool IsFalling() => rb.linearVelocity.y < -0.01f;
-
-    public bool IsGrounded() => isGrounded;
-
-    public bool CanJump() => isGrounded && playerInput.IsJumpPressed;
-
-    public bool IsIdling() => playerInput.MovementInput == 0 && isGrounded;
-
-    public bool IsAttacking() =>
-        IsGrounded()
-        && (
-            playerInput.IsSkill1Pressed
-            || playerInput.IsSkill2Pressed
-            || playerInput.IsSkill3Pressed
-            || playerInput.IsSkill4Pressed
-        );
 }

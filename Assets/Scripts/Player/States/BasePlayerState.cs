@@ -16,6 +16,4 @@ public class BasePlayerState : MonoBehaviour, IState
     public virtual void FixedUpdate() { }
 
     public virtual void OnExit() { }
-
-    public virtual bool CanSwitchTo(IState state) => true;
 }

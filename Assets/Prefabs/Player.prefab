@@ -87,7 +87,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.35, y: 0.62}
+  m_Size: {x: 1.375, y: 1.90625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -176,17 +176,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.96197253}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.59375, y: 1.9375}
-    newSize: {x: 0.35, y: 0.62}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.53125, y: 1.90625}
+    newSize: {x: 1.375, y: 1.90625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.59375, y: 1.9375}
+  m_Size: {x: 1.59375, y: 1.9404365}
   m_EdgeRadius: 0
 --- !u!114 &6122592651756924915
 MonoBehaviour:
@@ -200,7 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17adf915db58234caad6be99b7a7dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 0}
 --- !u!114 &7654968185538936536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +222,8 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
+  immuneTimer: 0
+  immuneDuration: 0.5
 --- !u!114 &2551242170968324692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,11 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dcd0a00bb18814b8e226195272535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackKey: 106
   jumpKey: 32
+  chargeKey: 107
+  dashKey: 108
   shieldKey: 115
-  dashKey: 100
-  skill1Key: 113
-  skill2Key: 119
-  skill3Key: 101
-  skill4Key: 114
   pauseKey: 27

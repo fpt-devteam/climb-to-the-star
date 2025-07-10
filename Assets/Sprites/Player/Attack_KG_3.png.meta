@@ -127,12 +127,12 @@ TextureImporter:
       name: Attack_KG_3_0
       rect:
         serializedVersion: 2
-        x: 19
+        x: 20
         y: 0
-        width: 49
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 47
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: Attack_KG_3_1
       rect:
         serializedVersion: 2
-        x: 131
+        x: 132
         y: 0
-        width: 40
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 38
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: Attack_KG_3_2
       rect:
         serializedVersion: 2
-        x: 218
+        x: 219
         y: 0
-        width: 45
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 43
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,12 +193,12 @@ TextureImporter:
       name: Attack_KG_3_3
       rect:
         serializedVersion: 2
-        x: 300
+        x: 301
         y: 0
-        width: 60
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 58
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,12 +215,12 @@ TextureImporter:
       name: Attack_KG_3_4
       rect:
         serializedVersion: 2
-        x: 400
+        x: 401
         y: 0
-        width: 60
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 58
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -237,12 +237,12 @@ TextureImporter:
       name: Attack_KG_3_5
       rect:
         serializedVersion: 2
-        x: 499
+        x: 500
         y: 0
-        width: 102
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 100
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -259,12 +259,12 @@ TextureImporter:
       name: Attack_KG_3_6
       rect:
         serializedVersion: 2
-        x: 610
+        x: 611
         y: 0
-        width: 91
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: Attack_KG_3_7
       rect:
         serializedVersion: 2
-        x: 710
+        x: 711
         y: 0
-        width: 91
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -303,12 +303,12 @@ TextureImporter:
       name: Attack_KG_3_8
       rect:
         serializedVersion: 2
-        x: 810
+        x: 811
         y: 0
-        width: 90
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -325,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 07603e6635d006f4b82a9b5b47dc99e5
     internalID: 0
     vertices: []
     indices: 

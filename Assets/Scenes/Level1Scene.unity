@@ -3477,11 +3477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.654
+      value: -4.659
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.02
+      value: -3.988
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3515,10 +3515,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6122592651756924915, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
-      propertyPath: attackPoint
-      value: 
-      objectReference: {fileID: 1881027399}
     - target: {fileID: 7654968185538936536, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: healthBar
       value: 

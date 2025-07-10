@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : BasePlayerState
+public class VictoryState : BasePlayerState
 {
     private Animator animator;
 
-    public AttackState(PlayerController playerController)
+    public VictoryState(PlayerController playerController)
         : base(playerController)
     {
         animator = playerController.GetComponent<Animator>();
@@ -13,9 +13,9 @@ public class AttackState : BasePlayerState
 
     public override void OnEnter()
     {
-        animator.Play("Attack_1");
+        animator.Play("Victory");
         playerController.StartCoroutine(ExitToDefault());
-        Debug.Log("Attacking");
+        Debug.Log("Victory");
     }
 
     private IEnumerator ExitToDefault()

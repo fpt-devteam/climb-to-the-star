@@ -4,8 +4,10 @@ public class NormalMovement : IPlayerMovement
 {
     private Transform transform;
     private Rigidbody2D rb;
-    private float jumpForce = 10f;
+
+    private float jumpForce = 7f;
     private float moveSpeed = 7f;
+    private float dashForce = 7f;
 
     public void Initialize(Player player)
     {
@@ -13,13 +15,13 @@ public class NormalMovement : IPlayerMovement
         this.transform = player.transform;
     }
 
-    public void Move(float moveDirection)
+    public void Move(float direction)
     {
-        transform.localScale = new Vector3(Mathf.Sign(moveDirection), 1, 1);
+        transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
 
         transform.position = Vector2.MoveTowards(
             transform.position,
-            new Vector2(transform.position.x + moveDirection * moveSpeed, transform.position.y),
+            new Vector2(transform.position.x + direction * moveSpeed, transform.position.y),
             moveSpeed * Time.fixedDeltaTime
         );
     }
@@ -34,8 +36,8 @@ public class NormalMovement : IPlayerMovement
         //noop
     }
 
-    public void Dash()
+    public void Dash(float direction)
     {
-        // noop
+        rb.AddForce(Vector2.right * direction * dashForce, ForceMode2D.Impulse);
     }
 }

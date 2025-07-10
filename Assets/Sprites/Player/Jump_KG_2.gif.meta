@@ -118,12 +118,12 @@ TextureImporter:
       name: Jump_KG_2_0
       rect:
         serializedVersion: 2
-        x: 24
+        x: 25
         y: 0
-        width: 50
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: Jump_KG_2_1
       rect:
         serializedVersion: 2
-        x: 124
-        y: 0
-        width: 52
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 125
+        y: 1
+        width: 50
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: Jump_KG_2_2
       rect:
         serializedVersion: 2
-        x: 225
-        y: 0
-        width: 51
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 226
+        y: 1
+        width: 49
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Jump_KG_2_3
       rect:
         serializedVersion: 2
-        x: 325
-        y: 0
-        width: 51
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 326
+        y: 1
+        width: 49
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: Jump_KG_2_4
       rect:
         serializedVersion: 2
-        x: 415
-        y: 2
-        width: 55
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 416
+        y: 3
+        width: 53
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: Jump_KG_2_5
       rect:
         serializedVersion: 2
-        x: 516
-        y: 1
-        width: 51
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 517
+        y: 2
+        width: 49
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e87379957119cc4cb763cb9a0e5ba90
     internalID: 0
     vertices: []
     indices: 

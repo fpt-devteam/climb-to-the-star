@@ -121,12 +121,12 @@ TextureImporter:
       name: Walking_KG_2_0
       rect:
         serializedVersion: 2
-        x: 17
+        x: 18
         y: 0
-        width: 50
+        width: 48
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -143,12 +143,12 @@ TextureImporter:
       name: Walking_KG_2_1
       rect:
         serializedVersion: 2
-        x: 119
+        x: 120
         y: 0
-        width: 50
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -165,12 +165,12 @@ TextureImporter:
       name: Walking_KG_2_2
       rect:
         serializedVersion: 2
-        x: 213
+        x: 214
         y: 0
-        width: 58
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 56
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,12 +187,12 @@ TextureImporter:
       name: Walking_KG_2_3
       rect:
         serializedVersion: 2
-        x: 313
+        x: 314
         y: 0
-        width: 59
+        width: 57
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -209,12 +209,12 @@ TextureImporter:
       name: Walking_KG_2_4
       rect:
         serializedVersion: 2
-        x: 413
+        x: 414
         y: 0
-        width: 57
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 55
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: Walking_KG_2_5
       rect:
         serializedVersion: 2
-        x: 510
+        x: 511
         y: 0
-        width: 59
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 57
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -253,12 +253,12 @@ TextureImporter:
       name: Walking_KG_2_6
       rect:
         serializedVersion: 2
-        x: 611
+        x: 612
         y: 0
-        width: 55
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 53
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -275,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b2325becad2c06f4b8938806d9e446da
     internalID: 0
     vertices: []
     indices: 
