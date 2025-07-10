@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10.666667
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -118,12 +118,12 @@ TextureImporter:
       name: rat-run_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 6
         y: 0
-        width: 23
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 21
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: rat-run_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 35
         y: 0
-        width: 26
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 13
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: rat-run_2
       rect:
         serializedVersion: 2
-        x: 65
+        x: 66
         y: 0
-        width: 28
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 26
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: rat-run_3
       rect:
         serializedVersion: 2
-        x: 98
+        x: 99
         y: 0
-        width: 27
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 25
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: rat-run_4
       rect:
         serializedVersion: 2
-        x: 129
+        x: 130
         y: 0
-        width: 27
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 25
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: rat-run_5
       rect:
         serializedVersion: 2
-        x: 164
+        x: 165
         y: 0
-        width: 24
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 13
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7976d38cf89216b438f94ba6b220fe54
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rat-run_0: 7261031384445923711
+      rat-run_1: -8876484908819960703
+      rat-run_2: 8745980326458973574
+      rat-run_3: -3018519195109439643
+      rat-run_4: 4204486903481209135
+      rat-run_5: -4675023083512939997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

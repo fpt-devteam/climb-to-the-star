@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10.666667
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -118,12 +118,12 @@ TextureImporter:
       name: rat-attack_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 6
         y: 0
-        width: 23
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 21
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: rat-attack_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 0
-        width: 27
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 25
+        height: 12
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: rat-attack_2
       rect:
         serializedVersion: 2
-        x: 68
+        x: 69
         y: 0
-        width: 23
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 21
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: rat-attack_3
       rect:
         serializedVersion: 2
-        x: 101
+        x: 102
         y: 0
-        width: 21
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 19
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: rat-attack_4
       rect:
         serializedVersion: 2
-        x: 135
+        x: 136
         y: 0
-        width: 21
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 19
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: rat-attack_5
       rect:
         serializedVersion: 2
-        x: 166
+        x: 167
         y: 0
-        width: 22
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 20
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a1f4c3e1816e9a64b8cb397b5168dd37
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rat-attack_0: 6727447189863774757
+      rat-attack_1: 4278337335424233215
+      rat-attack_2: 6665511059835045536
+      rat-attack_3: 1392080014915669841
+      rat-attack_4: -4555631025844428646
+      rat-attack_5: -4534558306086540256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

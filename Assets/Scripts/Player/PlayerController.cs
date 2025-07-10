@@ -2,31 +2,31 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField]
-    private float moveSpeed = 5f;
+    private IPlayerMovement playerMovement;
 
-    [Header("Jump Settings")]
-    [SerializeField]
-    private float jumpForce = 10f;
-
-    [SerializeField]
-    private float jumpCooldown = 0.5f;
-
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D rb;
     private Animator animator;
 
     private bool isGrounded = false;
+
+    // factory (...conditions, map) => return Movement();
+    // observer (...conditions, map) => return Movement();
+
+    // map: state mua to vai lon, mua bth, bang, etc...
+
+    [SerializeField]
+    private Transform attackPoint;
+    public Transform AttackPoint => attackPoint;
 
     public StateMachine stateMachine;
 
     private void Awake()
     {
-        if (_rigidbody == null)
-            _rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
-        if (animator == null)
-            animator = GetComponent<Animator>();
+        playerMovement = new NormalMovement();
+        playerMovement.Initialize(rb, transform);
 
         stateMachine = new StateMachine();
 
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         var fallState = new FallState(this, animator);
         var landingState = new LandingState(this, animator);
         var walkingState = new WalkingState(this, animator);
+        var attackState = new AttackState(this, animator);
 
         stateMachine.AddTransition(idleState, jumpState, new FuncPredicate(CanJump));
         stateMachine.AddTransition(idleState, walkingState, new FuncPredicate(IsWalking));
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
         stateMachine.AddTransition(fallState, landingState, new FuncPredicate(IsGrounded));
         stateMachine.AddTransition(walkingState, jumpState, new FuncPredicate(CanJump));
         stateMachine.AddTransition(walkingState, idleState, new FuncPredicate(IsIdling));
+        stateMachine.AddTransition(idleState, attackState, new FuncPredicate(IsAttacking));
+        stateMachine.AddTransition(walkingState, attackState, new FuncPredicate(IsAttacking));
 
         stateMachine.SetState(idleState);
     }
@@ -54,21 +57,12 @@ public class PlayerController : MonoBehaviour
     public void HandleMovement()
     {
         var moveDirection = Input.GetAxisRaw("Horizontal");
-
-        if (moveDirection > 0)
-            transform.localScale = new Vector3(1, 1, 1);
-        else if (moveDirection < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
-
-        _rigidbody.linearVelocity = new Vector2(
-            moveDirection * moveSpeed,
-            _rigidbody.linearVelocity.y
-        );
+        playerMovement.HandleMovement(moveDirection);
     }
 
     public void HandleJump()
     {
-        _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, jumpForce);
+        playerMovement.HandleJump();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -87,13 +81,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsWalking() => _rigidbody.linearVelocity.x != 0;
+    public bool IsWalking() => rb.linearVelocity.x != 0;
 
-    public bool IsFalling() => _rigidbody.linearVelocity.y < -0.01f;
+    public bool IsFalling() => rb.linearVelocity.y < -0.01f;
 
     public bool IsGrounded() => isGrounded;
 
     public bool CanJump() => isGrounded && Input.GetKeyDown(KeyCode.Space);
 
-    public bool IsIdling() => _rigidbody.linearVelocity.x == 0 && isGrounded;
+    public bool IsIdling() => rb.linearVelocity.x == 0 && isGrounded;
+
+    public bool IsAttacking() => IsGrounded() && Input.GetKeyDown(KeyCode.Z);
 }
