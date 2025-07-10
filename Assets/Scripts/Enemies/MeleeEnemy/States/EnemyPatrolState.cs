@@ -11,7 +11,6 @@ public class EnemyPatrolState : BaseEnemyState
     public override void OnEnter()
     {
         animator.Play("Run");
-        Debug.Log("Enemy: Entered Patrol State");
     }
 
     public override void FixedUpdate()
@@ -20,10 +19,7 @@ public class EnemyPatrolState : BaseEnemyState
         MoveTowardsPatrolTarget();
     }
 
-    public override void OnExit()
-    {
-        Debug.Log("Enemy: Exited Patrol State");
-    }
+    public override void OnExit() { }
 
     private void MoveTowardsPatrolTarget()
     {
@@ -32,11 +28,6 @@ public class EnemyPatrolState : BaseEnemyState
 
     private void CheckPatrolPointReached()
     {
-        Debug.Log($"Checking Patrol Point Reached: {enemyController.isMovingRight}");
-        Debug.Log(
-            $"Right Patrol Point: {enemyController.rightPatrolPoint}, Left Patrol Point: {enemyController.leftPatrolPoint}"
-        );
-
         float distanceToTarget = Vector2.Distance(
             enemyController.transform.position,
             GetPatrolTarget()

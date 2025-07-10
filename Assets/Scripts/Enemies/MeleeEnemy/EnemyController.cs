@@ -46,8 +46,6 @@ public class EnemyController : MonoBehaviour
         leftPatrolPoint = startPosition + Vector2.left * patrolDistance;
         rightPatrolPoint = startPosition + Vector2.right * patrolDistance;
 
-        Debug.Log($"Left Patrol Point: {leftPatrolPoint}, Right Patrol Point: {rightPatrolPoint}");
-
         stateMachine = new StateMachine();
 
         var patrolState = new EnemyPatrolState(this);
@@ -72,8 +70,6 @@ public class EnemyController : MonoBehaviour
     public void MoveTowards(Vector2 targetPosition)
     {
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-
-        Debug.Log($"Moving Towards: {direction}");
 
         transform.position = Vector2.MoveTowards(
             transform.position,

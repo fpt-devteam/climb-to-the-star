@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class FallState : BasePlayerState
 {
-    public FallState(PlayerController playerController, Animator animator)
-        : base(playerController, animator) { }
+    private Animator animator;
+
+    public FallState(PlayerController playerController)
+        : base(playerController)
+    {
+        animator = playerController.GetComponent<Animator>();
+    }
 
     public override void OnEnter()
     {
         animator.Play("Fall");
-        Debug.Log("FallState");
+        Debug.Log("Falling");
     }
 
     public override void FixedUpdate()
     {
         playerController.HandleMovement();
     }
-
-    public override void OnExit() { }
 }

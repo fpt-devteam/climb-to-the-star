@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class NormalMovement : IPlayerMovement
 {
-    private Rigidbody2D rb;
     private Transform transform;
+    private Rigidbody2D rb;
+    private float jumpForce = 10f;
     private float moveSpeed = 7f;
-    private float jumpForce = 15f;
 
-    public void Initialize(Rigidbody2D rb, Transform transform)
+    public void Initialize(Player player)
     {
-        this.rb = rb;
-        this.transform = transform;
+        this.rb = player.GetComponent<Rigidbody2D>();
+        this.transform = player.transform;
     }
 
-    public void HandleMovement(float moveDirection)
+    public void Move(float moveDirection)
     {
         transform.localScale = new Vector3(Mathf.Sign(moveDirection), 1, 1);
 
@@ -24,10 +24,18 @@ public class NormalMovement : IPlayerMovement
         );
     }
 
-    public void HandleJump()
+    public void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    public void HandleFall() { }
+    public void Fall()
+    {
+        //noop
+    }
+
+    public void Dash()
+    {
+        // noop
+    }
 }

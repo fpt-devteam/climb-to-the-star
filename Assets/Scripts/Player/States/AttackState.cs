@@ -3,43 +3,24 @@ using UnityEngine;
 
 public class AttackState : BasePlayerState
 {
-    private Transform attackPoint;
-    private float attackRange = 0.8f;
-    private int attackDamage = 15;
-    private LayerMask enemyLayers;
+    private Animator animator;
 
-    public AttackState(PlayerController playerController, Animator animator)
-        : base(playerController, animator)
+    public AttackState(PlayerController playerController)
+        : base(playerController)
     {
-        this.attackPoint = playerController.AttackPoint;
+        animator = playerController.GetComponent<Animator>();
     }
 
     public override void OnEnter()
     {
-        animator.Play("Attack_1");
-        Debug.Log("AttackState");
-        Attack();
+        playerController.HandleSkill();
         playerController.StartCoroutine(ExitToDefault());
-    }
-
-    private void Attack()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
-            attackPoint.position,
-            attackRange,
-            enemyLayers
-        );
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Hit enemy: " + enemy.name);
-            // enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-        }
+        Debug.Log("Attacking");
     }
 
     private IEnumerator ExitToDefault()
     {
         yield return new WaitForSeconds(0.4f);
-        playerController.stateMachine.SetState(new IdleState(playerController, animator));
+        playerController.stateMachine.SetState(new IdleState(playerController));
     }
 }

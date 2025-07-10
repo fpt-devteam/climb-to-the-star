@@ -3,18 +3,24 @@ using UnityEngine;
 
 public class LandingState : BasePlayerState
 {
-    public LandingState(PlayerController playerController, Animator animator)
-        : base(playerController, animator) { }
+    private Animator animator;
+
+    public LandingState(PlayerController playerController)
+        : base(playerController)
+    {
+        animator = playerController.GetComponent<Animator>();
+    }
 
     public override void OnEnter()
     {
         animator.Play("Land");
         playerController.StartCoroutine(ExitToDefault());
+        Debug.Log("Landing");
     }
 
     private IEnumerator ExitToDefault()
     {
         yield return new WaitForSeconds(0.4f);
-        playerController.stateMachine.SetState(new IdleState(playerController, animator));
+        playerController.stateMachine.SetState(new IdleState(playerController));
     }
 }

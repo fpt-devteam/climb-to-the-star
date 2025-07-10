@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class IdleState : BasePlayerState
 {
-    public IdleState(PlayerController playerController, Animator animator)
-        : base(playerController, animator) { }
+    private Animator animator;
+
+    public IdleState(PlayerController playerController)
+        : base(playerController)
+    {
+        animator = playerController.GetComponent<Animator>();
+    }
 
     public override void OnEnter()
     {
         animator.Play("Idle");
-        Debug.Log("IdleState");
+        Debug.Log("Idle");
     }
 
     public override void FixedUpdate()
     {
         playerController.HandleMovement();
-    }
-
-    public override void OnExit()
-    {
-        animator.Play("Idle", 0, 0);
     }
 }

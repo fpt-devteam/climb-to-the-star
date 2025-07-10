@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class WalkingState : BasePlayerState
 {
-    public WalkingState(PlayerController playerController, Animator animator)
-        : base(playerController, animator) { }
+    private Animator animator;
+
+    public WalkingState(PlayerController playerController)
+        : base(playerController)
+    {
+        animator = playerController.GetComponent<Animator>();
+    }
 
     public override void OnEnter()
     {
         animator.Play("Walking");
-        Debug.Log("WalkingState");
+        Debug.Log("Walking");
     }
 
     public override void FixedUpdate()
     {
         playerController.HandleMovement();
     }
-
-    public override void OnExit() { }
 }

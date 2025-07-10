@@ -3,12 +3,10 @@ using UnityEngine;
 public class BasePlayerState : MonoBehaviour, IState
 {
     protected PlayerController playerController;
-    protected Animator animator;
 
-    public BasePlayerState(PlayerController playerController, Animator animator)
+    public BasePlayerState(PlayerController playerController)
     {
         this.playerController = playerController;
-        this.animator = animator;
     }
 
     public virtual void OnEnter() { }
