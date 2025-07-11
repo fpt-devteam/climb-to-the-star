@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform AttackPoint => player.AttackPoint;
+    public GameObject AttackPoint => player.AttackPoint;
 
     public StateMachine stateMachine;
 
@@ -91,7 +91,10 @@ public class PlayerController : MonoBehaviour
         stateMachine.SetState(idleState);
     }
 
-    void Update() { }
+    void Update()
+    {
+        stateMachine.Update();
+    }
 
     void FixedUpdate()
     {

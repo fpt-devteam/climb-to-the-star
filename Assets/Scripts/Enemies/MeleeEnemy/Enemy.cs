@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public GameObject AttackPoint => attackPoint;
-
     [SerializeField]
     private float maxHealth = 100;
 
@@ -14,36 +12,19 @@ public class Player : MonoBehaviour
     private float currentHealth = 100;
 
     [SerializeField]
-    private float maxStamina = 100;
-
-    [SerializeField]
-    private float currentStamina = 100;
-
-    [SerializeField]
     private float damage = 7f;
-
-    [SerializeField]
-    private float jumpForce = 7f;
 
     [SerializeField]
     private float moveSpeed = 7f;
 
     [SerializeField]
-    private GameObject attackPoint;
-
-    [SerializeField]
     private Slider healthBar;
-
-    [SerializeField]
-    private Slider staminaBar;
 
     [SerializeField]
     private float immuneTimer = 0f;
 
     [SerializeField]
     private float immuneDuration = 0.5f;
-
-    private bool isShielding = false;
 
     public void Die()
     {
@@ -61,7 +42,6 @@ public class Player : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
-        currentStamina = maxStamina;
         immuneTimer = 0f;
     }
 
@@ -69,21 +49,6 @@ public class Player : MonoBehaviour
     {
         immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
         UpdateHealthSlider();
-        UpdateStaminaSlider();
-    }
-
-    public void StartShield() => isShielding = true;
-
-    public void StopShield() => isShielding = false;
-
-    public void HandleCharge()
-    {
-        currentStamina = Math.Min(maxStamina, currentStamina + 1f * Time.deltaTime);
-    }
-
-    public void RestoreStamina(float staminaAmount)
-    {
-        currentStamina = Math.Min(maxStamina, currentStamina + staminaAmount);
     }
 
     public void RestoreHealth(float healthAmount)
@@ -91,17 +56,9 @@ public class Player : MonoBehaviour
         currentHealth = Math.Min(maxHealth, currentHealth + healthAmount);
     }
 
-    public void DeductStamina(float staminaAmount)
-    {
-        if (currentStamina < staminaAmount)
-            return;
-
-        currentStamina -= staminaAmount;
-    }
-
     public void DeductHealth(float damageAmount)
     {
-        if (immuneTimer > 0 || isShielding)
+        if (immuneTimer > 0)
             return;
 
         currentHealth -= damageAmount;
@@ -123,28 +80,6 @@ public class Player : MonoBehaviour
                 fillImage.color = Color.green;
             }
             else if (healthBar.value > 0.3f && healthBar.value <= 0.6f)
-            {
-                fillImage.color = Color.yellow;
-            }
-            else
-            {
-                fillImage.color = Color.red;
-            }
-        }
-    }
-
-    private void UpdateStaminaSlider()
-    {
-        Image fillImage = staminaBar.fillRect.GetComponent<Image>();
-        staminaBar.value = currentStamina / maxStamina;
-
-        if (fillImage != null)
-        {
-            if (staminaBar.value > 0.6f && staminaBar.value <= 1f)
-            {
-                fillImage.color = Color.green;
-            }
-            else if (staminaBar.value > 0.3f && staminaBar.value <= 0.6f)
             {
                 fillImage.color = Color.yellow;
             }

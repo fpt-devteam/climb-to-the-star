@@ -3540,6 +3540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 858100221324561974, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7444980230784677987, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
       propertyPath: m_Name
       value: Rat
@@ -3582,6 +3586,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622169347832666681, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125732205910306953, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
