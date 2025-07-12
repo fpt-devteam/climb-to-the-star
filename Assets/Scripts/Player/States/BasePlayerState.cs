@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class BasePlayerState : MonoBehaviour, IState
+public abstract class BasePlayerState : IState
 {
-    protected PlayerController playerController;
+    protected PlayerController context;
 
-    public BasePlayerState(PlayerController playerController)
+    public BasePlayerState(PlayerController context)
     {
-        this.playerController = playerController;
+        this.context = context;
     }
 
-    public virtual void OnEnter() { }
+    public virtual void Enter() { }
 
     public virtual void Update() { }
 
     public virtual void FixedUpdate() { }
 
-    public virtual void OnExit() { }
+    public virtual void Exit() { }
+
+    public virtual IState CheckTransitions() => null;
 }

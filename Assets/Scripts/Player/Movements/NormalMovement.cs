@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class NormalMovement : IPlayerMovement
@@ -7,18 +8,16 @@ public class NormalMovement : IPlayerMovement
 
     private float jumpForce = 7f;
     private float moveSpeed = 7f;
-    private float dashForce = 7f;
+    private float dashForce = 10f;
 
-    public void Initialize(Player player)
+    public void Initialize(PlayerStats playerStats)
     {
-        this.rb = player.GetComponent<Rigidbody2D>();
-        this.transform = player.transform;
+        this.rb = playerStats.GetComponent<Rigidbody2D>();
+        this.transform = playerStats.transform;
     }
 
     public void Move(float direction)
     {
-        transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
-
         transform.position = Vector2.MoveTowards(
             transform.position,
             new Vector2(transform.position.x + direction * moveSpeed, transform.position.y),
@@ -38,6 +37,6 @@ public class NormalMovement : IPlayerMovement
 
     public void Dash(float direction)
     {
-        rb.AddForce(Vector2.right * direction * dashForce, ForceMode2D.Impulse);
+        // StartCoroutine(HandleDashCoroutine(direction));
     }
 }

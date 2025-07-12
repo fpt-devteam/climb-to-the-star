@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2594501577153481380}
   - component: {fileID: 3639561959202464277}
   - component: {fileID: 4380770887565904766}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531903172179956604}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1643022169208428183}
   - component: {fileID: 8273084271563870637}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3948254794663137603}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 9125732205910306953}
   - component: {fileID: 276569503983327429}
   - component: {fileID: 8555190452579427909}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 5268008033169981479}
   - component: {fileID: 3693878016822344075}
   - component: {fileID: 2924454592197804984}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 858100221324561974}
   - component: {fileID: 6303834696468398612}
   - component: {fileID: 1315922394761095602}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7663266825368790109}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 5043388411453759542}
   - component: {fileID: 8213126400501482422}
   - component: {fileID: 2119678841703544649}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -695,12 +695,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &8213126400501482422
 Rigidbody2D:
   serializedVersion: 5

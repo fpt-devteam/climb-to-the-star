@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
-    public GameObject AttackPoint => attackPoint;
-
     [SerializeField]
     private float maxHealth = 100;
 
@@ -27,9 +25,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 7f;
-
-    [SerializeField]
-    private GameObject attackPoint;
 
     [SerializeField]
     private Slider healthBar;

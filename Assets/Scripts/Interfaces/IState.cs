@@ -3,11 +3,13 @@ using UnityEngine;
 
 public interface IState
 {
-    void OnEnter();
+    void Enter();
 
     void Update();
 
     void FixedUpdate();
 
-    void OnExit();
+    void Exit();
+
+    IState CheckTransitions();
 }

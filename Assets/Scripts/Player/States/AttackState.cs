@@ -1,71 +1,75 @@
-using System.Collections;
-using UnityEngine;
+// using System.Collections;
+// using UnityEngine;
 
-public class AttackState : BasePlayerState
-{
-    private static readonly int[] AnimHashes =
-    {
-        Animator.StringToHash("Attack_1"),
-        Animator.StringToHash("Attack_2"),
-        Animator.StringToHash("Attack_3"),
-        Animator.StringToHash("Attack_4"),
-    };
+// public class AttackState : BasePlayerState
+// {
+//     private static readonly int[] AnimHashes =
+//     {
+//         Animator.StringToHash("Attack_1"),
+//         Animator.StringToHash("Attack_2"),
+//         Animator.StringToHash("Attack_3"),
+//         Animator.StringToHash("Attack_4"),
+//     };
 
-    private static readonly float[] Durations = { 0.5f, 0.5f, 0.5f, 0.5f };
+//     private static readonly float[] Durations = { 0.5f, 0.5f, 0.5f, 0.5f };
 
-    private Animator animator;
-    private GameObject attackPoint;
+//     private Animator animator;
+//     private GameObject attackPoint;
 
-    private int attackIndex;
-    private bool buffered;
-    private float attackTimer;
+//     private int attackIndex;
+//     private float attackTimer;
+//     private float comboWindow = 1f;
+//     private float comboTimer = 0f;
+//     private bool hasAppliedComboTimer = false;
 
-    public AttackState(PlayerController playerController)
-        : base(playerController)
-    {
-        animator = playerController.GetComponent<Animator>();
-        attackPoint = playerController.AttackPoint;
-    }
+//     public AttackState(PlayerController playerController)
+//         : base(playerController)
+//     {
+//         animator = playerController.GetComponent<Animator>();
+//         attackPoint = playerController.AttackPoint;
+//     }
 
-    public override void OnEnter()
-    {
-        attackIndex = 0;
-        buffered = false;
-        attackTimer = Durations[attackIndex];
-        PlayCurrent();
-        Debug.Log("Attacking");
-    }
+//     public override void OnEnter()
+//     {
+//         // attackIndex = playerController.GetAttackId();
+//         HandleAttack();
+//     }
 
-    public override void Update()
-    {
-        attackTimer -= Time.deltaTime;
+//     public override void OnExit() { }
 
-        if (attackTimer > 0f && playerController.IsAttacking())
-        {
-            buffered = true;
-        }
-    }
+//     private void HandleAttack()
+//     {
+//         PlayAttackAnimation();
+//         DealDamageToEnemies();
+//     }
 
-    public override void FixedUpdate()
-    {
-        if (attackTimer <= 0f)
-        {
-            if (buffered && attackIndex < 3)
-            {
-                attackIndex++;
-                attackTimer = Durations[attackIndex];
-                buffered = false;
-                PlayCurrent();
-            }
-            else
-            {
-                playerController.stateMachine.SetState(new IdleState(playerController));
-            }
-        }
-    }
+//     private void PlayAttackAnimation()
+//     {
+//         animator.Play(AnimHashes[attackIndex]);
+//         attackTimer = Durations[attackIndex];
+//     }
 
-    private void PlayCurrent()
-    {
-        animator.Play(AnimHashes[attackIndex]);
-    }
-}
+//     private void DealDamageToEnemies()
+//     {
+//         Collider2D[] colliders = Physics2D.OverlapCircleAll(
+//             attackPoint.transform.position,
+//             0.5f,
+//             LayerMask.GetMask("Enemy")
+//         );
+//         foreach (Collider2D collider in colliders)
+//         {
+//             Enemy enemy = collider.GetComponent<Enemy>();
+//             if (enemy != null)
+//             {
+//                 enemy.DeductHealth(10f);
+//                 Debug.Log("Enemy hit");
+//             }
+//         }
+//     }
+
+//     private void OnDrawGizmosSelected()
+//     {
+//         Gizmos.color = Color.yellow;
+//         Gizmos.DrawWireSphere(attackPoint.transform.position, 1.5f);
+//     }
+// }

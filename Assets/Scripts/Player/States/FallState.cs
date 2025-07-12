@@ -1,23 +1,23 @@
-using UnityEngine;
+// using UnityEngine;
 
-public class FallState : BasePlayerState
-{
-    private Animator animator;
+// public class FallState : BasePlayerState
+// {
+//     private Animator animator;
 
-    public FallState(PlayerController playerController)
-        : base(playerController)
-    {
-        animator = playerController.GetComponent<Animator>();
-    }
+//     public FallState(PlayerController playerController)
+//         : base(playerController)
+//     {
+//         animator = playerController.GetComponent<Animator>();
+//     }
 
-    public override void OnEnter()
-    {
-        animator.Play("Fall");
-        Debug.Log("Falling");
-    }
+//     public override void OnEnter()
+//     {
+//         animator.Play("Fall");
+//         Debug.Log("Falling");
+//     }
 
-    public override void FixedUpdate()
-    {
-        playerController.HandleMovement();
-    }
-}
+//     public override void FixedUpdate()
+//     {
+//         playerController.HandleMovement();
+//     }
+// }

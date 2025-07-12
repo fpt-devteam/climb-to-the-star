@@ -2973,37 +2973,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816300824}
   m_CullTransparentMesh: 1
---- !u!1 &1881027398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1881027399}
-  m_Layer: 0
-  m_Name: DamageZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1881027399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881027398}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.56, y: -3.36, z: -0.022016235}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1924205506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3471,17 +3440,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 25078711621334983, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 46879740}
+    - target: {fileID: 25078711621334983, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 1639923654}
     - target: {fileID: 3044073108098859285, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.659
+      value: -8.28
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.988
+      value: -3.95
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3515,18 +3492,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7654968185538936536, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 46879740}
-    - target: {fileID: 7654968185538936536, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
-      propertyPath: staminaBar
-      value: 
-      objectReference: {fileID: 1639923654}
-    - target: {fileID: 7654968185538936536, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
-      propertyPath: attackPoint
-      value: 
-      objectReference: {fileID: 1881027399}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3606,6 +3571,5 @@ SceneRoots:
   - {fileID: 5782800814124056827}
   - {fileID: 17717250}
   - {fileID: 8278552184407423913}
-  - {fileID: 1881027399}
   - {fileID: 2024585672}
   - {fileID: 1672605671}

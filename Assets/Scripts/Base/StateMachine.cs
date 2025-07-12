@@ -1,113 +1,49 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine
 {
-    public StateNode current;
+    public IState CurrentState => currentState;
 
-    public StateNode previous;
+    public IState PreviousState => previousState;
 
-    Dictionary<Type, StateNode> nodes;
+    private IState currentState;
 
-    public StateMachine()
+    private IState previousState;
+
+    public void Initialize(IState initialState)
     {
-        nodes = new Dictionary<Type, StateNode>();
+        ChangeState(initialState);
     }
 
     public void Update()
     {
-        var transition = GetTransition();
-
-        if (transition != null)
-        {
-            ChangeState(transition.To);
-            return;
-        }
-
-        current.State?.Update();
-    }
-
-    public void FixedUpdate()
-    {
-        var transition = GetTransition();
-
-        if (transition != null)
-        {
-            ChangeState(transition.To);
-            return;
-        }
-
-        current.State?.FixedUpdate();
-    }
-
-    public void SetState(IState state)
-    {
-        var node = GetOrAddNode(state);
-        current = node;
-        current.State?.OnEnter();
-    }
-
-    public void AddTransition(IState from, IState to, IPredicate condition)
-    {
-        GetOrAddNode(from).AddTransition(GetOrAddNode(to).State, condition);
-    }
-
-    private void ChangeState(IState state)
-    {
-        if (current.State == state)
+        if (currentState == null)
             return;
 
-        var previousState = current.State;
-        var nextState = nodes[state.GetType()].State;
+        currentState.Update();
 
-        previousState?.OnExit();
-        nextState?.OnEnter();
+        IState nextState = currentState.CheckTransitions();
 
-        current = nodes[state.GetType()];
-    }
-
-    private ITransition GetTransition()
-    {
-        foreach (var transition in current.Transitions)
+        if (nextState != null && nextState != currentState)
         {
-            if (transition.Condition.Evaluate())
-            {
-                return transition;
-            }
+            ChangeState(nextState);
         }
-
-        return null;
     }
 
-    private StateNode GetOrAddNode(IState state)
+    public void ChangeState(IState newState)
     {
-        var node = nodes.GetValueOrDefault(state.GetType());
+        if (newState == null)
+            return;
 
-        if (node == null)
-        {
-            node = new StateNode(state);
-            nodes.Add(state.GetType(), node);
-        }
+        currentState?.Exit();
 
-        return node;
-    }
-}
+        currentState = newState;
 
-public class StateNode
-{
-    public IState State { get; }
-
-    public HashSet<ITransition> Transitions { get; }
-
-    public StateNode(IState state)
-    {
-        State = state;
-        Transitions = new HashSet<ITransition>();
+        currentState.Enter();
     }
 
-    public void AddTransition(IState to, IPredicate condition)
+    public void ForceState(IState newState)
     {
-        Transitions.Add(new Transition(to, condition));
+        ChangeState(newState);
     }
 }

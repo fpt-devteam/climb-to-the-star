@@ -1,23 +1,34 @@
 using UnityEngine;
 
-public class WalkingState : BasePlayerState
+public class WalkState : BasePlayerState
 {
-    private Animator animator;
+    private readonly Animator animator;
 
-    public WalkingState(PlayerController playerController)
-        : base(playerController)
+    public WalkState(PlayerController context)
+        : base(context)
     {
-        animator = playerController.GetComponent<Animator>();
+        animator = context.GetComponent<Animator>();
     }
 
-    public override void OnEnter()
+    public override void Enter()
     {
         animator.Play("Walk");
-        Debug.Log("Walking");
     }
 
-    public override void FixedUpdate()
+    public override void Update()
     {
-        playerController.HandleMovement();
+        var direction = context.PlayerInput.GetMovementInput();
+        context.PlayerMovement.Move(direction);
+    }
+
+    public override void FixedUpdate() { }
+
+    public override void Exit() { }
+
+    public override IState CheckTransitions()
+    {
+        if (context.IsGrounded() && context.IsIdling())
+            return context.GetState(PlayerState.Idle);
+        return null;
     }
 }
