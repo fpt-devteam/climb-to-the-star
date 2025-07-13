@@ -16,6 +16,8 @@ public interface IPlayerInput
 
     bool IsAttackPressed();
 
+    bool IsAttackHeld();
+
     bool IsDashPressed();
 
     bool IsPausePressed();

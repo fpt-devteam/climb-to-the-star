@@ -1,34 +1,51 @@
-// using System.Collections;
-// using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-// public class HurtState : BasePlayerState
-// {
-//     private Animator animator;
-//     private float currentHealth;
+public class HurtState : BasePlayerState
+{
+    private Animator animator;
+    private float currentHealth;
+    private bool isAppliedAnimation = false;
+    private bool isAlive = true;
 
-//     public HurtState(PlayerController playerController)
-//         : base(playerController)
-//     {
-//         animator = playerController.GetComponent<Animator>();
-//     }
+    public HurtState(PlayerController context)
+        : base(context)
+    {
+        animator = context.GetComponent<Animator>();
+    }
 
-//     public override void OnEnter()
-//     {
-//         currentHealth = playerController.GetComponent<Player>().CurrentHealth();
-//         if (currentHealth <= 0)
-//         {
-//             playerController.stateMachine.SetState(new DieState(playerController));
-//             return;
-//         }
+    public override void Enter()
+    {
+        currentHealth = context.PlayerStats.CurrentHealth;
 
-//         animator.Play("Hurt");
-//         playerController.StartCoroutine(ExitToDefault());
-//         Debug.Log("Hurt");
-//     }
+        if (currentHealth <= 0)
+        {
+            isAlive = false;
+            return;
+        }
 
-//     private IEnumerator ExitToDefault()
-//     {
-//         yield return new WaitForSeconds(0.4f);
-//         playerController.stateMachine.SetState(new IdleState(playerController));
-//     }
-// }
+        animator.Play("Hurt");
+        context.StartCoroutine(ExitToDefault());
+    }
+
+    private IEnumerator ExitToDefault()
+    {
+        yield return new WaitForSeconds(0.4f);
+        isAppliedAnimation = true;
+    }
+
+    public override IState CheckTransitions()
+    {
+        if (!isAlive)
+        {
+            return context.GetState(PlayerState.Die);
+        }
+
+        if (isAppliedAnimation)
+        {
+            return context.GetState(PlayerState.Locomotion);
+        }
+
+        return null;
+    }
+}

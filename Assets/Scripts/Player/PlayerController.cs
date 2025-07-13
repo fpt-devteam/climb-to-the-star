@@ -1,81 +1,128 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum PlayerState
-{
-    Idle,
-    Walk,
-    Jump,
-    Fall,
-    Land,
-    Attack,
-    Hurt,
-    Die,
-    Dash,
-    Charge,
-    Shield,
-    Victory,
-}
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerStats PlayerStats { get; private set; }
-    public IPlayerInput PlayerInput { get; private set; }
-    public IPlayerMovement PlayerMovement { get; private set; }
+    [Header("Component References")]
+    private PlayerStats playerStats;
+    private IPlayerInput playerInput;
+    private Rigidbody2D rb;
 
     private StateMachine stateMachine;
     private Dictionary<PlayerState, IState> states;
+    private IPlayerMovement playerMovement;
 
     private bool isGrounded = false;
+    private bool isJumping = false;
     private bool isFacingRight = true;
 
-    void Awake()
+    public PlayerStats PlayerStats => playerStats;
+    public IPlayerInput PlayerInput => playerInput;
+    public IPlayerMovement PlayerMovement => playerMovement;
+
+    public bool IsFacingRight => isFacingRight;
+    public bool IsGrounded => isGrounded;
+
+    private void Awake()
     {
-        PlayerStats = GetComponent<PlayerStats>();
-        PlayerInput = GetComponent<KeyboardInput>();
-
-        PlayerMovement = new NormalMovement();
-        PlayerMovement.Initialize(PlayerStats);
-
-        states = new();
-        states.Add(PlayerState.Idle, new IdleState(this));
-        states.Add(PlayerState.Walk, new WalkState(this));
-
-        stateMachine = new();
-        stateMachine.Initialize(GetState(PlayerState.Idle));
+        InitializeComponents();
+        InitializeStateMachine();
     }
 
-    void Update()
+    private void InitializeComponents()
     {
-        if (PlayerInput.GetMovementInput() > 0f && !isFacingRight)
+        rb = GetComponent<Rigidbody2D>();
+        playerStats = GetComponent<PlayerStats>();
+
+        playerMovement = new NormalMovement();
+        playerMovement.Initialize(playerStats);
+
+        playerInput = new KeyboardInput();
+    }
+
+    private void InitializeStateMachine()
+    {
+        states = new Dictionary<PlayerState, IState>
+        {
+            { PlayerState.Locomotion, new LocomotionState(this) },
+            { PlayerState.Charge, new ChargeState(this) },
+            { PlayerState.Shield, new ShieldState(this) },
+            { PlayerState.Dash, new DashState(this) },
+            { PlayerState.Attack1, new Attack1State(this) },
+            { PlayerState.Attack2, new Attack2State(this) },
+            { PlayerState.Attack3, new Attack3State(this) },
+            { PlayerState.Attack4, new Attack4State(this) },
+        };
+
+        stateMachine = new StateMachine();
+        stateMachine.Initialize(GetState(PlayerState.Locomotion));
+    }
+
+    private void FixedUpdate()
+    {
+        HandleFacingDirection();
+        stateMachine.FixedUpdate();
+    }
+
+    private void HandleFacingDirection()
+    {
+        if (playerInput.GetMovementInput() > 0f && !isFacingRight)
         {
             transform.localScale = new Vector3(1, 1, 1);
             isFacingRight = true;
         }
-        else if (PlayerInput.GetMovementInput() < 0f && isFacingRight)
+        else if (playerInput.GetMovementInput() < 0f && isFacingRight)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             isFacingRight = false;
         }
-
-        stateMachine.Update();
     }
 
-    public bool IsFacingRight() => isFacingRight;
+    public bool IsWalking() => playerInput.GetMovementInput() != 0f && isGrounded;
 
-    public bool IsGrounded() => isGrounded;
+    public bool IsIdling() =>
+        !playerInput.IsChargeHeld()
+        && !playerInput.IsShieldHeld()
+        && playerInput.GetMovementInput() == 0f
+        && isGrounded;
 
-    public bool IsWalking() => PlayerInput.GetMovementInput() != 0 && isGrounded;
+    public bool IsCharging() => playerInput.IsChargeHeld() && isGrounded;
 
-    public bool IsIdling() => PlayerInput.GetMovementInput() == 0 && isGrounded;
+    public bool IsShielding() => playerInput.IsShieldHeld() && isGrounded;
 
-    public IState GetState(PlayerState state) => states[state];
+    public bool IsDashing() => playerInput.IsDashPressed() && isGrounded;
+
+    public bool IsJumping()
+    {
+        if (IsFalling())
+            return false;
+
+        if (isJumping)
+            return isJumping;
+
+        if (isGrounded && playerInput.IsJumpPressed())
+        {
+            isJumping = true;
+        }
+
+        return isJumping;
+    }
+
+    public bool CanAttack() => isGrounded && playerInput.IsAttackPressed();
+
+    public bool IsFalling() => rb.linearVelocity.y < 0f && !isGrounded;
+
+    public IState GetState(PlayerState state) =>
+        states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            isJumping = false;
         }
     }
 

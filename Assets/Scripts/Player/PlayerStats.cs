@@ -1,160 +1,204 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Health Settings")]
     [SerializeField]
-    private float maxHealth = 100;
+    private float maxHealth = 100f;
 
     [SerializeField]
-    private float currentHealth = 100;
-
-    [SerializeField]
-    private float maxStamina = 100;
-
-    [SerializeField]
-    private float currentStamina = 100;
-
-    [SerializeField]
-    private float damage = 7f;
-
-    [SerializeField]
-    private float jumpForce = 7f;
-
-    [SerializeField]
-    private float moveSpeed = 7f;
-
-    [SerializeField]
-    private Slider healthBar;
-
-    [SerializeField]
-    private Slider staminaBar;
-
-    [SerializeField]
-    private float immuneTimer = 0f;
+    private float currentHealth = 80f;
 
     [SerializeField]
     private float immuneDuration = 0.5f;
 
+    [Header("Stamina Settings")]
+    [SerializeField] private float maxStamina = 100f;
+
+    [SerializeField] private float currentStamina = 80f;
+
+    [SerializeField] private float chargeStaminaRestoreRate = 1f;
+
+    [Header("Combat Stats")]
+    [SerializeField] private float attackDamage = 7f;
+
+    [SerializeField] private float jumpForce = 7f;
+
+    [SerializeField] private float moveSpeed = 7f;
+
+    [Header("UI References")]
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Slider staminaBar;
+    [SerializeField] private GameObject attackPoint;
+
+    private const float HIGH_HEALTH_THRESHOLD = 0.6f;
+    private const float MEDIUM_HEALTH_THRESHOLD = 0.3f;
+    private const float ENEMY_DAMAGE = 10f;
+
+    private float immuneTimer = 0f;
     private bool isShielding = false;
+
+    public GameObject AttackPoint => attackPoint;
+    public float AttackDamage => attackDamage;
+    public float MaxHealth => maxHealth;
+    public float MaxStamina => maxStamina;
+    public float CurrentHealth => currentHealth;
+    public float CurrentStamina => currentStamina;
+    public float JumpForce => jumpForce;
+    public float MoveSpeed => moveSpeed;
+
+    public bool IsShielding => isShielding;
+    public bool IsAlive => currentHealth > 0f;
+    public bool IsImmune => immuneTimer > 0f;
+    public bool IsHurt => immuneTimer > 0f;
+    public bool IsDead => currentHealth <= 0f;
+
+    public float HealthPercentage => currentHealth / maxHealth;
+    public float StaminaPercentage => currentStamina / maxStamina;
 
     public void Die()
     {
+        if (IsDead)
+            return;
+
+        currentHealth = 0f;
         Debug.Log("Player died");
     }
 
-    public float HealthPercentage() => currentHealth / maxHealth;
-
-    public float CurrentHealth() => currentHealth;
-
-    public bool IsHurt() => immuneTimer > 0f;
-
-    public bool IsDead() => currentHealth <= 0f;
-
-    void Awake()
+    private void Awake()
     {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         immuneTimer = 0f;
+        isShielding = false;
     }
 
-    void Update()
+    private void Update()
     {
-        immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
-        UpdateHealthSlider();
-        UpdateStaminaSlider();
+        UpdateImmuneTimer();
+        UpdateUI();
+    }
+
+    private void UpdateImmuneTimer()
+    {
+        if (immuneTimer > 0f)
+        {
+            immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
+        }
+    }
+
+    private void UpdateUI()
+    {
+        if (healthBar != null)
+            UpdateHealthSlider();
+        if (staminaBar != null)
+            UpdateStaminaSlider();
     }
 
     public void StartShield() => isShielding = true;
 
     public void StopShield() => isShielding = false;
 
-    public void HandleCharge()
-    {
-        currentStamina = Math.Min(maxStamina, currentStamina + 1f * Time.deltaTime);
-    }
+    public void ChargeStamina() => RestoreStamina(chargeStaminaRestoreRate * Time.deltaTime);
 
     public void RestoreStamina(float staminaAmount)
     {
-        currentStamina = Math.Min(maxStamina, currentStamina + staminaAmount);
-    }
+        if (staminaAmount <= 0f)
+            return;
 
-    public void RestoreHealth(float healthAmount)
-    {
-        currentHealth = Math.Min(maxHealth, currentHealth + healthAmount);
+        currentStamina = Mathf.Min(maxStamina, currentStamina + staminaAmount);
     }
 
     public void DeductStamina(float staminaAmount)
     {
-        if (currentStamina < staminaAmount)
+        if (staminaAmount <= 0f)
             return;
 
-        currentStamina -= staminaAmount;
+        currentStamina = Mathf.Max(0f, currentStamina - staminaAmount);
     }
 
-    public void DeductHealth(float damageAmount)
+    public void RestoreHealth(float healthAmount)
     {
-        if (immuneTimer > 0 || isShielding)
+        if (healthAmount <= 0f)
             return;
 
-        currentHealth -= damageAmount;
-        immuneTimer = immuneDuration;
+        currentHealth = Mathf.Min(maxHealth, currentHealth + healthAmount);
+    }
 
-        if (currentHealth <= 0)
+    public void DeductHealth(float healthAmount)
+    {
+        if (healthAmount <= 0f)
+            return;
+
+        currentHealth = Mathf.Max(0f, currentHealth - healthAmount);
+
+        if (currentHealth <= 0f)
+        {
             Die();
+        }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        if (immuneTimer > 0f || isShielding || damageAmount <= 0f)
+            return;
+
+        DeductHealth(damageAmount);
+
+        immuneTimer = immuneDuration;
     }
 
     private void UpdateHealthSlider()
     {
-        Image fillImage = healthBar.fillRect.GetComponent<Image>();
-        healthBar.value = HealthPercentage();
+        if (healthBar == null)
+            return;
 
-        if (fillImage != null)
-        {
-            if (healthBar.value > 0.6f && healthBar.value <= 1f)
-            {
-                fillImage.color = Color.green;
-            }
-            else if (healthBar.value > 0.3f && healthBar.value <= 0.6f)
-            {
-                fillImage.color = Color.yellow;
-            }
-            else
-            {
-                fillImage.color = Color.red;
-            }
-        }
+        healthBar.value = HealthPercentage;
+
+        UpdateSliderColor(healthBar, HealthPercentage);
     }
 
     private void UpdateStaminaSlider()
     {
-        Image fillImage = staminaBar.fillRect.GetComponent<Image>();
-        staminaBar.value = currentStamina / maxStamina;
+        if (staminaBar == null)
+            return;
 
-        if (fillImage != null)
+        staminaBar.value = StaminaPercentage;
+
+        UpdateSliderColor(staminaBar, StaminaPercentage);
+    }
+
+    private void UpdateSliderColor(Slider slider, float percentage)
+    {
+        Image fillImage = slider.fillRect?.GetComponent<Image>();
+
+        if (fillImage == null)
+            return;
+
+        if (percentage > HIGH_HEALTH_THRESHOLD)
         {
-            if (staminaBar.value > 0.6f && staminaBar.value <= 1f)
-            {
-                fillImage.color = Color.green;
-            }
-            else if (staminaBar.value > 0.3f && staminaBar.value <= 0.6f)
-            {
-                fillImage.color = Color.yellow;
-            }
-            else
-            {
-                fillImage.color = Color.red;
-            }
+            fillImage.color = Color.green;
+        }
+        else if (percentage > MEDIUM_HEALTH_THRESHOLD)
+        {
+            fillImage.color = Color.yellow;
+        }
+        else
+        {
+            fillImage.color = Color.red;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision == null || collision.gameObject == null)
+            return;
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            DeductHealth(10f);
+            TakeDamage(ENEMY_DAMAGE);
         }
     }
 }

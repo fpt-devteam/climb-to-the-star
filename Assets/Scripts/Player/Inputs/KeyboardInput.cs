@@ -33,6 +33,8 @@ public class KeyboardInput : MonoBehaviour, IPlayerInput
 
     public bool IsAttackPressed() => Input.GetKeyDown(attackKey);
 
+    public bool IsAttackHeld() => Input.GetKey(attackKey);
+
     public bool IsChargePressed() => Input.GetKeyDown(chargeKey);
 
     public bool IsChargeHeld() => Input.GetKey(chargeKey);

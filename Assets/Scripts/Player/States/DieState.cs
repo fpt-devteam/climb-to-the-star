@@ -1,26 +1,27 @@
-// using System.Collections;
-// using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-// public class DieState : BasePlayerState
-// {
-//     private Animator animator;
+public class DieState : BasePlayerState
+{
+    private Animator animator;
+    private bool hasApplyAnimation = false;
 
-//     public DieState(PlayerController playerController)
-//         : base(playerController)
-//     {
-//         animator = playerController.GetComponent<Animator>();
-//     }
+    public DieState(PlayerController context)
+        : base(context)
+    {
+        animator = context.GetComponent<Animator>();
+    }
 
-//     public override void OnEnter()
-//     {
-//         animator.Play("Die");
-//         playerController.StartCoroutine(ExitToDefault());
-//         Debug.Log("Die");
-//     }
+    public override void Enter()
+    {
+        animator.Play("Die");
+        context.StartCoroutine(ExitToDefault());
+    }
 
-//     private IEnumerator ExitToDefault()
-//     {
-//         yield return new WaitForSeconds(1f);
-//         Time.timeScale = 0f;
-//     }
-// }
+    private IEnumerator ExitToDefault()
+    {
+        yield return new WaitForSeconds(1f);
+        hasApplyAnimation = true;
+        Time.timeScale = 0f;
+    }
+}

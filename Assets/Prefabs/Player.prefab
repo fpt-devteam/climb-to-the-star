@@ -234,15 +234,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  immuneDuration: 0.5
   maxStamina: 100
   currentStamina: 100
-  damage: 7
+  chargeStaminaRestoreRate: 1
+  attackDamage: 7
   jumpForce: 7
   moveSpeed: 7
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
-  immuneTimer: 0
-  immuneDuration: 0.5
+  attackPoint: {fileID: 4420288039303592469}
 --- !u!1 &4420288039303592469
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,21 @@ public class StateMachine
         }
     }
 
+    public void FixedUpdate()
+    {
+        if (currentState == null)
+            return;
+
+        currentState.FixedUpdate();
+
+        IState nextState = currentState.CheckTransitions();
+
+        if (nextState != null && nextState != currentState)
+        {
+            ChangeState(nextState);
+        }
+    }
+
     public void ChangeState(IState newState)
     {
         if (newState == null)

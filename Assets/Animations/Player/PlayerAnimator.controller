@@ -61,7 +61,7 @@ AnimatorStateMachine:
     m_Position: {x: -530, y: 1110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 214508849526237571}
-    m_Position: {x: -120, y: 650, z: 0}
+    m_Position: {x: -350, y: 700, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4675842727752312899}
     m_Position: {x: -350, y: 510, z: 0}
@@ -70,10 +70,10 @@ AnimatorStateMachine:
     m_Position: {x: -350, y: 580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8326431922919640809}
-    m_Position: {x: -120, y: 590, z: 0}
+    m_Position: {x: -350, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1613409866394973993}
-    m_Position: {x: -120, y: 460, z: 0}
+    m_Position: {x: -350, y: 760, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8856106668338455547}
     m_Position: {x: -120, y: 520, z: 0}
@@ -86,6 +86,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 8380398135732466302}
     m_Position: {x: -530, y: 1040, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3768686314169656632}
+    m_Position: {x: -110, y: 590, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -362,6 +365,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &3768686314169656632
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Charge
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: cabd6bda7e6c0c84dbeb28c23d4274d0, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &4675842727752312899
 AnimatorState:
   serializedVersion: 6
@@ -421,7 +450,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShieldIdle
+  m_Name: Shield
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
