@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - pyramid
+  - plane
+  - Rock
+  - Cloud
+  - Iceberg
+  - IceSpike
   layers:
   - Default
   - TransparentFX
@@ -48,6 +54,15 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 890210543
+    locked: 0
+  - name: Foreground
+    uniqueID: 2385522631
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2854977559
+    locked: 0
+  - name: Particle
+    uniqueID: 4091127969
     locked: 0
   m_RenderingLayers:
   - Default
