@@ -15,27 +15,34 @@ public class PlayerStats : MonoBehaviour
     private float immuneDuration = 0.5f;
 
     [Header("Stamina Settings")]
-    [SerializeField] private float maxStamina = 100f;
+    [SerializeField]
+    private float maxStamina = 100f;
 
-    [SerializeField] private float currentStamina = 80f;
+    [SerializeField]
+    private float currentStamina = 80f;
 
-    [SerializeField] private float chargeStaminaRestoreRate = 1f;
+    [SerializeField]
+    private float chargeStaminaRestoreRate = 1f;
 
     [Header("Combat Stats")]
-    [SerializeField] private float attackDamage = 7f;
+    [SerializeField]
+    private float attackDamage = 7f;
 
-    [SerializeField] private float jumpForce = 7f;
+    [SerializeField]
+    private float jumpForce = 7f;
 
-    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField]
+    private float moveSpeed = 7f;
 
     [Header("UI References")]
-    [SerializeField] private Slider healthBar;
-    [SerializeField] private Slider staminaBar;
-    [SerializeField] private GameObject attackPoint;
+    [SerializeField]
+    private Slider healthBar;
 
-    private const float HIGH_HEALTH_THRESHOLD = 0.6f;
-    private const float MEDIUM_HEALTH_THRESHOLD = 0.3f;
-    private const float ENEMY_DAMAGE = 10f;
+    [SerializeField]
+    private Slider staminaBar;
+
+    [SerializeField]
+    private GameObject attackPoint;
 
     private float immuneTimer = 0f;
     private bool isShielding = false;
@@ -68,8 +75,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = maxHealth;
-        currentStamina = maxStamina;
         immuneTimer = 0f;
         isShielding = false;
     }
@@ -155,8 +160,6 @@ public class PlayerStats : MonoBehaviour
             return;
 
         healthBar.value = HealthPercentage;
-
-        UpdateSliderColor(healthBar, HealthPercentage);
     }
 
     private void UpdateStaminaSlider()
@@ -165,28 +168,5 @@ public class PlayerStats : MonoBehaviour
             return;
 
         staminaBar.value = StaminaPercentage;
-
-        UpdateSliderColor(staminaBar, StaminaPercentage);
-    }
-
-    private void UpdateSliderColor(Slider slider, float percentage)
-    {
-        Image fillImage = slider.fillRect?.GetComponent<Image>();
-
-        if (fillImage == null)
-            return;
-
-        if (percentage > HIGH_HEALTH_THRESHOLD)
-        {
-            fillImage.color = Color.green;
-        }
-        else if (percentage > MEDIUM_HEALTH_THRESHOLD)
-        {
-            fillImage.color = Color.yellow;
-        }
-        else
-        {
-            fillImage.color = Color.red;
-        }
     }
 }

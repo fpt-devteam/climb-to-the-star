@@ -8,12 +8,14 @@ public class NormalMovement : IPlayerMovement
 
     private float jumpForce = 7f;
     private float moveSpeed = 7f;
-    private float dashForce = 10f;
 
     public void Initialize(PlayerStats playerStats)
     {
         this.rb = playerStats.GetComponent<Rigidbody2D>();
         this.transform = playerStats.transform;
+
+        jumpForce = playerStats.JumpForce;
+        moveSpeed = playerStats.MoveSpeed;
     }
 
     public void Move(float direction)
@@ -33,10 +35,5 @@ public class NormalMovement : IPlayerMovement
     public void Fall()
     {
         //noop
-    }
-
-    public void Dash(float direction)
-    {
-        // StartCoroutine(HandleDashCoroutine(direction));
     }
 }
