@@ -8,6 +8,9 @@ public class NormalMovement : IPlayerMovement
 
     private float jumpForce = 7f;
     private float moveSpeed = 7f;
+    private float moveSpeedInAir = 5f;
+    private float airMoveSpeed = 3f;
+    private float maxFallSpeed = 10f;
 
     public void Initialize(PlayerStats playerStats)
     {
@@ -27,6 +30,15 @@ public class NormalMovement : IPlayerMovement
         );
     }
 
+    public void MovementInAir(float direction)
+    {
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            new Vector2(transform.position.x + direction * moveSpeedInAir, transform.position.y),
+            moveSpeedInAir * Time.fixedDeltaTime
+        );
+    }
+
     public void Jump()
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -34,6 +46,6 @@ public class NormalMovement : IPlayerMovement
 
     public void Fall()
     {
-        //noop
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
     }
 }

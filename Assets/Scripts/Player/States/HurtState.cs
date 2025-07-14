@@ -26,13 +26,6 @@ public class HurtState : BasePlayerState
 
         animator.Play("Hurt");
         AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerHurt);
-        context.StartCoroutine(ExitToDefault());
-    }
-
-    private IEnumerator ExitToDefault()
-    {
-        yield return new WaitForSeconds(0.5f);
-        isAppliedAnimation = true;
     }
 
     public override IState CheckTransitions()
@@ -42,7 +35,7 @@ public class HurtState : BasePlayerState
             return context.GetState(PlayerState.Die);
         }
 
-        if (isAppliedAnimation)
+        if (!context.IsHurt())
         {
             return context.GetState(PlayerState.Locomotion);
         }

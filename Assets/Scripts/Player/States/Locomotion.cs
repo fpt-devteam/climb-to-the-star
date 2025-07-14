@@ -7,9 +7,6 @@ public class LocomotionState : BasePlayerState
     private IPlayerMovement movement;
     private IPlayerInput input;
 
-    private bool hasApplyJump;
-    private bool hasApplyLand;
-
     public LocomotionState(PlayerController context)
         : base(context)
     {
@@ -20,36 +17,11 @@ public class LocomotionState : BasePlayerState
 
     public override void Enter()
     {
-        hasApplyLand = true;
-        hasApplyJump = false;
-
         OnIdle();
     }
 
     public override void FixedUpdate()
     {
-        if (context.IsJumping())
-        {
-            if (!hasApplyJump)
-            {
-                hasApplyJump = true;
-                OnJump();
-            }
-
-            OnMovement();
-            return;
-        }
-
-        hasApplyJump = false;
-
-        if (context.IsFalling())
-        {
-            hasApplyLand = false;
-            OnFall();
-            OnMovement();
-            return;
-        }
-
         if (context.IsWalking())
         {
             OnWalk();
@@ -59,40 +31,13 @@ public class LocomotionState : BasePlayerState
 
         if (context.IsIdling())
         {
-            if (hasApplyLand)
-            {
-                OnIdle();
-            }
-            else
-            {
-                OnLand();
-                context.StartCoroutine(WaitForTime(0.5f));
-            }
+            OnIdle();
         }
-    }
-
-    private IEnumerator WaitForTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-        hasApplyLand = true;
     }
 
     private void OnWalk()
     {
         animator.Play("Walk");
-    }
-
-    private void OnJump()
-    {
-        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerJump);
-        animator.Play("Jump");
-        movement.Jump();
-    }
-
-    private void OnFall()
-    {
-        animator.Play("Fall");
-        movement.Fall();
     }
 
     private void OnMovement()
@@ -103,12 +48,6 @@ public class LocomotionState : BasePlayerState
     private void OnIdle()
     {
         animator.Play("Idle");
-    }
-
-    private void OnLand()
-    {
-        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerLand);
-        animator.Play("Land");
     }
 
     public override IState CheckTransitions()
@@ -136,6 +75,16 @@ public class LocomotionState : BasePlayerState
         if (context.IsHurt())
         {
             return context.GetState(PlayerState.Hurt);
+        }
+
+        if (context.IsJumping())
+        {
+            return context.GetState(PlayerState.Jump);
+        }
+
+        if (context.IsFalling())
+        {
+            return context.GetState(PlayerState.Fall);
         }
 
         return null;
