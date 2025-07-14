@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      goblinsmasher_hurt_0: -1235811652695864053
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      goblinsmasher_run_0: 8739781634878525218
+      goblinsmasher_run_1: 27141672467730482
+      goblinsmasher_run_2: -2454730577070456437
+      goblinsmasher_run_3: -1601015621179670086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
