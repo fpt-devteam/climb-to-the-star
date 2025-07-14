@@ -84,6 +84,7 @@ public class LocomotionState : BasePlayerState
 
     private void OnJump()
     {
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerJump);
         animator.Play("Jump");
         movement.Jump();
     }
@@ -106,6 +107,7 @@ public class LocomotionState : BasePlayerState
 
     private void OnLand()
     {
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerLand);
         animator.Play("Land");
     }
 

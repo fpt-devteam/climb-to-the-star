@@ -15,6 +15,7 @@ public class DieState : BasePlayerState
     public override void Enter()
     {
         animator.Play("Die");
+        hasApplyAnimation = false;
         context.StartCoroutine(ExitToDefault());
     }
 

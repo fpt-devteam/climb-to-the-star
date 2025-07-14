@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2791895913779023444}
   - component: {fileID: 8088294752800325164}
   - component: {fileID: 813991901505012993}
+  - component: {fileID: -5213915374481888564}
   m_Layer: 5
   m_Name: QuitPanelButton
   m_TagString: Untagged
@@ -257,3 +258,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5213915374481888564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015504671308692386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98d2ed461e916046bac726d4a432ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openPanelOnClick: 1
+  makePanelActive: 0
+  panelToOpen: {fileID: 0}

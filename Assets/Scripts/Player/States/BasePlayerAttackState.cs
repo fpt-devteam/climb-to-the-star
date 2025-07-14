@@ -30,6 +30,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
         comboTimer = comboWindow;
 
         animator.Play(animationName);
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerAttack);
         animationCoroutine = context.StartCoroutine(WaitForAnimationCompletion());
         PerformDamage();
     }

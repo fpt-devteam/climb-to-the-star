@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5956863267004508591}
   - component: {fileID: 2753522527632139967}
   - component: {fileID: 7390859014363593585}
+  - component: {fileID: 7828937668776653332}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -26,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527041215121850526}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -122,6 +123,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7828937668776653332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527041215121850526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98d2ed461e916046bac726d4a432ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openPanelOnClick: 1
+  makePanelActive: 1
+  panelToOpen: {fileID: 0}
 --- !u!1 &4494279786940169146
 GameObject:
   m_ObjectHideFlags: 0

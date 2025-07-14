@@ -25,6 +25,7 @@ public class HurtState : BasePlayerState
         }
 
         animator.Play("Hurt");
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerHurt);
         context.StartCoroutine(ExitToDefault());
     }
 

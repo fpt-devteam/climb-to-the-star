@@ -238,9 +238,9 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 50
   chargeStaminaRestoreRate: 1
-  attackDamage: 7
-  jumpForce: 7
-  moveSpeed: 7
+  attackDamage: 10
+  jumpForce: 10
+  moveSpeed: 5
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   attackPoint: {fileID: 4420288039303592469}
