@@ -233,10 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 80
   immuneDuration: 0.5
   maxStamina: 100
-  currentStamina: 100
+  currentStamina: 50
   chargeStaminaRestoreRate: 1
   attackDamage: 7
   jumpForce: 7

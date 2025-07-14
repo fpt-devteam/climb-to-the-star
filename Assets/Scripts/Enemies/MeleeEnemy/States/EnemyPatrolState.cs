@@ -1,109 +1,115 @@
-// using UnityEngine;
+using UnityEngine;
 
-// public class EnemyPatrolState : BaseEnemyState
-// {
-//     [SerializeField]
-//     private float patrolPointReachedThreshold = 0.5f;
+public class EnemyPatrolState : BaseEnemyState
+{
+  [SerializeField]
+  private float patrolPointReachedThreshold = 0.5f;
+  private Animator animator;
 
-//     [SerializeField]
-//     private float patrolDistance = 3f;
+  private bool isMovingRight;
 
-//     [SerializeField]
-//     private float playerDetectionRange = 5f;
+  public EnemyPatrolState(EnemyController context) : base(context)
+  {
+    animator = context.GetComponent<Animator>();
+  }
 
-//     private bool isMovingRight;
-//     private Animator animator;
+  public override void Enter()
+  {
+    animator.Play("Run");
+    isMovingRight = context.IsFacingRight;
+  }
 
-//     private Vector2 startPosition;
-//     private Vector2 leftPatrolPoint;
-//     private Vector2 rightPatrolPoint;
+  public override void FixedUpdate()
+  {
+    CheckPatrolPointReached();
+    HandleFacingDirection();
+    context.MoveTowards(GetPatrolTarget());
+    DetectPlayer();
+  }
 
-//     [Header("Debug")]
-//     [SerializeField]
-//     private bool showDebugGizmos = true;
+  private void CheckPatrolPointReached()
+  {
+    float distanceToTarget = Vector2.Distance(context.transform.position, GetPatrolTarget());
 
-//     public EnemyPatrolState(EnemyController enemyController)
-//         : base(enemyController)
-//     {
-//         animator = enemyController.GetComponent<Animator>();
-//     }
+    if (distanceToTarget <= patrolPointReachedThreshold)
+    {
+      isMovingRight = !isMovingRight;
+    }
+  }
 
-//     public override void OnEnter()
-//     {
-//         animator.Play("Run");
-//         startPosition = enemyController.transform.position;
-//         leftPatrolPoint = startPosition + Vector2.left * patrolDistance;
-//         rightPatrolPoint = startPosition + Vector2.right * patrolDistance;
-//         isMovingRight = true;
+  private void HandleFacingDirection()
+  {
+    if (isMovingRight && !context.IsFacingRight)
+    {
+      context.SetDirection(true);
+    }
+    else if (!isMovingRight && context.IsFacingRight)
+    {
+      context.SetDirection(false);
+    }
+  }
 
-//         Debug.Log("Enemy entering Patrol State");
-//     }
+  private void DetectPlayer()
+  {
+    Collider2D playerCollider = Physics2D.OverlapCircle(
+        context.transform.position,
+        context.EnemyStats.PlayerDetectionRange,
+        LayerMask.GetMask("Player")
+    );
 
-//     public override void FixedUpdate()
-//     {
-//         CheckPatrolPointReached();
-//         enemyController.MoveTowards(GetPatrolTarget());
-//         DetectPlayer();
-//     }
+    if (playerCollider != null)
+    {
+      PlayerStats detectedPlayer = playerCollider.GetComponent<PlayerStats>();
 
-//     private void CheckPatrolPointReached()
-//     {
-//         float distanceToTarget = Vector2.Distance(
-//             enemyController.transform.position,
-//             GetPatrolTarget()
-//         );
+      if (detectedPlayer != null)
+      {
+        float playerX = detectedPlayer.transform.position.x;
+        float leftBound = Mathf.Min(context.LeftPatrolPoint.x, context.RightPatrolPoint.x);
+        float rightBound = Mathf.Max(context.LeftPatrolPoint.x, context.RightPatrolPoint.x);
 
-//         if (distanceToTarget <= patrolPointReachedThreshold)
-//         {
-//             isMovingRight = !isMovingRight;
-//         }
-//     }
+        if (playerX >= leftBound && playerX <= rightBound)
+        {
+          context.SetPlayer(detectedPlayer);
+          Debug.Log("Player detected in patrol area");
+        }
+        else
+        {
+          context.SetPlayer(null);
+        }
+      }
+    }
+    else
+    {
+      context.SetPlayer(null);
+    }
+  }
 
-//     private void DetectPlayer()
-//     {
-//         Collider2D playerCollider = Physics2D.OverlapCircle(
-//             enemyController.transform.position,
-//             playerDetectionRange,
-//             LayerMask.GetMask("Player")
-//         );
+  private Vector2 GetPatrolTarget() => isMovingRight ? context.RightPatrolPoint : context.LeftPatrolPoint;
 
-//         if (playerCollider != null)
-//         {
-//             Player detectedPlayer = playerCollider.GetComponent<Player>();
-//             if (detectedPlayer != null)
-//             {
-//                 enemyController.SetPlayer(detectedPlayer);
-//                 Debug.Log("Player detected in patrol state");
-//             }
-//         }
-//         else
-//         {
-//             // Clear player reference if no player detected
-//             enemyController.SetPlayer(null);
-//         }
-//     }
+  public override IState CheckTransitions()
+  {
+    if (context.EnemyStats.IsDead)
+    {
+      return context.GetState(EnemyState.Die);
+    }
 
-//     private Vector2 GetPatrolTarget() => isMovingRight ? rightPatrolPoint : leftPatrolPoint;
+    if (context.EnemyStats.IsHurt)
+    {
+      return context.GetState(EnemyState.Hurt);
+    }
 
-//     public override void OnExit()
-//     {
-//         Debug.Log("Enemy exiting Patrol State");
-//     }
+    if (context.Player != null)
+    {
+      if (context.IsPlayerInAttackRange())
+      {
+        return context.GetState(EnemyState.Attack);
+      }
+      else if (context.IsPlayerInDetectionRange())
+      {
+        return context.GetState(EnemyState.Chase);
+      }
+    }
 
-//     private void OnDrawGizmosSelected()
-//     {
-//         if (!showDebugGizmos)
-//             return;
-
-//         Gizmos.color = Color.yellow;
-//         Gizmos.DrawWireCube(startPosition, new Vector3(patrolDistance * 2, 1, 0));
-
-//         Gizmos.color = Color.green;
-//         Gizmos.DrawWireSphere(leftPatrolPoint, 0.3f);
-//         Gizmos.DrawWireSphere(rightPatrolPoint, 0.3f);
-
-//         // Player detection range
-//         Gizmos.color = Color.red;
-//         Gizmos.DrawWireSphere(enemyController.transform.position, playerDetectionRange);
-//     }
-// }
+    return null;
+  }
+}

@@ -30,7 +30,7 @@ public class HurtState : BasePlayerState
 
     private IEnumerator ExitToDefault()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
         isAppliedAnimation = true;
     }
 

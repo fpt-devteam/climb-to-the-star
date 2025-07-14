@@ -49,6 +49,11 @@ public class ChargeState : BasePlayerState
             return context.GetState(PlayerState.Dash);
         }
 
+        if (context.IsHurt())
+        {
+            return context.GetState(PlayerState.Hurt);
+        }
+
         return null;
     }
 }

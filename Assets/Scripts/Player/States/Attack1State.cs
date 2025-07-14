@@ -21,6 +21,11 @@ public class Attack1State : BasePlayerAttackState
                 return context.GetState(PlayerState.Attack2);
             }
 
+            if (context.IsHurt())
+            {
+                return context.GetState(PlayerState.Hurt);
+            }
+
             return context.GetState(PlayerState.Locomotion);
         }
 

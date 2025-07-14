@@ -1,51 +1,41 @@
-// using System.Collections;
-// using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-// public class EnemyDieState : BaseEnemyState
-// {
-//     [SerializeField]
-//     private float deathAnimationDuration = 1f;
+public class EnemyDieState : BaseEnemyState
+{
+  [SerializeField]
+  private float deathAnimationDuration = 1f;
 
-//     private Animator animator;
-//     private Enemy enemy;
+  private Animator animator;
+  private bool hasApplyAnimation = false;
 
-//     public EnemyDieState(EnemyController enemyController)
-//         : base(enemyController)
-//     {
-//         animator = enemyController.GetComponent<Animator>();
-//         enemy = enemyController.GetComponent<Enemy>();
-//     }
+  public EnemyDieState(EnemyController context)
+      : base(context)
+  {
+    animator = context.GetComponent<Animator>();
+  }
 
-//     public override void OnEnter()
-//     {
-//         Debug.Log("Enemy entering Die State");
+  public override void Enter()
+  {
+    Debug.Log("Enemy entering Die State");
 
-//         // Call the enemy's die method
-//         enemy.Die();
+    context.EnemyStats.Die();
 
-//         // Play death animation
-//         animator.Play("Die");
+    animator.Play("Die");
 
-//         // Stop all movement
-//         enemyController.StopMoving();
+    context.StartCoroutine(DeathSequence());
+  }
 
-//         // Start death sequence
-//         enemyController.StartCoroutine(DeathSequence());
-//     }
+  private IEnumerator DeathSequence()
+  {
+    yield return new WaitForSeconds(deathAnimationDuration);
+    hasApplyAnimation = true;
 
-//     private IEnumerator DeathSequence()
-//     {
-//         yield return new WaitForSeconds(deathAnimationDuration);
+    context.gameObject.SetActive(false);
+  }
 
-//         // Optional: Destroy the enemy GameObject
-//         // Destroy(enemyController.gameObject);
-
-//         // Or disable the enemy
-//         enemyController.gameObject.SetActive(false);
-//     }
-
-//     public override void OnExit()
-//     {
-//         Debug.Log("Enemy exiting Die State");
-//     }
-// }
+  public override IState CheckTransitions()
+  {
+    return null;
+  }
+}

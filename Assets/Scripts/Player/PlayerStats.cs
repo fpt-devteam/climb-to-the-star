@@ -64,7 +64,6 @@ public class PlayerStats : MonoBehaviour
             return;
 
         currentHealth = 0f;
-        Debug.Log("Player died");
     }
 
     private void Awake()
@@ -188,17 +187,6 @@ public class PlayerStats : MonoBehaviour
         else
         {
             fillImage.color = Color.red;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision == null || collision.gameObject == null)
-            return;
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(ENEMY_DAMAGE);
         }
     }
 }

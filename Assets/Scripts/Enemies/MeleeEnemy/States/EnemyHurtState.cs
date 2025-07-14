@@ -1,44 +1,51 @@
-// using System.Collections;
-// using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-// public class EnemyHurtState : BaseEnemyState
-// {
-//     [SerializeField]
-//     private float hurtDuration = 0.4f;
+public class EnemyHurtState : BaseEnemyState
+{
+  [SerializeField]
+  private float hurtDuration = 0.4f;
 
-//     private Animator animator;
-//     private Enemy enemy;
+  private Animator animator;
+  private bool isAppliedAnimation = false;
 
-//     public EnemyHurtState(EnemyController enemyController)
-//         : base(enemyController)
-//     {
-//         animator = enemyController.GetComponent<Animator>();
-//         enemy = enemyController.GetComponent<Enemy>();
-//     }
+  public EnemyHurtState(EnemyController context)
+      : base(context)
+  {
+    animator = context.GetComponent<Animator>();
+  }
 
-//     public override void OnEnter()
-//     {
-//         Debug.Log("Enemy entering Hurt State");
+  public override void Enter()
+  {
+    Debug.Log("Enemy entering Hurt State");
 
-//         // Check if enemy should die instead
-//         if (enemy.IsDead())
-//         {
-//             // State machine will handle transition to die state
-//             return;
-//         }
+    if (context.EnemyStats.IsDead)
+    {
+      return;
+    }
 
-//         animator.Play("Hurt");
-//         enemyController.StartCoroutine(ExitHurtState());
-//     }
+    animator.Play("Hurt");
+    context.StartCoroutine(ExitHurtState());
+  }
 
-//     private IEnumerator ExitHurtState()
-//     {
-//         yield return new WaitForSeconds(hurtDuration);
-//         // State machine will handle transition back to appropriate state
-//     }
+  private IEnumerator ExitHurtState()
+  {
+    yield return new WaitForSeconds(hurtDuration);
+    isAppliedAnimation = true;
+  }
 
-//     public override void OnExit()
-//     {
-//         Debug.Log("Enemy exiting Hurt State");
-//     }
-// }
+  public override IState CheckTransitions()
+  {
+    if (context.EnemyStats.IsDead)
+    {
+      return context.GetState(EnemyState.Die);
+    }
+
+    if (isAppliedAnimation)
+    {
+      return context.GetState(EnemyState.Patrol);
+    }
+
+    return null;
+  }
+}

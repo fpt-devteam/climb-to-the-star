@@ -1,156 +1,140 @@
-// using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
-// public class EnemyController : MonoBehaviour
-// {
-//     [Header("Movement Settings")]
-//     [SerializeField]
-//     private float moveSpeed = 2f;
+public class EnemyController : MonoBehaviour
+{
+  [Header("Component References")]
+  private EnemyStats enemyStats;
+  private Rigidbody2D rb;
 
-//     [SerializeField]
-//     private GameObject attackPoint;
-//     public GameObject AttackPoint => attackPoint;
+  [SerializeField]
+  private GameObject startPosition;
+  private Vector2 leftPatrolPoint;
+  private Vector2 rightPatrolPoint;
 
-//     public StateMachine stateMachine;
 
-//     private Enemy enemy;
-//     private Player player;
 
-//     // Cached states to avoid recreation
-//     private EnemyPatrolState patrolState;
-//     private EnemyHurtState hurtState;
-//     private EnemyDieState dieState;
-//     private EnemyAttackState attackState;
+  private StateMachine stateMachine;
+  private Dictionary<EnemyState, IState> states;
 
-//     // Movement control
-//     private bool canMove = true;
-//     private Vector2 targetPosition;
+  private bool isFacingRight = true;
+  private PlayerStats player;
 
-//     public void SetPlayer(Player player)
-//     {
-//         this.player = player;
-//     }
+  public EnemyStats EnemyStats => enemyStats;
+  public bool IsFacingRight => isFacingRight;
+  public PlayerStats Player => player;
+  public Vector2 LeftPatrolPoint => leftPatrolPoint;
+  public Vector2 RightPatrolPoint => rightPatrolPoint;
 
-//     public Player GetPlayer()
-//     {
-//         return player;
-//     }
+  private void Awake()
+  {
+    InitializeComponents();
+    InitializeStateMachine();
 
-//     private void Awake()
-//     {
-//         stateMachine = new StateMachine();
-//         enemy = GetComponent<Enemy>();
+    leftPatrolPoint = (Vector2)startPosition.transform.position + Vector2.left * enemyStats.PatrolDistance;
+    rightPatrolPoint = (Vector2)startPosition.transform.position + Vector2.right * enemyStats.PatrolDistance;
+  }
 
-//         // Create states once
-//         patrolState = new EnemyPatrolState(this);
-//         hurtState = new EnemyHurtState(this);
-//         dieState = new EnemyDieState(this);
-//         attackState = new EnemyAttackState(this);
+  private void InitializeComponents()
+  {
+    rb = GetComponent<Rigidbody2D>();
+    enemyStats = GetComponent<EnemyStats>();
+  }
 
-//         // Set up proper transitions
-//         SetupStateTransitions();
+  private void InitializeStateMachine()
+  {
+    states = new Dictionary<EnemyState, IState>
+        {
+            { EnemyState.Patrol, new EnemyPatrolState(this) },
+            { EnemyState.Chase, new EnemyChaseState(this) },
+            { EnemyState.Attack, new EnemyAttackState(this) },
+            { EnemyState.Hurt, new EnemyHurtState(this) },
+            { EnemyState.Die, new EnemyDieState(this) },
+        };
 
-//         // Start with patrol state
-//         stateMachine.SetState(patrolState);
-//     }
+    stateMachine = new StateMachine();
+    stateMachine.Initialize(GetState(EnemyState.Patrol));
+  }
 
-//     private void SetupStateTransitions()
-//     {
-//         // Patrol state transitions
-//         stateMachine.AddTransition(
-//             patrolState,
-//             attackState,
-//             new FuncPredicate(() => player != null && IsPlayerInAttackRange())
-//         );
-//         stateMachine.AddTransition(
-//             patrolState,
-//             hurtState,
-//             new FuncPredicate(() => enemy.IsHurt() && !enemy.IsDead())
-//         );
-//         stateMachine.AddTransition(patrolState, dieState, new FuncPredicate(() => enemy.IsDead()));
+  private void Update()
+  {
+    HandleFacingDirection();
+    stateMachine.Update();
+  }
 
-//         // Attack state transitions
-//         stateMachine.AddTransition(
-//             attackState,
-//             patrolState,
-//             new FuncPredicate(() => player == null || !IsPlayerInAttackRange())
-//         );
-//         stateMachine.AddTransition(
-//             attackState,
-//             hurtState,
-//             new FuncPredicate(() => enemy.IsHurt() && !enemy.IsDead())
-//         );
-//         stateMachine.AddTransition(attackState, dieState, new FuncPredicate(() => enemy.IsDead()));
+  private void FixedUpdate()
+  {
+    stateMachine.FixedUpdate();
+  }
 
-//         // Hurt state transitions
-//         stateMachine.AddTransition(
-//             hurtState,
-//             patrolState,
-//             new FuncPredicate(() => !enemy.IsHurt() && !enemy.IsDead())
-//         );
-//         stateMachine.AddTransition(hurtState, dieState, new FuncPredicate(() => enemy.IsDead()));
+  private void HandleFacingDirection()
+  {
+    if (player != null)
+    {
+      float directionToPlayer = player.transform.position.x - transform.position.x;
 
-//         // Die state has no transitions (final state)
-//     }
+      if (directionToPlayer > 0f && !isFacingRight)
+      {
+        transform.localScale = new Vector3(1, 1, 1);
+        isFacingRight = true;
+      }
+      else if (directionToPlayer < 0f && isFacingRight)
+      {
+        transform.localScale = new Vector3(-1, 1, 1);
+        isFacingRight = false;
+      }
+    }
+  }
 
-//     private bool IsPlayerInAttackRange()
-//     {
-//         if (player == null)
-//             return false;
+  public void SetPlayer(PlayerStats player)
+  {
+    this.player = player;
+  }
 
-//         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-//         return distanceToPlayer <= 2f; // Adjust based on your attack range
-//     }
+  public bool IsPlayerInAttackRange()
+  {
+    if (player == null)
+      return false;
 
-//     private void Update()
-//     {
-//         stateMachine.Update();
-//     }
+    float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+    return IsPlayerInDetectionRange() && distanceToPlayer <= enemyStats.AttackRange;
+  }
 
-//     private void FixedUpdate()
-//     {
-//         stateMachine.FixedUpdate();
+  public bool IsPlayerInDetectionRange()
+  {
+    if (player == null)
+      return false;
 
-//         // Handle movement if allowed
-//         if (canMove)
-//         {
-//             MoveTowards(targetPosition);
-//         }
-//     }
+    var xPosition = transform.position.x;
+    var leftBound = Mathf.Min(leftPatrolPoint.x, rightPatrolPoint.x);
+    var rightBound = Mathf.Max(leftPatrolPoint.x, rightPatrolPoint.x);
 
-//     public void MoveTowards(Vector2 targetPosition)
-//     {
-//         this.targetPosition = targetPosition;
+    return leftBound <= xPosition && xPosition <= rightBound;
+  }
 
-//         if (!canMove)
-//             return;
+  public void MoveTowards(Vector2 targetPosition)
+  {
+    Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+    transform.position = Vector2.MoveTowards(transform.position, targetPosition, enemyStats.MoveSpeed * Time.fixedDeltaTime);
+  }
 
-//         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+  public void SetDirection(bool facingRight)
+  {
+    isFacingRight = facingRight;
+    transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+  }
 
-//         transform.position = Vector2.MoveTowards(
-//             transform.position,
-//             targetPosition,
-//             moveSpeed * Time.fixedDeltaTime
-//         );
+  public IState GetState(EnemyState state) => states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
 
-//         // Flip sprite based on direction
-//         if (direction.x != 0)
-//         {
-//             transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
-//         }
-//     }
+  private void OnDrawGizmosSelected()
+  {
+    Gizmos.color = Color.green;
+    Gizmos.DrawWireSphere(leftPatrolPoint, 0.3f);
+    Gizmos.DrawWireSphere(rightPatrolPoint, 0.3f);
 
-//     public void StopMoving()
-//     {
-//         canMove = false;
-//     }
-
-//     public void ResumeMoving()
-//     {
-//         canMove = true;
-//     }
-
-//     public bool IsMoving()
-//     {
-//         return canMove;
-//     }
-// }
+    Gizmos.color = Color.red;
+    Vector3 patrolAreaCenter = (Vector3)(leftPatrolPoint + rightPatrolPoint) * 0.5f;
+    Vector3 patrolAreaSize = new Vector3(EnemyStats.PatrolDistance * 2, 2f, 0f);
+    Gizmos.DrawWireCube(patrolAreaCenter, patrolAreaSize);
+  }
+}

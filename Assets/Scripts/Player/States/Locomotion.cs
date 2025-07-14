@@ -131,6 +131,11 @@ public class LocomotionState : BasePlayerState
             return context.GetState(PlayerState.Attack1);
         }
 
+        if (context.IsHurt())
+        {
+            return context.GetState(PlayerState.Hurt);
+        }
+
         return null;
     }
 }

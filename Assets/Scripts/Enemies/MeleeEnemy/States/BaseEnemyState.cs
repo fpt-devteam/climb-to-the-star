@@ -1,19 +1,21 @@
-// using UnityEngine;
+using UnityEngine;
 
-// public class BaseEnemyState : MonoBehaviour, IState
-// {
-//     protected EnemyController enemyController;
+public abstract class BaseEnemyState : IState
+{
+    protected EnemyController context;
 
-//     public BaseEnemyState(EnemyController enemyController)
-//     {
-//         this.enemyController = enemyController;
-//     }
+    public BaseEnemyState(EnemyController context)
+    {
+        this.context = context;
+    }
 
-//     public virtual void OnEnter() { }
+    public virtual void Enter() { }
 
-//     public virtual void Update() { }
+    public virtual void Update() { }
 
-//     public virtual void FixedUpdate() { }
+    public virtual void FixedUpdate() { }
 
-//     public virtual void OnExit() { }
-// }
+    public virtual void Exit() { }
+
+    public virtual IState CheckTransitions() => null;
+}

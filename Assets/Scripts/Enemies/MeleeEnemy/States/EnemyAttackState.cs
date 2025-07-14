@@ -1,134 +1,108 @@
-// using System.Collections;
-// using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-// public class EnemyAttackState : BaseEnemyState
-// {
-//   [SerializeField]
-//   private float attackCooldown = 1.5f;
+public class EnemyAttackState : BaseEnemyState
+{
+    private Animator animator;
+    private GameObject attackPoint;
+    private float attackTimer;
+    private bool isAttacking;
+    private Coroutine attackCoroutine;
 
-//   [SerializeField]
-//   private float attackRange = 1.5f;
+    public EnemyAttackState(EnemyController context)
+        : base(context)
+    {
+        animator = context.GetComponent<Animator>();
+        attackPoint = context.EnemyStats.AttackPoint;
+    }
 
-//   private Animator animator;
-//   private GameObject attackPoint;
-//   private float attackTimer;
-//   private bool isAttacking;
+    public override void Enter()
+    {
+        Debug.Log("Enemy entering Attack State");
+        attackTimer = 0f;
+        isAttacking = false;
+        PerformAttack();
+    }
 
-//   public EnemyAttackState(EnemyController enemyController)
-//       : base(enemyController)
-//   {
-//     animator = enemyController.GetComponent<Animator>();
-//     attackPoint = enemyController.AttackPoint;
-//   }
+    public override void FixedUpdate()
+    {
+        if (isAttacking)
+        {
+            attackTimer -= Time.fixedDeltaTime;
+        }
+    }
 
-//   public override void OnEnter()
-//   {
-//     Debug.Log("Enemy entering Attack State");
-//     attackTimer = 0f;
-//     isAttacking = false;
-//   }
+    private void PerformAttack()
+    {
+        if (isAttacking || attackTimer > 0f)
+            return;
 
-//   public override void Update()
-//   {
-//     if (isAttacking)
-//     {
-//       attackTimer -= Time.deltaTime;
-//     }
-//   }
+        isAttacking = true;
+        attackTimer = context.EnemyStats.AttackCooldown;
 
-//   public override void FixedUpdate()
-//   {
-//     Player player = enemyController.GetPlayer();
+        animator.Play("Attack");
 
-//     if (player == null)
-//     {
-//       // No player to attack, state machine will transition back to patrol
-//       return;
-//     }
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(
+            attackPoint.transform.position,
+            0.5f,
+            LayerMask.GetMask("Player")
+        );
 
-//     float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (colliders.Length > 0)
+        {
+            foreach (Collider2D collider in colliders)
+            {
+                PlayerStats playerStats = collider.GetComponent<PlayerStats>();
+                if (playerStats != null)
+                {
+                    playerStats.TakeDamage(context.EnemyStats.AttackDamage);
+                    Debug.Log($"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}");
+                }
+            }
+        }
 
-//     if (distanceToPlayer <= attackRange)
-//     {
-//       // In attack range
-//       if (!isAttacking && attackTimer <= 0f)
-//       {
-//         PerformAttack();
-//       }
-//     }
-//     else
-//     {
-//       // Chase player
-//       ChasePlayer();
-//     }
-//   }
+        attackCoroutine = context.StartCoroutine(ResetAttackState());
+    }
 
-//   private void ChasePlayer()
-//   {
-//     Player player = enemyController.GetPlayer();
-//     if (player != null)
-//     {
-//       enemyController.MoveTowards(player.transform.position);
-//     }
-//   }
+    private IEnumerator ResetAttackState()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isAttacking = false;
+    }
 
-//   private void PerformAttack()
-//   {
-//     isAttacking = true;
-//     attackTimer = attackCooldown;
+    public override IState CheckTransitions()
+    {
+        if (isAttacking)
+        {
+            return null;
+        }
 
-//     // Stop moving during attack
-//     enemyController.StopMoving();
+        if (context.EnemyStats.IsDead)
+        {
+            return context.GetState(EnemyState.Die);
+        }
 
-//     // Play attack animation
-//     animator.Play("Attack");
+        if (context.EnemyStats.IsHurt)
+        {
+            return context.GetState(EnemyState.Hurt);
+        }
 
-//     // Check for player in attack range and deal damage
-//     Collider2D[] colliders = Physics2D.OverlapCircleAll(
-//         attackPoint.transform.position,
-//         0.5f,
-//         LayerMask.GetMask("Player")
-//     );
+        if (context.Player == null)
+        {
+            return context.GetState(EnemyState.Patrol);
+        }
 
-//     if (colliders.Length > 0)
-//     {
-//       foreach (Collider2D collider in colliders)
-//       {
-//         Player player = collider.GetComponent<Player>();
-//         if (player != null)
-//         {
-//           player.DeductHealth(10f);
-//           Debug.Log("Player hit by enemy attack");
-//         }
-//       }
-//     }
+        if (!context.IsPlayerInAttackRange())
+        {
+            return context.GetState(EnemyState.Chase);
+        }
 
-//     // Start coroutine to reset attack state
-//     enemyController.StartCoroutine(ResetAttackState());
-//   }
+        if (context.IsPlayerInAttackRange())
+        {
+            return context.GetState(EnemyState.Attack);
+        }
 
-//   private IEnumerator ResetAttackState()
-//   {
-//     // Wait for attack animation to complete
-//     yield return new WaitForSeconds(0.5f);
-//     isAttacking = false;
-//   }
-
-//   public override void OnExit()
-//   {
-//     Debug.Log("Enemy exiting Attack State");
-//     isAttacking = false;
-//   }
-
-//   private void OnDrawGizmosSelected()
-//   {
-//     if (attackPoint != null)
-//     {
-//       Gizmos.color = Color.red;
-//       Gizmos.DrawWireSphere(attackPoint.transform.position, 0.5f);
-//     }
-
-//     Gizmos.color = Color.yellow;
-//     Gizmos.DrawWireSphere(transform.position, attackRange);
-//   }
-// }
+        Debug.Log("No transition available, staying in Attack State");
+        return null;
+    }
+}

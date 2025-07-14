@@ -32,8 +32,6 @@ public abstract class BasePlayerAttackState : BasePlayerState
         animator.Play(animationName);
         animationCoroutine = context.StartCoroutine(WaitForAnimationCompletion());
         PerformDamage();
-
-        Debug.Log($"Entering {GetType().Name}");
     }
 
     public override void Exit()
@@ -64,15 +62,14 @@ public abstract class BasePlayerAttackState : BasePlayerState
             LayerMask.GetMask("Enemy")
         );
 
-        // foreach (Collider2D collider in colliders)
-        // {
-        //     Enemy enemy = collider.GetComponent<Enemy>();
-        //     if (enemy != null)
-        //     {
-        //         enemy.DeductHealth(finalDamage);
-        //         Debug.Log($"Enemy hit! Damage: {finalDamage}");
-        //     }
-        // }
+        foreach (Collider2D collider in colliders)
+        {
+            EnemyStats enemyStats = collider.GetComponent<EnemyStats>();
+            if (enemyStats != null)
+            {
+                enemyStats.TakeDamage(finalDamage);
+            }
+        }
     }
 
     protected IEnumerator WaitForAnimationCompletion()

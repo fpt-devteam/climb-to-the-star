@@ -54,10 +54,17 @@ public class PlayerController : MonoBehaviour
             { PlayerState.Attack2, new Attack2State(this) },
             { PlayerState.Attack3, new Attack3State(this) },
             { PlayerState.Attack4, new Attack4State(this) },
+            { PlayerState.Hurt, new HurtState(this) },
+            { PlayerState.Die, new DieState(this) },
         };
 
         stateMachine = new StateMachine();
         stateMachine.Initialize(GetState(PlayerState.Locomotion));
+    }
+
+    private void Update()
+    {
+        stateMachine.Update();
     }
 
     private void FixedUpdate()
@@ -111,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool CanAttack() => isGrounded && playerInput.IsAttackPressed();
-
+    public bool IsHurt() => playerStats.IsHurt;
     public bool IsFalling() => rb.linearVelocity.y < 0f && !isGrounded;
 
     public IState GetState(PlayerState state) =>
