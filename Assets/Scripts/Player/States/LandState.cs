@@ -15,6 +15,7 @@ public class LandState : BasePlayerState
     public override void Enter()
     {
         animator.Play("Land");
+        isAppliedAnimation = false;
         AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerLand);
         context.StartCoroutine(ExitToDefault());
     }

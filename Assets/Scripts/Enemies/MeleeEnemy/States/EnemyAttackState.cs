@@ -41,6 +41,7 @@ public class EnemyAttackState : BaseEnemyState
         attackTimer = context.EnemyStats.AttackCooldown;
 
         animator.Play("Attack");
+        attackCoroutine = context.StartCoroutine(ResetAttackState());
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             attackPoint.transform.position,
@@ -56,12 +57,12 @@ public class EnemyAttackState : BaseEnemyState
                 if (playerStats != null)
                 {
                     playerStats.TakeDamage(context.EnemyStats.AttackDamage);
-                    Debug.Log($"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}");
+                    Debug.Log(
+                        $"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}"
+                    );
                 }
             }
         }
-
-        attackCoroutine = context.StartCoroutine(ResetAttackState());
     }
 
     private IEnumerator ResetAttackState()
