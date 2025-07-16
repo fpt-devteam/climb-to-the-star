@@ -52,6 +52,15 @@ TagManager:
   - name: Background
     uniqueID: 2187867781
     locked: 0
+  - name: Background 1
+    uniqueID: 1903849609
+    locked: 0
+  - name: Backgound 2
+    uniqueID: 58920853
+    locked: 0
+  - name: Background 3
+    uniqueID: 99804009
+    locked: 0
   - name: Player
     uniqueID: 2510430811
     locked: 0

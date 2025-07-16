@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class EnemyAttackState : BaseEnemyState
 {
+    [Header("Attack Settings")]
+    [SerializeField]
+    private float attackCooldown = 1.5f;
+
+    [SerializeField]
+    private float attackRange = 0.5f;
+
     private Animator animator;
     private GameObject attackPoint;
-    private float attackTimer;
     private bool isAttacking;
-    private Coroutine attackCoroutine;
+    private float lastAttackTime;
 
     public EnemyAttackState(EnemyController context)
         : base(context)
@@ -19,91 +25,61 @@ public class EnemyAttackState : BaseEnemyState
     public override void Enter()
     {
         Debug.Log("Enemy entering Attack State");
-        attackTimer = 0f;
-        isAttacking = false;
-        PerformAttack();
-    }
 
-    public override void FixedUpdate()
-    {
-        if (isAttacking)
+        if (Time.time - lastAttackTime < attackCooldown)
         {
-            attackTimer -= Time.fixedDeltaTime;
+            Debug.Log("Attack on cooldown, returning to patrol");
+            return;
         }
+
+        isAttacking = true;
+        lastAttackTime = Time.time;
+
+        animator.Play("Attack");
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.EnemyAttack);
+
+        PerformAttack();
+
+        context.StartCoroutine(ResetAttackState());
     }
 
     private void PerformAttack()
     {
-        if (isAttacking || attackTimer > 0f)
-            return;
-
-        isAttacking = true;
-        attackTimer = context.EnemyStats.AttackCooldown;
-
-        animator.Play("Attack");
-        attackCoroutine = context.StartCoroutine(ResetAttackState());
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(
+        Collider2D collider = Physics2D.OverlapCircle(
             attackPoint.transform.position,
-            0.5f,
+            attackRange,
             LayerMask.GetMask("Player")
         );
 
-        if (colliders.Length > 0)
+        if (collider != null)
         {
-            foreach (Collider2D collider in colliders)
+            PlayerStats playerStats = collider.GetComponent<PlayerStats>();
+            if (playerStats != null && !playerStats.IsImmune)
             {
-                PlayerStats playerStats = collider.GetComponent<PlayerStats>();
-                if (playerStats != null)
-                {
-                    playerStats.TakeDamage(context.EnemyStats.AttackDamage);
-                    Debug.Log(
-                        $"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}"
-                    );
-                }
+                playerStats.TakeDamage(context.EnemyStats.AttackDamage);
+                Debug.Log($"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}");
             }
         }
     }
 
     private IEnumerator ResetAttackState()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
 
     public override IState CheckTransitions()
     {
-        if (isAttacking)
-        {
-            return null;
-        }
-
-        if (context.EnemyStats.IsDead)
-        {
-            return context.GetState(EnemyState.Die);
-        }
-
         if (context.EnemyStats.IsHurt)
         {
             return context.GetState(EnemyState.Hurt);
         }
 
-        if (context.Player == null)
+        if (isAttacking)
         {
-            return context.GetState(EnemyState.Patrol);
+            return null;
         }
 
-        if (!context.IsPlayerInAttackRange())
-        {
-            return context.GetState(EnemyState.Chase);
-        }
-
-        if (context.IsPlayerInAttackRange())
-        {
-            return context.GetState(EnemyState.Attack);
-        }
-
-        Debug.Log("No transition available, staying in Attack State");
-        return null;
+        return context.GetState(EnemyState.Patrol);
     }
 }

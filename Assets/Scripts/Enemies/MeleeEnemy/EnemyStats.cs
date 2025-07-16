@@ -41,7 +41,6 @@ public class EnemyStats : MonoBehaviour
 
     private const float HIGH_HEALTH_THRESHOLD = 0.6f;
     private const float MEDIUM_HEALTH_THRESHOLD = 0.3f;
-
     private float immuneTimer = 0f;
 
     public GameObject AttackPoint => attackPoint;
@@ -53,7 +52,6 @@ public class EnemyStats : MonoBehaviour
     public float AttackCooldown => attackCooldown;
     public float PatrolDistance => patrolDistance;
     public float PlayerDetectionRange => patrolDistance;
-
     public bool IsAlive => currentHealth > 0f;
     public bool IsImmune => immuneTimer > 0f;
     public bool IsHurt => immuneTimer > 0f;
@@ -116,13 +114,10 @@ public class EnemyStats : MonoBehaviour
         if (healthBar == null)
             return;
 
-        healthBar.value = HealthPercentage;
-        UpdateSliderColor(healthBar, HealthPercentage);
-    }
+        var percentage = HealthPercentage;
+        healthBar.value = percentage;
 
-    private void UpdateSliderColor(Slider slider, float percentage)
-    {
-        Image fillImage = slider.fillRect?.GetComponent<Image>();
+        Image fillImage = healthBar.fillRect?.GetComponent<Image>();
 
         if (fillImage == null)
             return;

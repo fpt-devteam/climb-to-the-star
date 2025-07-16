@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyHurtState : BaseEnemyState
 {
   [SerializeField]
-  private float hurtDuration = 0.4f;
+  private float hurtDuration = 0.2f;
 
   private Animator animator;
   private bool isAppliedAnimation = false;
@@ -18,12 +18,7 @@ public class EnemyHurtState : BaseEnemyState
   public override void Enter()
   {
     Debug.Log("Enemy entering Hurt State");
-
-    if (context.EnemyStats.IsDead)
-    {
-      return;
-    }
-
+    isAppliedAnimation = false;
     animator.Play("Hurt");
     context.StartCoroutine(ExitHurtState());
   }
@@ -32,6 +27,10 @@ public class EnemyHurtState : BaseEnemyState
   {
     yield return new WaitForSeconds(hurtDuration);
     isAppliedAnimation = true;
+  }
+  public override void Exit()
+  {
+    animator.StopPlayback();
   }
 
   public override IState CheckTransitions()
@@ -46,6 +45,7 @@ public class EnemyHurtState : BaseEnemyState
       return context.GetState(EnemyState.Patrol);
     }
 
+    Debug.Log("Enemy is still hurt, staying in Hurt State");
     return null;
   }
 }

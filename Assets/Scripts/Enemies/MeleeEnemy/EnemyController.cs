@@ -11,42 +11,26 @@ public class EnemyController : MonoBehaviour
     private GameObject startPosition;
     private Vector2 leftPatrolPoint;
     private Vector2 rightPatrolPoint;
-
     private StateMachine stateMachine;
     private Dictionary<EnemyState, IState> states;
-
-    private bool isFacingRight = true;
     private PlayerStats player;
+    private bool isFacingRight = true;
 
-    public EnemyStats EnemyStats => enemyStats;
     public bool IsFacingRight => isFacingRight;
+    public EnemyStats EnemyStats => enemyStats;
     public PlayerStats Player => player;
     public Vector2 LeftPatrolPoint => leftPatrolPoint;
     public Vector2 RightPatrolPoint => rightPatrolPoint;
 
     private void Awake()
     {
-        InitializeComponents();
-        InitializeStateMachine();
-
-        leftPatrolPoint =
-            (Vector2)startPosition.transform.position + Vector2.left * enemyStats.PatrolDistance;
-        rightPatrolPoint =
-            (Vector2)startPosition.transform.position + Vector2.right * enemyStats.PatrolDistance;
-    }
-
-    private void InitializeComponents()
-    {
         rb = GetComponent<Rigidbody2D>();
         enemyStats = GetComponent<EnemyStats>();
-    }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
-    private void InitializeStateMachine()
-    {
         states = new Dictionary<EnemyState, IState>
         {
             { EnemyState.Patrol, new EnemyPatrolState(this) },
-            { EnemyState.Chase, new EnemyChaseState(this) },
             { EnemyState.Attack, new EnemyAttackState(this) },
             { EnemyState.Hurt, new EnemyHurtState(this) },
             { EnemyState.Die, new EnemyDieState(this) },
@@ -54,42 +38,29 @@ public class EnemyController : MonoBehaviour
 
         stateMachine = new StateMachine();
         stateMachine.Initialize(GetState(EnemyState.Patrol));
+
+        leftPatrolPoint =
+            (Vector2)startPosition.transform.position + Vector2.left * enemyStats.PatrolDistance;
+        rightPatrolPoint =
+            (Vector2)startPosition.transform.position + Vector2.right * enemyStats.PatrolDistance;
     }
 
     private void Update()
     {
-        HandleFacingDirection();
         stateMachine.Update();
     }
 
     private void FixedUpdate()
     {
         stateMachine.FixedUpdate();
-    }
-
-    private void HandleFacingDirection()
-    {
-        if (player != null)
+        if (IsPlayerInAttackRange())
         {
-            float directionToPlayer = player.transform.position.x - transform.position.x;
-
-            if (directionToPlayer > 0f && !isFacingRight)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                isFacingRight = true;
-            }
-            else if (directionToPlayer < 0f && isFacingRight)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                isFacingRight = false;
-            }
+            Vector2 direction = player.transform.position - transform.position;
+            ChangeDirection(direction.x > 0);
         }
     }
 
-    public void SetPlayer(PlayerStats player)
-    {
-        this.player = player;
-    }
+    public void SetPlayer(PlayerStats player) => this.player = player;
 
     public bool IsPlayerInAttackRange()
     {
@@ -97,36 +68,25 @@ public class EnemyController : MonoBehaviour
             return false;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        return IsPlayerInDetectionRange() && distanceToPlayer <= enemyStats.AttackRange;
+        return distanceToPlayer <= enemyStats.AttackRange;
     }
 
-    public bool IsPlayerInDetectionRange()
-    {
-        if (player == null)
-            return false;
-
-        var xPosition = transform.position.x;
-        var yPosition = transform.position.y;
-        var leftBound = Mathf.Min(leftPatrolPoint.x, rightPatrolPoint.x);
-        var rightBound = Mathf.Max(leftPatrolPoint.x, rightPatrolPoint.x);
-
-        return leftBound <= xPosition && xPosition <= rightBound && yPosition == leftPatrolPoint.y;
-    }
-
-    public void MoveTowards(Vector2 targetPosition)
-    {
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+    public void MoveTowards(Vector2 targetPosition) =>
         transform.position = Vector2.MoveTowards(
             transform.position,
             targetPosition,
             enemyStats.MoveSpeed * Time.fixedDeltaTime
         );
-    }
 
-    public void SetDirection(bool facingRight)
+    public void ChangeDirection(bool facingRight)
     {
         isFacingRight = facingRight;
-        transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+
+        transform.localScale = new Vector3(
+            isFacingRight ? 1f : -1f,
+            transform.localScale.y,
+            transform.localScale.z
+        );
     }
 
     public IState GetState(EnemyState state) =>
