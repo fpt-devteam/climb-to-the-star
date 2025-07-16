@@ -6,4 +6,9 @@ public class Footstep : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerMove);
     }
+
+    public void StopFootstep()
+    {
+        AudioManager.Instance.StopSFX();
+    }
 }

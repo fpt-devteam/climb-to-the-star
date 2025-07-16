@@ -12,6 +12,7 @@ TagManager:
   - Cloud
   - Iceberg
   - IceSpike
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -60,6 +61,9 @@ TagManager:
     locked: 0
   - name: Background 3
     uniqueID: 99804009
+    locked: 0
+  - name: Enemy
+    uniqueID: 2108312481
     locked: 0
   - name: Player
     uniqueID: 2510430811

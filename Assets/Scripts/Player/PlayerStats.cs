@@ -29,10 +29,32 @@ public class PlayerStats : MonoBehaviour
     private float attackDamage = 7f;
 
     [SerializeField]
+    private float attackRange = 0.5f;
+
+    [SerializeField]
+    private float comboWindow = 1.5f;
+
+    [SerializeField]
+    private float animationDuration = 0.6f;
+
+    [SerializeField]
     private float jumpForce = 7f;
 
     [SerializeField]
     private float moveSpeed = 7f;
+
+    [Header("Movement Stats")]
+    [SerializeField]
+    private float moveSpeedInAir = 5f;
+
+    [SerializeField]
+    private float airMoveSpeed = 3f;
+
+    [SerializeField]
+    private float maxFallSpeed = 10f;
+
+    [SerializeField]
+    private float dashForce = 40f;
 
     [Header("UI References")]
     [SerializeField]
@@ -49,12 +71,19 @@ public class PlayerStats : MonoBehaviour
 
     public GameObject AttackPoint => attackPoint;
     public float AttackDamage => attackDamage;
+    public float AttackRange => attackRange;
+    public float ComboWindow => comboWindow;
+    public float AnimationDuration => animationDuration;
     public float MaxHealth => maxHealth;
     public float MaxStamina => maxStamina;
     public float CurrentHealth => currentHealth;
     public float CurrentStamina => currentStamina;
     public float JumpForce => jumpForce;
     public float MoveSpeed => moveSpeed;
+    public float MoveSpeedInAir => moveSpeedInAir;
+    public float AirMoveSpeed => airMoveSpeed;
+    public float MaxFallSpeed => maxFallSpeed;
+    public float DashForce => dashForce;
 
     public bool IsShielding => isShielding;
     public bool IsAlive => currentHealth > 0f;

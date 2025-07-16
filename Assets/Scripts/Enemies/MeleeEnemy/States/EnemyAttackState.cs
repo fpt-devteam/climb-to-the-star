@@ -8,7 +8,7 @@ public class EnemyAttackState : BaseEnemyState
     private float attackCooldown = 1.5f;
 
     [SerializeField]
-    private float attackRange = 0.5f;
+    private float attackDelay = 0.3f;
 
     private Animator animator;
     private GameObject attackPoint;
@@ -38,16 +38,23 @@ public class EnemyAttackState : BaseEnemyState
         animator.Play("Attack");
         AudioManager.Instance.PlaySFX(AudioSFXEnum.EnemyAttack);
 
-        PerformAttack();
+        // Delay the attack to match animation timing
+        context.StartCoroutine(PerformDelayedAttack());
 
         context.StartCoroutine(ResetAttackState());
+    }
+
+    private IEnumerator PerformDelayedAttack()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        PerformAttack();
     }
 
     private void PerformAttack()
     {
         Collider2D collider = Physics2D.OverlapCircle(
             attackPoint.transform.position,
-            attackRange,
+            context.EnemyStats.AttackRange,
             LayerMask.GetMask("Player")
         );
 
@@ -81,5 +88,14 @@ public class EnemyAttackState : BaseEnemyState
         }
 
         return context.GetState(EnemyState.Patrol);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackPoint.transform.position, context.EnemyStats.AttackRange);
+        }
     }
 }

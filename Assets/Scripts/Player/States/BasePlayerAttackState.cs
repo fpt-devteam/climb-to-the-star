@@ -27,7 +27,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
     {
         hasAppliedAnimation = false;
         hasAppliedDamage = false;
-        comboTimer = comboWindow;
+        comboTimer = context.PlayerStats.ComboWindow;
 
         animator.Play(animationName);
         AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerAttack);
@@ -59,7 +59,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             attackPoint.transform.position,
-            attackRange,
+            context.PlayerStats.AttackRange,
             LayerMask.GetMask("Enemy")
         );
 
@@ -75,7 +75,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
 
     protected IEnumerator WaitForAnimationCompletion()
     {
-        yield return new WaitForSeconds(animationDuration);
+        yield return new WaitForSeconds(context.PlayerStats.AnimationDuration);
         hasAppliedAnimation = true;
     }
 
@@ -89,7 +89,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+            Gizmos.DrawWireSphere(attackPoint.transform.position, context.PlayerStats.AttackRange);
         }
     }
 }

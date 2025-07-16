@@ -138,14 +138,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.3452
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7138
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.77
       objectReference: {fileID: 0}
@@ -189,14 +181,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 7 - AZURE - BIG (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -215,10 +199,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.169147
-      objectReference: {fileID: 0}
     - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 114.67
@@ -263,18 +243,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 9 - ORANGE - BIG (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -296,14 +264,6 @@ PrefabInstance:
     - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
@@ -372,22 +332,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.2195
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.0209
-      objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.97
@@ -449,18 +393,6 @@ PrefabInstance:
     - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.4189
       objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -564,14 +496,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 8 - BEIGE - BIG (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -598,18 +522,6 @@ PrefabInstance:
     - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - WHITE - BIG (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_TagString
-      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -670,10 +582,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5508
-      objectReference: {fileID: 0}
-    - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 156.26
       objectReference: {fileID: 0}
@@ -716,18 +624,6 @@ PrefabInstance:
     - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
       propertyPath: m_Name
       value: Rock Pile 5 - WHITE - BIG (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_TagString
-      value: Rock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -840,14 +736,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.162
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.811
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_LocalPosition.x
       value: 105.8598
       objectReference: {fileID: 0}
@@ -891,18 +779,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 12 - MOSSY - BIG (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -924,18 +800,6 @@ PrefabInstance:
     - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7614
       objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1058,14 +922,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9418
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7948
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.78
       objectReference: {fileID: 0}
@@ -1109,14 +965,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1130,10 +978,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.513
-      objectReference: {fileID: 0}
     - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_LocalPosition.x
       value: 142.75
@@ -1177,18 +1021,6 @@ PrefabInstance:
     - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_Name
       value: Rock Pile 12 - MOSSY - BIG (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_TagString
-      value: Rock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1292,7 +1124,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 890210543
-  m_SortingLayer: 2
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1389,18 +1221,6 @@ PrefabInstance:
     - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_TagString
-      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1504,14 +1324,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 5 - WHITE - BIG (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1530,10 +1342,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.3306
-      objectReference: {fileID: 0}
     - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 65.16
@@ -1578,14 +1386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 9 - ORANGE - BIG (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1604,14 +1404,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1709
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8426
-      objectReference: {fileID: 0}
     - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 64.2
@@ -1655,14 +1447,6 @@ PrefabInstance:
     - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
       propertyPath: m_Name
       value: Rock Pile 7 - AZURE - BIG (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1788,14 +1572,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 81.6
@@ -1858,22 +1634,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6551
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0849
-      objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
       value: 98.93
@@ -1935,18 +1695,6 @@ PrefabInstance:
     - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.3955
       objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2141,7 +1889,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 890210543
-  m_SortingLayer: 2
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2162,33 +1910,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 1672467067200709030, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672467067200709030, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 890210543
-      objectReference: {fileID: 0}
     - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
       propertyPath: m_Name
       value: Rock Pile 1 - WHITE - BIG (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2226
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8309
       objectReference: {fileID: 0}
     - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2244,10 +1968,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.3084
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.1
       objectReference: {fileID: 0}
@@ -2291,14 +2011,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 12 - MOSSY - BIG (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2320,22 +2032,6 @@ PrefabInstance:
     - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.8836
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6294
       objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2453,14 +2149,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2072
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8791
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_LocalPosition.x
       value: 75.1
       objectReference: {fileID: 0}
@@ -2503,14 +2191,6 @@ PrefabInstance:
     - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_Name
       value: Rock Pile 12 - MOSSY - BIG (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2574,18 +2254,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 9 - ORANGE - BIG (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2648,14 +2316,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2682,18 +2342,6 @@ PrefabInstance:
     - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.8575
       objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2848,22 +2496,6 @@ PrefabInstance:
     - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.4294
       objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3054,14 +2686,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3083,22 +2707,6 @@ PrefabInstance:
     - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.1104
       objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3318,22 +2926,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.0676188
-      objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
       value: 135.2
@@ -3396,22 +2988,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6205
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1726
-      objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
       value: 99.71
@@ -3473,14 +3049,6 @@ PrefabInstance:
     - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3631,18 +3199,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
       value: 151.5
@@ -3705,22 +3261,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.3652
-      objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
       value: 142.01
@@ -3780,10 +3320,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.3268
-      objectReference: {fileID: 0}
-    - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.9
       objectReference: {fileID: 0}
@@ -3827,14 +3363,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 5 - WHITE - BIG (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3858,37 +3386,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 1672467067200709030, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1672467067200709030, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 890210543
-      objectReference: {fileID: 0}
     - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
       propertyPath: m_Name
       value: Rock Pile 1 - WHITE - BIG
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805077953389950147, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2143615
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0779165
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.3644512
       objectReference: {fileID: 0}
     - target: {fileID: 6839790787075631178, guid: ecc3238d5b53a7d448abe65560d01725, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3944,10 +3444,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.3555
-      objectReference: {fileID: 0}
-    - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 140.19
       objectReference: {fileID: 0}
@@ -3991,18 +3487,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 9 - ORANGE - BIG (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4021,14 +3505,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1624
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8535
-      objectReference: {fileID: 0}
     - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.4655
@@ -4073,14 +3549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4104,14 +3572,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1686
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7392
-      objectReference: {fileID: 0}
     - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 93.15
@@ -4156,14 +3616,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4185,26 +3637,6 @@ PrefabInstance:
     - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5027376
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0681
       objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4265,10 +3697,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9361
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 58.4
       objectReference: {fileID: 0}
@@ -4312,14 +3740,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4346,22 +3766,6 @@ PrefabInstance:
     - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.2052174
       objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4424,22 +3828,6 @@ PrefabInstance:
     - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - WHITE - BIG (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9342068
       objectReference: {fileID: 0}
     - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4630,18 +4018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7084
-      objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.26
@@ -4763,14 +4139,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.141
-      objectReference: {fileID: 0}
-    - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7885
-      objectReference: {fileID: 0}
-    - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 134.69
       objectReference: {fileID: 0}
@@ -4814,14 +4182,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 8 - BEIGE - BIG (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4843,22 +4203,6 @@ PrefabInstance:
     - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - WHITE - BIG (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5062217
       objectReference: {fileID: 0}
     - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4989,22 +4333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5298
-      objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
       value: 98.09
@@ -5067,18 +4395,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.5065043
-      objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.6116
@@ -5138,14 +4454,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1998959
-      objectReference: {fileID: 0}
-    - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9999509
-      objectReference: {fileID: 0}
-    - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.76
       objectReference: {fileID: 0}
@@ -5189,14 +4497,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 8 - BEIGE - BIG (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5213,14 +4513,6 @@ PrefabInstance:
     - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5283,14 +4575,6 @@ PrefabInstance:
     - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5394,14 +4678,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 8 - BEIGE - BIG (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5420,10 +4696,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.5409
-      objectReference: {fileID: 0}
     - target: {fileID: 2975568575488837262, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.85
@@ -5468,14 +4740,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 9 - ORANGE - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283659234965054599, guid: a2db94c1adbd8d34b91b35804cea74ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5489,10 +4753,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6571
-      objectReference: {fileID: 0}
     - target: {fileID: 6683440764294749351, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.12
@@ -5537,14 +4797,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 7 - AZURE - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398288002786296771, guid: a35f4f410a1787849b5489694e22c35e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5558,10 +4810,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
-    - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.4629
-      objectReference: {fileID: 0}
     - target: {fileID: 4260765745806186763, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.94
@@ -5606,14 +4854,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 12 - MOSSY - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5440634645744841198, guid: 448b6ddde62de9142905b4eb5f430429, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5630,18 +4870,6 @@ PrefabInstance:
     - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_Name
       value: Rock Pile 15 - WHITE - small
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451406771357790420, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5905
       objectReference: {fileID: 0}
     - target: {fileID: 8407829831858544512, guid: 4cd805386b7a5dd4e8dc81050a7c2539, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5700,18 +4928,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 14 - WHITE - small
       objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971380131064043627, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.672577
-      objectReference: {fileID: 0}
     - target: {fileID: 7145028292941223916, guid: 600f14ac3f61c124d885dbd53fe6cd6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.59
@@ -5769,22 +4985,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - WHITE - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3027541437316663193, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.1964767
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8037
-      objectReference: {fileID: 0}
     - target: {fileID: 8299130862035309764, guid: 1158d81e1fcd0b84c9fcecd520bc2084, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.17
@@ -5839,10 +5039,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.6363962
-      objectReference: {fileID: 0}
-    - target: {fileID: 1308232671559690914, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.9476
       objectReference: {fileID: 0}
@@ -5886,14 +5082,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 5 - WHITE - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692813307761542791, guid: cd4deb3f1e674e74abc53181ecc5ecb1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5910,18 +5098,6 @@ PrefabInstance:
     - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_Name
       value: Rock Pile 13 - BEIGE - small (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056098321589241100, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.691
       objectReference: {fileID: 0}
     - target: {fileID: 7986411877542221663, guid: 5ba68538efbd1e748bc9335b13060906, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5977,10 +5153,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6682
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060849524411535171, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.83
       objectReference: {fileID: 0}
@@ -6024,14 +5196,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Pile 6 - ORANGE - BIG
       objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8654706891287299307, guid: 33c58dd4b322ea346a29c8d2e9f8ce01, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6048,18 +5212,6 @@ PrefabInstance:
     - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_Name
       value: Rock Pile 6 - AZURE - small (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1493412480665311949, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.9998
       objectReference: {fileID: 0}
     - target: {fileID: 4981749415044457244, guid: 576f11cc21ffb9e43aec50b418243488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6115,10 +5267,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 852408057}
     m_Modifications:
     - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.655
-      objectReference: {fileID: 0}
-    - target: {fileID: 909538369596351137, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.78
       objectReference: {fileID: 0}
@@ -6161,14 +5309,6 @@ PrefabInstance:
     - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
       propertyPath: m_Name
       value: Rock Pile 8 - BEIGE - BIG (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095458902948199666, guid: 60e1ebe0aad527644bb083b2c9da7528, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

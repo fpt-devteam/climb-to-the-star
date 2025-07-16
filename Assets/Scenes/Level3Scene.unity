@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 254094022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.75, y: 2.85, z: -9.948916}
+  m_LocalPosition: {x: -3.6, y: 2.52, z: -9.948916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -720,7 +720,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 890210543
-  m_SortingLayer: 3
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -7720,7 +7720,7 @@ Transform:
   m_GameObject: {fileID: 1620018617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0.3, z: -10}
+  m_LocalPosition: {x: 1.13, y: 0.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7797,11 +7797,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.86
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.05
+      value: 2.52
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7856,6 +7856,7 @@ GameObject:
   - component: {fileID: 1696901674}
   - component: {fileID: 1696901673}
   - component: {fileID: 1696901672}
+  - component: {fileID: 1696901675}
   m_Layer: 0
   m_Name: ChangeSceneTrigger
   m_TagString: Untagged
@@ -7875,7 +7876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e855b735f8a554ea0c3d3520b5e287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Level3Scene
+  sceneName: Level4Scene
 --- !u!61 &1696901673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7937,6 +7938,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1696901675
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696901671}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1700714400
 GameObject:
   m_ObjectHideFlags: 0
@@ -8306,7 +8334,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1909444665
-  m_SortingLayer: 4
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

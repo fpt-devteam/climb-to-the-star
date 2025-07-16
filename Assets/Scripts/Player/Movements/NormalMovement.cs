@@ -5,28 +5,24 @@ public class NormalMovement : IPlayerMovement
 {
     private Transform transform;
     private Rigidbody2D rb;
-
-    private float jumpForce = 7f;
-    private float moveSpeed = 7f;
-    private float moveSpeedInAir = 5f;
-    private float airMoveSpeed = 3f;
-    private float maxFallSpeed = 10f;
+    private PlayerStats playerStats;
 
     public void Initialize(PlayerStats playerStats)
     {
+        this.playerStats = playerStats;
         this.rb = playerStats.GetComponent<Rigidbody2D>();
         this.transform = playerStats.transform;
-
-        jumpForce = playerStats.JumpForce;
-        moveSpeed = playerStats.MoveSpeed;
     }
 
     public void Move(float direction)
     {
         transform.position = Vector2.MoveTowards(
             transform.position,
-            new Vector2(transform.position.x + direction * moveSpeed, transform.position.y),
-            moveSpeed * Time.fixedDeltaTime
+            new Vector2(
+                transform.position.x + direction * playerStats.MoveSpeed,
+                transform.position.y
+            ),
+            playerStats.MoveSpeed * Time.fixedDeltaTime
         );
     }
 
@@ -34,18 +30,24 @@ public class NormalMovement : IPlayerMovement
     {
         transform.position = Vector2.MoveTowards(
             transform.position,
-            new Vector2(transform.position.x + direction * moveSpeedInAir, transform.position.y),
-            moveSpeedInAir * Time.fixedDeltaTime
+            new Vector2(
+                transform.position.x + direction * playerStats.MoveSpeedInAir,
+                transform.position.y
+            ),
+            playerStats.MoveSpeedInAir * Time.fixedDeltaTime
         );
     }
 
     public void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * playerStats.JumpForce, ForceMode2D.Impulse);
     }
 
     public void Fall()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
+        rb.linearVelocity = new Vector2(
+            rb.linearVelocity.x,
+            Mathf.Max(rb.linearVelocity.y, -playerStats.MaxFallSpeed)
+        );
     }
 }

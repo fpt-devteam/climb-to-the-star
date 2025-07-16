@@ -6,7 +6,6 @@ public class DashState : BasePlayerState
     private Animator animator;
     private Rigidbody2D rb;
     private TrailRenderer trailRenderer;
-    private float dashForce = 40f;
     private bool hasAppliedDash = false;
 
     public DashState(PlayerController context)
@@ -56,7 +55,10 @@ public class DashState : BasePlayerState
 
         float direction = context.IsFacingRight ? 1f : -1f;
 
-        rb.linearVelocity = new Vector2(direction * dashForce, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(
+            direction * context.PlayerStats.DashForce,
+            rb.linearVelocity.y
+        );
 
         yield return new WaitForSeconds(0.1f);
 

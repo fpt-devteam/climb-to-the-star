@@ -100,7 +100,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -114,7 +114,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -135,7 +135,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -167,11 +167,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 287
-        width: 63
-        height: 254
+        y: 288
+        width: 62
+        height: 252
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: Terrain_and_Props_1
       rect:
         serializedVersion: 2
-        x: 67
-        y: 422
-        width: 107
-        height: 112
+        x: 68
+        y: 423
+        width: 105
+        height: 110
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: Terrain_and_Props_2
       rect:
         serializedVersion: 2
-        x: 175
-        y: 511
-        width: 18
-        height: 24
+        x: 173
+        y: 512
+        width: 23
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -232,12 +232,12 @@ TextureImporter:
       name: Terrain_and_Props_3
       rect:
         serializedVersion: 2
-        x: 195
-        y: 422
-        width: 107
-        height: 115
+        x: 196
+        y: 423
+        width: 105
+        height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,12 +254,12 @@ TextureImporter:
       name: Terrain_and_Props_4
       rect:
         serializedVersion: 2
-        x: 175
-        y: 479
-        width: 18
-        height: 25
+        x: 173
+        y: 480
+        width: 23
+        height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -276,12 +276,12 @@ TextureImporter:
       name: Terrain_and_Props_5
       rect:
         serializedVersion: 2
-        x: 63
-        y: 370
-        width: 97
-        height: 47
+        x: 64
+        y: 371
+        width: 95
+        height: 45
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -298,12 +298,12 @@ TextureImporter:
       name: Terrain_and_Props_6
       rect:
         serializedVersion: 2
-        x: 191
-        y: 368
-        width: 98
-        height: 38
+        x: 192
+        y: 369
+        width: 96
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -320,12 +320,12 @@ TextureImporter:
       name: Terrain_and_Props_7
       rect:
         serializedVersion: 2
-        x: 291
-        y: 335
-        width: 10
-        height: 50
+        x: 292
+        y: 336
+        width: 8
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -342,12 +342,12 @@ TextureImporter:
       name: Terrain_and_Props_8
       rect:
         serializedVersion: 2
-        x: 303
-        y: 335
-        width: 17
-        height: 61
+        x: 304
+        y: 336
+        width: 16
+        height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -364,12 +364,12 @@ TextureImporter:
       name: Terrain_and_Props_9
       rect:
         serializedVersion: 2
-        x: 271
-        y: 335
-        width: 18
-        height: 34
+        x: 272
+        y: 336
+        width: 16
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -386,12 +386,12 @@ TextureImporter:
       name: Terrain_and_Props_10
       rect:
         serializedVersion: 2
-        x: 31
-        y: 255
-        width: 105
-        height: 34
+        x: 32
+        y: 256
+        width: 103
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -408,12 +408,12 @@ TextureImporter:
       name: Terrain_and_Props_11
       rect:
         serializedVersion: 2
-        x: 71
-        y: 191
-        width: 241
-        height: 82
+        x: 72
+        y: 192
+        width: 239
+        height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -430,12 +430,12 @@ TextureImporter:
       name: Terrain_and_Props_12
       rect:
         serializedVersion: 2
-        x: 1
-        y: 191
-        width: 28
-        height: 49
+        x: 2
+        y: 192
+        width: 26
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -452,12 +452,12 @@ TextureImporter:
       name: Terrain_and_Props_13
       rect:
         serializedVersion: 2
-        x: 32
-        y: 191
-        width: 30
-        height: 50
+        x: 33
+        y: 192
+        width: 28
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -474,12 +474,12 @@ TextureImporter:
       name: Terrain_and_Props_14
       rect:
         serializedVersion: 2
-        x: 1
-        y: 159
-        width: 31
-        height: 17
+        x: 2
+        y: 160
+        width: 29
+        height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -496,12 +496,12 @@ TextureImporter:
       name: Terrain_and_Props_15
       rect:
         serializedVersion: 2
-        x: 36
-        y: 159
-        width: 55
-        height: 21
+        x: 37
+        y: 160
+        width: 53
+        height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -518,12 +518,12 @@ TextureImporter:
       name: Terrain_and_Props_16
       rect:
         serializedVersion: 2
-        x: 111
-        y: 63
-        width: 157
-        height: 113
+        x: 112
+        y: 64
+        width: 155
+        height: 111
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -540,12 +540,12 @@ TextureImporter:
       name: Terrain_and_Props_17
       rect:
         serializedVersion: 2
-        x: 31
-        y: 127
-        width: 66
-        height: 29
+        x: 32
+        y: 128
+        width: 64
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -562,12 +562,12 @@ TextureImporter:
       name: Terrain_and_Props_18
       rect:
         serializedVersion: 2
-        x: 3
-        y: 79
-        width: 103
-        height: 42
+        x: 4
+        y: 80
+        width: 101
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -584,12 +584,12 @@ TextureImporter:
       name: Terrain_and_Props_19
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 0
-        width: 88
-        height: 79
+        width: 86
+        height: 78
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -606,12 +606,12 @@ TextureImporter:
       name: Terrain_and_Props_20
       rect:
         serializedVersion: 2
-        x: 115
+        x: 116
         y: 0
-        width: 72
-        height: 57
+        width: 70
+        height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -628,12 +628,12 @@ TextureImporter:
       name: Terrain_and_Props_21
       rect:
         serializedVersion: 2
-        x: 191
-        y: 15
-        width: 18
-        height: 45
+        x: 192
+        y: 16
+        width: 16
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -650,7 +650,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a7e6623d3b1182f438b7459c881ca32f
     internalID: 0
     vertices: []
     indices: 
@@ -659,7 +659,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Terrain_and_Props_0: 7524805609583646632
+      Terrain_and_Props_1: -778642162071068864
+      Terrain_and_Props_10: 214759914939099798
+      Terrain_and_Props_11: -5588228214301328085
+      Terrain_and_Props_12: -3329337049672913973
+      Terrain_and_Props_13: -8625103688074738216
+      Terrain_and_Props_14: -4431551881186229920
+      Terrain_and_Props_15: 3264104559154692804
+      Terrain_and_Props_16: -5088739765837812855
+      Terrain_and_Props_17: -5574540892594649770
+      Terrain_and_Props_18: 6360217670390750199
+      Terrain_and_Props_19: -1291047660000004122
+      Terrain_and_Props_2: -6757766758911780738
+      Terrain_and_Props_20: -1032229608557952401
+      Terrain_and_Props_21: 6530679173019828921
+      Terrain_and_Props_3: 3068277905654777829
+      Terrain_and_Props_4: -7662601631111615731
+      Terrain_and_Props_5: 777567994236811104
+      Terrain_and_Props_6: 5192726240851050897
+      Terrain_and_Props_7: 6109166913223408358
+      Terrain_and_Props_8: -5857943447969817599
+      Terrain_and_Props_9: -2315371145126014235
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

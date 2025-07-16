@@ -2390,6 +2390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4315d90187cb74c92303da5be96349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSource: {fileID: 1777464627}
+  sfxSource: {fileID: 1777464627}
   audioSFXClips:
   - key: 0
     clip: {fileID: 8300000, guid: 28da8d0d05f4ba943b422351eb9131d0, type: 3}

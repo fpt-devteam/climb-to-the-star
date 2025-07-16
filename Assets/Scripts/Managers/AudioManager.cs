@@ -47,8 +47,9 @@ public struct SoundMusicData
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
-    private AudioSource musicSource;
-    private AudioSource sfxSource;
+
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
 
     [Header("Audio Data")]
     [SerializeField]
@@ -84,9 +85,6 @@ public class AudioManager : MonoBehaviour
 
     private void InitializeAudioManager()
     {
-        musicSource = GetComponent<AudioSource>();
-        sfxSource = GetComponent<AudioSource>();
-
         audioSFXDictionary = new Dictionary<AudioSFXEnum, SoundSFXData>();
         audioMusicDictionary = new Dictionary<AudioMusicEnum, SoundMusicData>();
 
@@ -146,6 +144,14 @@ public class AudioManager : MonoBehaviour
         if (musicSource != null && musicSource.isPlaying)
         {
             musicSource.Stop();
+        }
+    }
+
+    public void StopSFX()
+    {
+        if (sfxSource != null && sfxSource.isPlaying)
+        {
+            sfxSource.Stop();
         }
     }
 
