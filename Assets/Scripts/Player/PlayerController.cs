@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsFacingRight => isFacingRight;
     public bool IsGrounded => isGrounded;
+    public float ImmuneDuration => playerStats.ImmuneDuration;
 
     private void Awake()
     {
@@ -126,8 +127,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsFalling() => rb.linearVelocity.y < 0f && !isGrounded;
 
-    public IState GetState(PlayerState state) =>
-        states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
+    public IState GetState(PlayerState state) => states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -3,50 +3,70 @@ using System;
 using UnityEngine.UI;
 public class BossStats : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 200f;
+    [Header("Boss Stats")]
+    [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
-    [SerializeField] private float enrageThreshold = 0.3f;
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float enrageSpeedMultiplier = 1.5f;
-    [SerializeField] private float meleeAttackDamage = 20f;
-    [SerializeField] private float rangeAttackDamage = 20f;
-    [SerializeField] private float meleeAttackRange = 2f;
-    [SerializeField] private float rangeAttackRange = 8f;
-    [SerializeField] private float attackCooldown = 2f;
-    [SerializeField] private float enrageAttackCooldown = 1f;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float meleeAttackRange;
+    [SerializeField] private float meleeAttackDamage;
+    [SerializeField] private float rangeAttackDamage;
+    [SerializeField] private float rangeAttackRange;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private float immuneDuration;
+
+    [Header("Components")]
     [SerializeField] private GameObject meleeAttackPoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Slider healthBar;
 
+    [Header("Enrage Settings")]
+    [SerializeField] private float enrageThreshold;
+    [SerializeField] private float enrageAttackCooldown;
+    [SerializeField] private float enrageSpeedMultiplier;
+
+    private const float HIGH_HEALTH_THRESHOLD = 0.6f;
+    private const float MEDIUM_HEALTH_THRESHOLD = 0.3f;
+    private float immuneTimer = 0f;
 
     public float MaxHealth => maxHealth;
     public float CurrentHealth => currentHealth;
     public float HealthPercentage => currentHealth / maxHealth;
-    public bool IsEnraged => HealthPercentage <= enrageThreshold;
-    public bool IsHurt { get; private set; }
-    public bool IsDead => currentHealth <= 0f;
-    public float MoveSpeed => IsEnraged ? moveSpeed * enrageSpeedMultiplier : moveSpeed;
+
     public float MeleeAttackDamage => meleeAttackDamage;
     public float RangeAttackDamage => rangeAttackDamage;
     public float MeleeAttackRange => meleeAttackRange;
+    public float ImmuneTimer => immuneTimer;
+    public float ImmuneDuration => immuneDuration;
+
+    public float MoveSpeed => IsEnraged ? moveSpeed * enrageSpeedMultiplier : moveSpeed;
+    public float AttackCooldown => IsEnraged ? enrageAttackCooldown : attackCooldown;
+
+    public bool IsImmune => immuneTimer > 0f;
+    public bool IsHurt => immuneTimer > 0f;
+    public bool IsEnraged => HealthPercentage <= enrageThreshold;
+    public bool IsDead => currentHealth <= 0f;
+
     public GameObject MeleeAttackPoint => meleeAttackPoint;
     public GameObject ProjectilePrefab => projectilePrefab;
 
     private void Awake()
     {
         currentHealth = maxHealth;
-        IsHurt = false;
+        immuneTimer = 0f;
     }
     private void Update()
     {
         UpdateUI();
+        UpdateImmuneTimer();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damageAmount)
     {
-        if (IsDead)
+        if (immuneTimer > 0f || damageAmount <= 0f)
             return;
-        DeductHealth(damage);
+
+        DeductHealth(damageAmount);
+        immuneTimer = immuneDuration;
     }
 
     private void UpdateUI()
@@ -69,11 +89,17 @@ public class BossStats : MonoBehaviour
             Die();
         }
     }
+    private void UpdateImmuneTimer()
+    {
+        if (immuneTimer > 0f)
+        {
+            immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
+        }
+    }
 
     private void Die()
     {
         currentHealth = 0f;
-        IsHurt = false;
         Debug.Log("Boss has died.");
     }
 

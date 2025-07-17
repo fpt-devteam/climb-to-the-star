@@ -1,31 +1,33 @@
 using System.Collections;
 using UnityEngine;
 
-public class HurtState : BasePlayerState
+public class BossHurtState : BaseBossState
 {
     private float hurtDuration;
     private bool isAppliedAnimation;
     private Animator animator;
 
-    public HurtState(PlayerController context)
+    public BossHurtState(BossController context)
         : base(context)
     {
         animator = context.GetComponent<Animator>();
-        hurtDuration = context.PlayerStats.ImmuneDuration;
+        hurtDuration = context.BossStats.ImmuneDuration;
     }
 
     public override void Enter()
     {
+        Debug.Log("Boss entering Hurt State");
         isAppliedAnimation = false;
         animator.Play("Hurt");
-        AudioManager.Instance.PlaySFX(AudioSFXEnum.PlayerHurt);
         context.StartCoroutine(ExitHurtState());
     }
+
     private IEnumerator ExitHurtState()
     {
         yield return new WaitForSeconds(hurtDuration);
         isAppliedAnimation = true;
     }
+
     public override void Exit()
     {
         animator.StopPlayback();
@@ -33,16 +35,17 @@ public class HurtState : BasePlayerState
 
     public override IState CheckTransitions()
     {
-        if (context.PlayerStats.IsDead)
+        if (context.BossStats.IsDead)
         {
-            return context.GetState(PlayerState.Die);
+            return context.GetState(BossState.Death);
         }
 
         if (isAppliedAnimation)
         {
-            return context.GetState(PlayerState.Locomotion);
+            return context.GetState(BossState.Search);
         }
 
+        Debug.Log("Boss is still hurt, staying in Hurt State");
         return null;
     }
 }

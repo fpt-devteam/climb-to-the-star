@@ -70,6 +70,12 @@ public abstract class BasePlayerAttackState : BasePlayerState
             {
                 enemyStats.TakeDamage(finalDamage);
             }
+
+            BossStats bossStats = collider.GetComponent<BossStats>();
+            if (bossStats != null)
+            {
+                bossStats.TakeDamage(finalDamage);
+            }
         }
     }
 
