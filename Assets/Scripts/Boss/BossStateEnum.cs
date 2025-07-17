@@ -1,10 +1,10 @@
-// public enum BossState
-// {
-//     Idle,
-//     Search,
-//     MeleeAttack,
-//     RangedAttack,
-//     Hurt,
-//     Enrage,
-//     Death,
-// }
+public enum BossState
+{
+  Idle,
+  Search,
+  MeleeAttack,
+  RangedAttack,
+  Hurt,
+  Enrage,
+  Death,
+}

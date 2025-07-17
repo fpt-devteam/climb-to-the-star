@@ -51,6 +51,11 @@ public abstract class BasePlayerAttackState : BasePlayerState
   protected bool animationEventTriggered = false;
   protected bool hasMinAnimationTimePassed = false; // NEW: Prevents instant transitions
 
+  // DASH CANCEL: Input buffering for more forgiving timing
+  protected bool hasDashInputBuffered = false;
+  protected float dashInputBufferTimer = 0f;
+  protected float dashInputBufferDuration = 0.1f; // 100ms buffer for dash cancel
+
   protected GameObject attackPoint;
   protected Animator animator;
   protected string animationName;
@@ -102,6 +107,10 @@ public abstract class BasePlayerAttackState : BasePlayerState
     animationEventTriggered = false;
     hasMinAnimationTimePassed = false; // NEW: Reset animation timing flag
     canDashCancel = false; // DEAD CELLS: Reset dash cancel availability
+
+    // DASH CANCEL: Reset dash input buffer
+    hasDashInputBuffered = false;
+    dashInputBufferTimer = 0f;
   }
 
   private void UpdateTimers()
@@ -111,6 +120,24 @@ public abstract class BasePlayerAttackState : BasePlayerState
     if (comboBufferTimer > 0f)
     {
       comboBufferTimer -= Time.deltaTime;
+    }
+
+    // DASH CANCEL: Update dash input buffer
+    if (dashInputBufferTimer > 0f)
+    {
+      dashInputBufferTimer -= Time.deltaTime;
+      if (dashInputBufferTimer <= 0f)
+      {
+        hasDashInputBuffered = false;
+      }
+    }
+
+    // DASH CANCEL: Buffer dash input for more forgiving timing
+    if (context.PlayerInput.IsDashPressed())
+    {
+      hasDashInputBuffered = true;
+      dashInputBufferTimer = dashInputBufferDuration;
+      Debug.Log($"[DASH BUFFER] Dash input buffered at {stateTimer:F3}s - will last {dashInputBufferDuration}s");
     }
   }
 
@@ -253,18 +280,31 @@ public abstract class BasePlayerAttackState : BasePlayerState
   protected bool CanDashCancel()
   {
     bool dashPressed = context.PlayerInput.IsDashPressed();
-    bool dashAvailable = canDashCancel && !context.IsDashOnCooldown;
+    bool hasDashInput = dashPressed || hasDashInputBuffered; // Include buffered input
 
-    if (dashPressed && canDashCancel && !context.IsDashOnCooldown)
+    // COMPREHENSIVE DEBUG: Log every frame during dash cancel window
+    if (canDashCancel)
     {
-      Debug.Log($"DASH CANCEL TRIGGERED at {stateTimer:F2}s - canceling {animationName}");
+      Debug.Log($"[DASH CANCEL DEBUG] Timer: {stateTimer:F3}s, DashPressed: {dashPressed}, Buffered: {hasDashInputBuffered}, HasInput: {hasDashInput}, Window: {canDashCancel}, Cooldown: {context.IsDashOnCooldown}");
+    }
+
+    // CRITICAL FIX: Dash cancel should work based on dash cancel window, NOT minimum animation time
+    // This allows responsive combat like Dead Cells where dash cancel is immediate when window opens
+    bool inDashCancelWindow = canDashCancel && !context.IsDashOnCooldown;
+
+    if (hasDashInput && canDashCancel && !context.IsDashOnCooldown)
+    {
+      Debug.Log($"DASH CANCEL TRIGGERED at {stateTimer:F2}s - canceling {animationName} (buffered input: {hasDashInputBuffered})");
+      // Clear buffer after successful dash cancel
+      hasDashInputBuffered = false;
+      dashInputBufferTimer = 0f;
       return true;
     }
-    else if (dashPressed && !canDashCancel)
+    else if (hasDashInput && !canDashCancel)
     {
       Debug.Log($"Dash cancel blocked - window not open yet ({stateTimer:F2}s < {animationDuration * dashCancelPercentage:F2}s)");
     }
-    else if (dashPressed && context.IsDashOnCooldown)
+    else if (hasDashInput && context.IsDashOnCooldown)
     {
       Debug.Log($"Dash cancel blocked - dash on cooldown");
     }

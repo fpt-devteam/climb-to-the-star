@@ -7,7 +7,7 @@ public class Attack1State : BasePlayerAttackState
   {
     animationName = "Attack_1";
     animationDuration = 0.4f;       // USER SPECIFIED: 400ms exact duration
-    minAnimationDisplayTime = 0.3f; // Increased to prevent animation skipping
+    minAnimationDisplayTime = 0.25f; // REDUCED: Must be less than dash cancel time (70% of 0.4s = 0.28s)
     comboWindow = 0.3f;              // Combo window opens before animation ends
     earlyComboWindow = 0.15f;        // Early buffer for speed
     attackRange = 0.5f;
