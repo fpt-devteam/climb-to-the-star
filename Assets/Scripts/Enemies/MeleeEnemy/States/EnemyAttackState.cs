@@ -3,99 +3,140 @@ using UnityEngine;
 
 public class EnemyAttackState : BaseEnemyState
 {
-    [Header("Attack Settings")]
-    [SerializeField]
-    private float attackCooldown = 1.5f;
+  [Header("Attack Settings")]
+  [SerializeField]
+  private float attackCooldown = 1.5f;
 
-    [SerializeField]
-    private float attackDelay = 0.3f;
+  [SerializeField]
+  private float attackDelay = 0.3f;
 
-    private Animator animator;
-    private GameObject attackPoint;
-    private bool isAttacking;
-    private float lastAttackTime;
+  private Animator animator;
+  private GameObject attackPoint;
+  private bool isAttacking;
+  private float lastAttackTime;
 
-    public EnemyAttackState(EnemyController context)
-        : base(context)
+  public EnemyAttackState(EnemyController context)
+      : base(context)
+  {
+    animator = context.GetComponent<Animator>();
+    attackPoint = context.EnemyStats.AttackPoint;
+  }
+
+  public override void Enter()
+  {
+    Debug.Log("Enemy entering Attack State");
+
+    // PROFESSIONAL: Cannot attack while hurt/immune (blinking)
+    if (!context.EnemyStats.CanAttack)
     {
-        animator = context.GetComponent<Animator>();
-        attackPoint = context.EnemyStats.AttackPoint;
+      Debug.Log("Enemy cannot attack while hurt/immune - returning to patrol");
+      return;
     }
 
-    public override void Enter()
+    // DEAD CELLS: Cannot attack while knocked back or stunned
+    if (!context.CanPerformActions)
     {
-        Debug.Log("Enemy entering Attack State");
-
-        if (Time.time - lastAttackTime < attackCooldown)
-        {
-            Debug.Log("Attack on cooldown, returning to patrol");
-            return;
-        }
-
-        isAttacking = true;
-        lastAttackTime = Time.time;
-
-        animator.Play("Attack");
-        AudioManager.Instance.PlaySFX(AudioSFXEnum.EnemyAttack);
-
-        // Delay the attack to match animation timing
-        context.StartCoroutine(PerformDelayedAttack());
-
-        context.StartCoroutine(ResetAttackState());
+      Debug.Log("Enemy cannot attack while knocked back/stunned - returning to patrol");
+      return;
     }
 
-    private IEnumerator PerformDelayedAttack()
+    if (Time.time - lastAttackTime < attackCooldown)
     {
-        yield return new WaitForSeconds(attackDelay);
-        PerformAttack();
+      Debug.Log("Attack on cooldown, returning to patrol");
+      return;
     }
 
-    private void PerformAttack()
-    {
-        Collider2D collider = Physics2D.OverlapCircle(
-            attackPoint.transform.position,
-            context.EnemyStats.AttackRange,
-            LayerMask.GetMask("Player")
-        );
+    isAttacking = true;
+    lastAttackTime = Time.time;
 
-        if (collider != null)
-        {
-            PlayerStats playerStats = collider.GetComponent<PlayerStats>();
-            if (playerStats != null && !playerStats.IsImmune)
-            {
-                playerStats.TakeDamage(context.EnemyStats.AttackDamage);
-                Debug.Log($"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}");
-            }
-        }
+    animator.Play("Attack");
+    AudioManager.Instance.PlaySFX(AudioSFXEnum.EnemyAttack);
+
+    // Delay the attack to match animation timing
+    context.StartCoroutine(PerformDelayedAttack());
+
+    context.StartCoroutine(ResetAttackState());
+  }
+
+  private IEnumerator PerformDelayedAttack()
+  {
+    yield return new WaitForSeconds(attackDelay);
+
+    // PROFESSIONAL: Double-check attack capability before executing
+    if (context.EnemyStats.CanAttack)
+    {
+      PerformAttack();
+    }
+    else
+    {
+      Debug.Log("Enemy became hurt/immune during attack delay - attack cancelled");
+      isAttacking = false;
+    }
+  }
+
+  private void PerformAttack()
+  {
+    Collider2D collider = Physics2D.OverlapCircle(
+        attackPoint.transform.position,
+        context.EnemyStats.AttackRange,
+        LayerMask.GetMask("Player")
+    );
+
+    if (collider != null)
+    {
+      PlayerStats playerStats = collider.GetComponent<PlayerStats>();
+      if (playerStats != null && !playerStats.IsInvincible) // DEAD CELLS: Check all invincibility types
+      {
+        playerStats.TakeDamage(context.EnemyStats.AttackDamage);
+
+        // DEAD CELLS: Screen shake when enemy hits player
+        CameraShake.PlayerHurt();
+
+        Debug.Log($"Player hit by enemy attack! Damage: {context.EnemyStats.AttackDamage}");
+      }
+    }
+  }
+
+  private IEnumerator ResetAttackState()
+  {
+    yield return new WaitForSeconds(1f);
+    isAttacking = false;
+  }
+
+  public override IState CheckTransitions()
+  {
+    // PROFESSIONAL: Priority 1 - Always transition to hurt if hurt/immune
+    if (context.EnemyStats.IsHurt)
+    {
+      Debug.Log("Enemy hurt during attack - transitioning to hurt state");
+      return context.GetState(EnemyState.Hurt);
     }
 
-    private IEnumerator ResetAttackState()
+    // PROFESSIONAL: Priority 2 - Cancel attack if can't attack anymore
+    if (isAttacking && !context.EnemyStats.CanAttack)
     {
-        yield return new WaitForSeconds(1f);
-        isAttacking = false;
+      Debug.Log("Enemy lost attack capability - returning to patrol");
+      isAttacking = false;
+      return context.GetState(EnemyState.Patrol);
     }
 
-    public override IState CheckTransitions()
+    // Priority 3 - Continue attacking if still attacking
+    if (isAttacking)
     {
-        if (context.EnemyStats.IsHurt)
-        {
-            return context.GetState(EnemyState.Hurt);
-        }
-
-        if (isAttacking)
-        {
-            return null;
-        }
-
-        return context.GetState(EnemyState.Patrol);
+      return null;
     }
 
-    private void OnDrawGizmosSelected()
+    // Priority 4 - Return to patrol when attack complete
+    return context.GetState(EnemyState.Patrol);
+  }
+
+  private void OnDrawGizmosSelected()
+  {
+    if (attackPoint != null)
     {
-        if (attackPoint != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.transform.position, context.EnemyStats.AttackRange);
-        }
+      // Visual feedback for attack state
+      Gizmos.color = context.EnemyStats.CanAttack ? Color.red : Color.gray;
+      Gizmos.DrawWireSphere(attackPoint.transform.position, context.EnemyStats.AttackRange);
     }
+  }
 }

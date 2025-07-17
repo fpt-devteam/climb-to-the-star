@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      idle mushroom_0: 1044146576611842157
+      idle mushroom_1: 7656598999481367449
+      idle mushroom_2: 8247437983181818892
+      idle mushroom_3: -4542981142304631124
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

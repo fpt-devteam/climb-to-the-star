@@ -2,58 +2,58 @@ using UnityEngine;
 
 public class ChargeState : BasePlayerState
 {
-    private Animator animator;
-    private PlayerStats playerStats;
+  private Animator animator;
+  private PlayerStats playerStats;
 
-    public ChargeState(PlayerController context)
-        : base(context)
+  public ChargeState(PlayerController context)
+      : base(context)
+  {
+    animator = context.GetComponent<Animator>();
+    playerStats = context.PlayerStats;
+  }
+
+  public override void Enter()
+  {
+    animator.Play("Charge");
+  }
+
+  public override void FixedUpdate()
+  {
+    playerStats.ChargeStamina();
+  }
+
+  public override IState CheckTransitions()
+  {
+    if (context.IsJumping())
     {
-        animator = context.GetComponent<Animator>();
-        playerStats = context.PlayerStats;
+      return context.GetState(PlayerState.Air); // Use unified AirState
     }
 
-    public override void Enter()
+    if (context.IsWalking())
     {
-        animator.Play("Charge");
+      return context.GetState(PlayerState.Locomotion);
     }
 
-    public override void FixedUpdate()
+    if (context.IsIdling())
     {
-        playerStats.ChargeStamina();
+      return context.GetState(PlayerState.Locomotion);
     }
 
-    public override IState CheckTransitions()
+    if (context.IsShielding())
     {
-        if (context.IsJumping())
-        {
-            return context.GetState(PlayerState.Locomotion);
-        }
-
-        if (context.IsWalking())
-        {
-            return context.GetState(PlayerState.Locomotion);
-        }
-
-        if (context.IsIdling())
-        {
-            return context.GetState(PlayerState.Locomotion);
-        }
-
-        if (context.IsShielding())
-        {
-            return context.GetState(PlayerState.Shield);
-        }
-
-        if (context.IsDashing())
-        {
-            return context.GetState(PlayerState.Dash);
-        }
-
-        if (context.IsHurt())
-        {
-            return context.GetState(PlayerState.Hurt);
-        }
-
-        return null;
+      return context.GetState(PlayerState.Shield);
     }
+
+    if (context.IsDashing())
+    {
+      return context.GetState(PlayerState.Dash);
+    }
+
+    if (context.IsHurt())
+    {
+      return context.GetState(PlayerState.Hurt);
+    }
+
+    return null;
+  }
 }

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 496250177516164218}
   - component: {fileID: 401939825538446458}
   - component: {fileID: 6122592651756924915}
-  - component: {fileID: 2551242170968324692}
   - component: {fileID: 25078711621334983}
   - component: {fileID: 5403025294482926831}
+  - component: {fileID: 4670721689122803488}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1439989737
-  m_SortingLayer: 5
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: -3624141828879840293, guid: 043ae0232a4a43a4a85539ba91f395d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.15296578, y: 0.99023825}
+  m_Offset: {x: 0.15747976, y: 0.99023825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6131997, y: 1.883905}
+  m_Size: {x: 1.0435314, y: 1.883905}
   m_EdgeRadius: 0
 --- !u!114 &6122592651756924915
 MonoBehaviour:
@@ -203,24 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17adf915db58234caad6be99b7a7dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2551242170968324692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3044073108098859285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41dcd0a00bb18814b8e226195272535b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackKey: 106
-  jumpKey: 32
-  chargeKey: 107
-  dashKey: 108
-  shieldKey: 115
-  pauseKey: 27
+  maxJumps: 2
+  dashCooldownTime: 1
 --- !u!114 &25078711621334983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +224,20 @@ MonoBehaviour:
   currentStamina: 50
   chargeStaminaRestoreRate: 1
   attackDamage: 10
-  jumpForce: 10
+  attackRange: 1.5
+  comboWindow: 1.5
+  animationDuration: 0.6
+  jumpForce: 15
   moveSpeed: 5
+  moveSpeedInAir: 4
+  airMoveSpeed: 4
+  maxFallSpeed: 18
+  dashForce: 10
+  gravityScale: 4
+  coyoteTime: 0.12
+  jumpBufferTime: 0.08
+  fallGravityMultiplier: 3.5
+  lowJumpMultiplier: 2.8
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   attackPoint: {fileID: 4420288039303592469}
@@ -257,6 +253,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02abafa898536c45ae69eef0b167396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4670721689122803488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044073108098859285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e09477b4a4f084d9383d5551918d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delaySeconds: 0.02
+  initialAlpha: 0.5
+  ghostLifetime: 0.35
+  ghostTint: {r: 1, g: 1, b: 1, a: 1}
+  useEaseOutFade: 1
+  maxGhostCount: 8
+  ghostPrefab: {fileID: 4808761746405744167, guid: 65a30c0312b3ddb428f2b85ea7450eea, type: 3}
 --- !u!1 &4420288039303592469
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 4420288039303592469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.099, y: 0.628, z: -0.07309954}
+  m_LocalPosition: {x: 1.543, y: 0.628, z: -0.07309954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

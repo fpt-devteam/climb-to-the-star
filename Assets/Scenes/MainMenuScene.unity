@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeSceneOnClick: 1
-  sceneNameToLoad: BossScene
+  sceneNameToLoad: Level1Scene
 --- !u!1 &334254111
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using UnityEngine;
+// using System.Collections.Generic;
+// using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
@@ -32,14 +32,14 @@ public class BossController : MonoBehaviour
             { BossState.Death, new BossDeathState(this) }
         };
 
-        stateMachine = new StateMachine();
-        stateMachine.Initialize(GetState(BossState.Idle));
-    }
+//         stateMachine = new StateMachine();
+//         stateMachine.Initialize(GetState(BossState.Idle));
+//     }
 
-    private void Update()
-    {
-        stateMachine.Update();
-    }
+//     private void Update()
+//     {
+//         stateMachine.Update();
+//     }
 
     private void FixedUpdate()
     {

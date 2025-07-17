@@ -69,20 +69,20 @@ public class BossStats : MonoBehaviour
         immuneTimer = immuneDuration;
     }
 
-    private void UpdateUI()
-    {
-        if (healthBar == null)
-            return;
+//     private void UpdateUI()
+//     {
+//         if (healthBar == null)
+//             return;
 
-        healthBar.value = HealthPercentage;
-    }
+//         healthBar.value = HealthPercentage;
+//     }
 
-    private void DeductHealth(float healthAmount)
-    {
-        if (healthAmount <= 0f)
-            return;
+//     private void DeductHealth(float healthAmount)
+//     {
+//         if (healthAmount <= 0f)
+//             return;
 
-        currentHealth = Mathf.Max(0f, currentHealth - healthAmount);
+//         currentHealth = Mathf.Max(0f, currentHealth - healthAmount);
 
         if (currentHealth <= 0f)
         {
@@ -103,12 +103,12 @@ public class BossStats : MonoBehaviour
         Debug.Log("Boss has died.");
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (meleeAttackPoint != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(meleeAttackPoint.transform.position, meleeAttackRange);
-        }
-    }
-}
+//     private void OnDrawGizmosSelected()
+//     {
+//         if (meleeAttackPoint != null)
+//         {
+//             Gizmos.color = Color.red;
+//             Gizmos.DrawWireSphere(meleeAttackPoint.transform.position, meleeAttackRange);
+//         }
+//     }
+// }

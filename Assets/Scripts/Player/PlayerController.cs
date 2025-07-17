@@ -5,47 +5,79 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Component References")]
-    private PlayerStats playerStats;
-    private IPlayerInput playerInput;
-    private Rigidbody2D rb;
+  [Header("Component References")]
+  private PlayerStats playerStats;
+  private IPlayerInput playerInput;
+  private Rigidbody2D rb;
 
-    private StateMachine stateMachine;
-    private Dictionary<PlayerState, IState> states;
-    private IPlayerMovement playerMovement;
+  private StateMachine stateMachine;
+  private Dictionary<PlayerState, IState> states;
+  private IPlayerMovement playerMovement;
 
-    private bool isGrounded = false;
-    private bool isJumping = false;
-    private bool isFacingRight = true;
+  private bool isGrounded = false;
+  private bool isJumping = false;
+  private bool isFacingRight = true;
 
-    public PlayerStats PlayerStats => playerStats;
-    public IPlayerInput PlayerInput => playerInput;
-    public IPlayerMovement PlayerMovement => playerMovement;
+  // Enhanced jump tracking
+  private bool wasGroundedLastFrame = false;
+  private bool jumpPressedThisFrame = false;
+  private bool jumpReleasedThisFrame = false;
+  private float lastJumpTime = 0f; // Track when last jump occurred
+  private float minAirborneTime = 0.1f; // Minimum time player must stay airborne after jump
 
-    public bool IsFacingRight => isFacingRight;
-    public bool IsGrounded => isGrounded;
-    public float ImmuneDuration => playerStats.ImmuneDuration;
+  // Double jump input buffering for reliability
+  private bool jumpInputBuffer = false;
+  private float jumpInputBufferTimer = 0f;
+  private float jumpInputBufferDuration = 0.1f; // 100ms buffer for double jump input
 
-    private void Awake()
-    {
-        InitializeComponents();
-        InitializeStateMachine();
-    }
+  // DEAD CELLS: Double Jump System
+  [Header("Dead Cells Jump System")]
+  [SerializeField] private int maxJumps = 2; // Double jump
+  private int currentJumps = 0;
+  private bool hasUsedDoubleJump = false;
 
-    private void InitializeComponents()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        playerStats = GetComponent<PlayerStats>();
+  // Ground detection improvement
+  private int groundContactCount = 0;
 
-        playerMovement = new NormalMovement();
-        playerMovement.Initialize(playerStats);
+  // Dash cooldown system
+  [Header("Dash Cooldown")]
+  [SerializeField] private float dashCooldownTime = 1.0f; // 1 second cooldown
+  private float dashCooldownTimer = 0f;
+  private float lastDashTime = -10f; // Initialize to allow immediate first dash
 
-        playerInput = new KeyboardInput();
-    }
+  public PlayerStats PlayerStats => playerStats;
+  public IPlayerInput PlayerInput => playerInput;
+  public IPlayerMovement PlayerMovement => playerMovement;
 
-    private void InitializeStateMachine()
-    {
-        states = new Dictionary<PlayerState, IState>
+  public bool IsFacingRight => isFacingRight;
+  public bool IsGrounded => isGrounded;
+
+  // Dash cooldown properties
+  public float DashCooldownTime => dashCooldownTime;
+  public float DashCooldownRemaining => dashCooldownTimer;
+  public bool IsDashOnCooldown => dashCooldownTimer > 0f;
+  public float DashCooldownPercentage => dashCooldownTimer / dashCooldownTime;
+
+  private void Awake()
+  {
+    InitializeComponents();
+    InitializeStateMachine();
+  }
+
+  private void InitializeComponents()
+  {
+    rb = GetComponent<Rigidbody2D>();
+    playerStats = GetComponent<PlayerStats>();
+
+    playerMovement = new NormalMovement();
+    playerMovement.Initialize(playerStats);
+
+    playerInput = new KeyboardInput();
+  }
+
+  private void InitializeStateMachine()
+  {
+    states = new Dictionary<PlayerState, IState>
         {
             { PlayerState.Locomotion, new LocomotionState(this) },
             { PlayerState.Charge, new ChargeState(this) },
@@ -58,98 +90,520 @@ public class PlayerController : MonoBehaviour
             { PlayerState.Hurt, new HurtState(this) },
             { PlayerState.Land, new LandState(this) },
             { PlayerState.Die, new DieState(this) },
-            { PlayerState.Jump, new JumpState(this) },
-            { PlayerState.Fall, new FallState(this) },
+            { PlayerState.Air, new AirState(this) },
         };
 
-        stateMachine = new StateMachine();
-        stateMachine.Initialize(GetState(PlayerState.Locomotion));
+    stateMachine = new StateMachine();
+    stateMachine.Initialize(GetState(PlayerState.Locomotion));
+  }
+
+  private void Update()
+  {
+    // Update input tracking for enhanced jump features
+    UpdateInputTracking();
+
+    // Update movement system timers
+    UpdateMovementTimers();
+
+    // Update dash cooldown
+    UpdateDashCooldown();
+
+    // Debug state transitions (F1 key)
+    DebugStateTransitions();
+
+    stateMachine.Update();
+  }
+
+  private void FixedUpdate()
+  {
+    HandleFacingDirection();
+    stateMachine.FixedUpdate();
+
+    // Update frame tracking
+    wasGroundedLastFrame = isGrounded;
+  }
+
+  private void UpdateInputTracking()
+  {
+    // Track jump input for buffering and variable height
+    jumpPressedThisFrame = playerInput.IsJumpPressed();
+    jumpReleasedThisFrame = !playerInput.IsJumpHeld() && isJumping && rb.linearVelocity.y > 0;
+
+    // Update jump input buffer for double jump reliability
+    if (jumpPressedThisFrame)
+    {
+      jumpInputBuffer = true;
+      jumpInputBufferTimer = jumpInputBufferDuration;
+      Debug.Log("Jump input buffered for double jump reliability");
     }
 
-    private void Update()
+    // Decrease buffer timer
+    if (jumpInputBufferTimer > 0f)
     {
-        stateMachine.Update();
+      jumpInputBufferTimer -= Time.deltaTime;
+      if (jumpInputBufferTimer <= 0f)
+      {
+        jumpInputBuffer = false;
+      }
     }
 
-    private void FixedUpdate()
+    // Handle jump cut for variable jump height
+    if (jumpReleasedThisFrame && !playerMovement.IsJumpCut())
     {
-        HandleFacingDirection();
-        stateMachine.FixedUpdate();
+      playerMovement.CutJump();
+    }
+  }
+
+  private void UpdateMovementTimers()
+  {
+    // Update coyote time
+    playerMovement.UpdateCoyoteTime(isGrounded);
+
+    // Update jump buffer
+    playerMovement.UpdateJumpBuffer(jumpPressedThisFrame);
+  }
+
+  private void UpdateDashCooldown()
+  {
+    if (dashCooldownTimer > 0f)
+    {
+      dashCooldownTimer -= Time.deltaTime;
+      if (dashCooldownTimer < 0f)
+      {
+        dashCooldownTimer = 0f;
+      }
+    }
+  }
+
+  private void HandleFacingDirection()
+  {
+    float movementInput = playerInput.GetMovementInput();
+
+    // Only change direction if there's significant input to avoid jittery turning
+    // Dead Cells/Celeste style: more responsive direction changes
+    if (Mathf.Abs(movementInput) > 0.2f)
+    {
+      if (movementInput > 0f && !isFacingRight)
+      {
+        transform.localScale = new Vector3(1, 1, 1);
+        isFacingRight = true;
+      }
+      else if (movementInput < 0f && isFacingRight)
+      {
+        transform.localScale = new Vector3(-1, 1, 1);
+        isFacingRight = false;
+      }
+    }
+  }
+
+  public bool IsWalking()
+  {
+    if (!isGrounded) return false;
+
+    // Check both input AND actual movement velocity for accurate state detection
+    bool hasInput = Mathf.Abs(playerInput.GetMovementInput()) > 0.1f;
+    bool isActuallyMoving = playerMovement.IsMovingHorizontally();
+
+    return hasInput || isActuallyMoving;
+  }
+
+  public bool IsIdling()
+  {
+    if (!isGrounded) return false;
+
+    // Only idle if no input AND not actually moving AND no other actions
+    bool noInput = Mathf.Abs(playerInput.GetMovementInput()) <= 0.1f;
+    bool notMoving = !playerMovement.IsMovingHorizontally();
+    bool noOtherActions = !playerInput.IsChargeHeld() && !playerInput.IsShieldHeld();
+
+    return noInput && notMoving && noOtherActions && !playerMovement.IsUnderExternalControl();
+  }
+
+  public bool IsCharging() => playerInput.IsChargeHeld() && isGrounded;
+
+  public bool IsShielding() => playerInput.IsShieldHeld() && isGrounded;
+
+  public bool IsDashing()
+  {
+    // DEAD CELLS: Allow dash both on ground AND in air
+    bool canDash = playerInput.IsDashPressed() && dashCooldownTimer <= 0f;
+
+    // Don't allow dash if already under external control (already dashing)
+    if (playerMovement.IsUnderExternalControl())
+    {
+      Debug.Log("IsDashing: false - under external control (already dashing)");
+      return false;
     }
 
-    private void HandleFacingDirection()
+    if (playerInput.IsDashPressed())
     {
-        if (playerInput.GetMovementInput() > 0f && !isFacingRight)
+      Debug.Log($"=== DASH INPUT DETECTED ===");
+      Debug.Log($"IsDashing: {canDash} - grounded: {isGrounded}, dashPressed: {playerInput.IsDashPressed()}, cooldown: {dashCooldownTimer}");
+      Debug.Log($"IsWalking: {IsWalking()}, IsIdling: {IsIdling()}, IsCharging: {IsCharging()}, IsShielding: {IsShielding()}");
+      Debug.Log($"Movement Input: {playerInput.GetMovementInput()}");
+      Debug.Log($"Under External Control: {playerMovement.IsUnderExternalControl()}");
+    }
+
+    return canDash;
+  }
+
+  public bool IsJumping()
+  {
+    // Check if jump input was pressed this frame OR if we have buffered input
+    bool hasJumpInput = playerInput.IsJumpPressed() || jumpInputBuffer;
+    if (!hasJumpInput)
+    {
+      return false; // No new jump input, return false
+    }
+
+    Debug.Log($"=== JUMP INPUT DETECTED ===");
+    Debug.Log($"Current Jumps: {currentJumps}, Has Used Double Jump: {hasUsedDoubleJump}");
+    Debug.Log($"Is Grounded: {isGrounded}, Can Coyote: {playerMovement.CanCoyoteJump()}");
+
+    // Ground jump or coyote time (first jump)
+    if (isGrounded || playerMovement.CanCoyoteJump())
+    {
+      // Always allow ground jump - reset counters first
+      currentJumps = 1; // First jump
+      hasUsedDoubleJump = false;
+      isJumping = true;
+      lastJumpTime = Time.time; // Track jump time for ground detection
+      Debug.Log("FIRST JUMP ACTIVATED!");
+      return true;
+    }
+    // Double jump - can be used in air (second jump only)
+    else if (currentJumps == 1 && !hasUsedDoubleJump)
+    {
+      currentJumps = 2; // Second jump (maximum)
+      hasUsedDoubleJump = true;
+      isJumping = true;
+      lastJumpTime = Time.time; // Track jump time for ground detection
+      jumpInputBuffer = false; // Clear buffer after using double jump
+      Debug.Log("DOUBLE JUMP ACTIVATED!");
+      return true;
+    }
+    else
+    {
+      Debug.Log($"JUMP BLOCKED: currentJumps = {currentJumps}, hasUsedDoubleJump = {hasUsedDoubleJump}");
+    }
+
+    // No more jumps available
+    return false;
+  }
+
+  public bool CanAttack() => isGrounded && playerInput.IsAttackPressed();
+
+  public bool IsHurt() => playerStats.IsHurt;
+
+  public bool IsFalling() => rb.linearVelocity.y < -0.5f && !isGrounded;
+
+  // Debug method to help identify dash issues
+  public void DebugDashState()
+  {
+    Debug.Log($"=== DASH DEBUG ===");
+    Debug.Log($"Dash Key Pressed: {playerInput.IsDashPressed()}");
+    Debug.Log($"Is Grounded: {isGrounded}");
+    Debug.Log($"Is Dashing: {IsDashing()}");
+    Debug.Log($"Dash Cooldown: {dashCooldownTimer:F2}s remaining");
+    Debug.Log($"Dash On Cooldown: {IsDashOnCooldown}");
+    Debug.Log($"Under External Control: {playerMovement.IsUnderExternalControl()}");
+    Debug.Log($"Movement Input: {playerInput.GetMovementInput()}");
+    Debug.Log($"Is Walking: {IsWalking()}");
+    Debug.Log($"Is Idling: {IsIdling()}");
+    Debug.Log($"Is Moving Horizontally: {playerMovement.IsMovingHorizontally()}");
+    Debug.Log($"Current State: {stateMachine.CurrentState?.GetType().Name}");
+  }
+
+  // Method to start dash cooldown (called when dash begins)
+  public void StartDashCooldown()
+  {
+    dashCooldownTimer = dashCooldownTime;
+    lastDashTime = Time.time;
+    Debug.Log($"Dash cooldown started: {dashCooldownTime}s");
+  }
+
+  // Method to reset jumping state (called when landing)
+  public void ResetJumpingState()
+  {
+    isJumping = false;
+    currentJumps = 0;
+    hasUsedDoubleJump = false;
+    jumpInputBuffer = false; // Clear any lingering input buffer
+    jumpInputBufferTimer = 0f;
+    Debug.Log($"=== JUMP STATE RESET - PLAYER LANDED ===");
+    Debug.Log($"Reset: isJumping={isJumping}, currentJumps={currentJumps}, hasUsedDoubleJump={hasUsedDoubleJump}");
+  }
+
+  // Method to clear just the jumping flag (called when falling)
+  public void ClearJumpingFlag()
+  {
+    isJumping = false;
+    Debug.Log($"=== JUMPING FLAG CLEARED - PLAYER FALLING ===");
+    Debug.Log($"After Clear: isJumping={isJumping}, currentJumps={currentJumps}, hasUsedDoubleJump={hasUsedDoubleJump}");
+  }
+
+  // Method to clear jumping input state after processing
+  public void ClearJumpingInput()
+  {
+    isJumping = false;
+    jumpInputBuffer = false;
+    Debug.Log("=== JUMPING INPUT CLEARED ===");
+  }
+
+  // Call this in Update for debugging
+  private void DebugStateTransitions()
+  {
+    if (Input.GetKeyDown(KeyCode.F1))
+    {
+      DebugDashState();
+    }
+
+    if (Input.GetKeyDown(KeyCode.F2))
+    {
+      DebugCombatState();
+    }
+
+    if (Input.GetKeyDown(KeyCode.F3))
+    {
+      DebugJumpState();
+    }
+
+    if (Input.GetKeyDown(KeyCode.F4))
+    {
+      DebugCombatTiming();
+    }
+  }
+
+  // Debug method for grace period combat timing
+  public void DebugCombatTiming()
+  {
+    Debug.Log($"=== GRACE PERIOD COMBAT TIMING DEBUG ===");
+    Debug.Log($"Current State: {GetCurrentStateName()}");
+
+    if (stateMachine.CurrentState is BasePlayerAttackState attackState)
+    {
+      // Use reflection to access timing details for comprehensive debugging
+      var stateTimerField = typeof(BasePlayerAttackState).GetField("stateTimer",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var animationDurationField = typeof(BasePlayerAttackState).GetField("animationDuration",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var comboGracePeriodField = typeof(BasePlayerAttackState).GetField("comboGracePeriod",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var hasMinTimeField = typeof(BasePlayerAttackState).GetField("hasMinAnimationTimePassed",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var canComboField = typeof(BasePlayerAttackState).GetField("canCombo",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+      if (stateTimerField != null && animationDurationField != null && comboGracePeriodField != null)
+      {
+        float stateTimer = (float)stateTimerField.GetValue(attackState);
+        float animationDuration = (float)animationDurationField.GetValue(attackState);
+        float comboGracePeriod = (float)comboGracePeriodField.GetValue(attackState);
+        bool hasMinTime = (bool)hasMinTimeField.GetValue(attackState);
+        bool canCombo = (bool)canComboField.GetValue(attackState);
+
+        float totalWindow = animationDuration + comboGracePeriod;
+        bool inGracePeriod = stateTimer > animationDuration && stateTimer <= totalWindow;
+
+        Debug.Log($"=== GRACE PERIOD TIMING ===");
+        Debug.Log($"State Timer: {stateTimer:F3}s");
+        Debug.Log($"Animation Duration: {animationDuration:F2}s");
+        Debug.Log($"Grace Period: {comboGracePeriod:F2}s");
+        Debug.Log($"Total Window: {totalWindow:F2}s");
+        Debug.Log($"Animation Complete: {stateTimer >= animationDuration}");
+        Debug.Log($"In Grace Period: {inGracePeriod}");
+        Debug.Log($"Can Combo: {canCombo}");
+        Debug.Log($"Min Time Passed: {hasMinTime}");
+
+        if (inGracePeriod)
         {
-            transform.localScale = new Vector3(1, 1, 1);
-            isFacingRight = true;
+          float gracePeriodRemaining = totalWindow - stateTimer;
+          Debug.Log($"GRACE PERIOD ACTIVE - {gracePeriodRemaining:F3}s remaining");
         }
-        else if (playerInput.GetMovementInput() < 0f && isFacingRight)
+        else if (stateTimer > totalWindow)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
-            isFacingRight = false;
+          Debug.Log($"COMBO WINDOW EXPIRED - Exceeded by {(stateTimer - totalWindow):F3}s");
         }
+      }
     }
-
-    public bool IsWalking() => playerInput.GetMovementInput() != 0f && isGrounded;
-
-    public bool IsIdling() =>
-        !playerInput.IsChargeHeld()
-        && !playerInput.IsShieldHeld()
-        && playerInput.GetMovementInput() == 0f
-        && isGrounded;
-
-    public bool IsCharging() => playerInput.IsChargeHeld() && isGrounded;
-
-    public bool IsShielding() => playerInput.IsShieldHeld() && isGrounded;
-
-    public bool IsDashing() => playerInput.IsDashPressed() && isGrounded;
-
-    public bool IsJumping()
+    else
     {
-        if (IsFalling())
-            return false;
-
-        if (isJumping)
-            return isJumping;
-
-        if (isGrounded && playerInput.IsJumpPressed())
-        {
-            isJumping = true;
-        }
-
-        return isJumping;
+      Debug.Log("Not in attack state - grace period system inactive");
     }
+  }
 
-    public bool CanAttack() => isGrounded && playerInput.IsAttackPressed();
+  // Debug method for jump system
+  public void DebugJumpState()
+  {
+    Debug.Log($"=== JUMP SYSTEM DEBUG ===");
+    Debug.Log($"Current Jumps: {currentJumps}");
+    Debug.Log($"Max Jumps: {maxJumps}");
+    Debug.Log($"Has Used Double Jump: {hasUsedDoubleJump}");
+    Debug.Log($"Is Jumping Flag: {isJumping}");
+    Debug.Log($"Is Grounded: {isGrounded}");
+    Debug.Log($"Can Coyote Jump: {playerMovement.CanCoyoteJump()}");
+    Debug.Log($"Jump Input Pressed: {playerInput.IsJumpPressed()}");
+    Debug.Log($"Jump Input Held: {playerInput.IsJumpHeld()}");
+    Debug.Log($"Jump Input Buffer: {jumpInputBuffer}");
+    Debug.Log($"Jump Buffer Timer: {jumpInputBufferTimer:F3}s");
+    Debug.Log($"Current State: {GetCurrentStateName()}");
+    Debug.Log($"Is Falling: {IsFalling()}");
+    Debug.Log($"Y Velocity: {rb.linearVelocity.y}");
+  }
 
-    public bool IsHurt() => playerStats.IsHurt;
+  // Debug method for combat system
+  public void DebugCombatState()
+  {
+    Debug.Log($"=== PROFESSIONAL COMBAT DEBUG ===");
+    Debug.Log($"Current State: {GetCurrentStateName()}");
+    Debug.Log($"Can Attack: {CanAttack()}");
+    Debug.Log($"Attack Pressed: {playerInput.IsAttackPressed()}");
+    Debug.Log($"Attack Held: {playerInput.IsAttackHeld()}");
+    Debug.Log($"Is Grounded: {isGrounded}");
 
-    public bool IsFalling() => rb.linearVelocity.y < 0f && !isGrounded;
-
-    public IState GetState(PlayerState state) => states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    if (stateMachine.CurrentState is BasePlayerAttackState attackState)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Rock"))
-        {
-            isGrounded = true;
-            isJumping = false;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("IceSpike"))
-        {
-            playerStats.TakeDamage(10f);
-        }
-    }
+      Debug.Log($"=== ATTACK STATE DETAILS ===");
+      Debug.Log($"Attack State Type: {attackState.GetType().Name}");
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Rock"))
+      // Use reflection to access timing details for comprehensive debugging
+      var stateTimerField = typeof(BasePlayerAttackState).GetField("stateTimer",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var hasMinTimeField = typeof(BasePlayerAttackState).GetField("hasMinAnimationTimePassed",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var minDisplayTimeField = typeof(BasePlayerAttackState).GetField("minAnimationDisplayTime",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var canComboField = typeof(BasePlayerAttackState).GetField("canCombo",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var isInEarlyComboField = typeof(BasePlayerAttackState).GetField("isInEarlyComboWindow",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var hasInputBufferedField = typeof(BasePlayerAttackState).GetField("hasInputBuffered",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      var comboBufferTimerField = typeof(BasePlayerAttackState).GetField("comboBufferTimer",
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+      if (stateTimerField != null)
+      {
+        float stateTimer = (float)stateTimerField.GetValue(attackState);
+        bool hasMinTime = (bool)hasMinTimeField.GetValue(attackState);
+        float minDisplayTime = (float)minDisplayTimeField.GetValue(attackState);
+        bool canCombo = (bool)canComboField.GetValue(attackState);
+        bool isInEarlyCombo = (bool)isInEarlyComboField.GetValue(attackState);
+        bool hasInputBuffered = (bool)hasInputBufferedField.GetValue(attackState);
+        float comboBufferTimer = (float)comboBufferTimerField.GetValue(attackState);
+
+        Debug.Log($"=== ANIMATION TIMING SYSTEM ===");
+        Debug.Log($"State Timer: {stateTimer:F3}s");
+        Debug.Log($"Min Display Time: {minDisplayTime:F2}s");
+        Debug.Log($"Min Time Passed: {hasMinTime}");
+        Debug.Log($"Can Combo: {canCombo}");
+        Debug.Log($"In Early Combo Window: {isInEarlyCombo}");
+        Debug.Log($"Has Input Buffered: {hasInputBuffered}");
+        Debug.Log($"Combo Buffer Timer: {comboBufferTimer:F3}s");
+        Debug.Log($"=== TRANSITION ANALYSIS ===");
+
+        if (hasInputBuffered || playerInput.IsAttackPressed())
         {
-            isGrounded = false;
+          if (!hasMinTime)
+          {
+            Debug.Log($"COMBO BLOCKED: Waiting for minimum animation time");
+            Debug.Log($"Time remaining: {(minDisplayTime - stateTimer):F3}s");
+          }
+          else if (!canCombo)
+          {
+            Debug.Log($"COMBO BLOCKED: Not in combo window yet");
+          }
+          else
+          {
+            Debug.Log($"COMBO READY: All conditions met for transition");
+          }
         }
+      }
     }
+  }
+
+  // Public method to get current state name for debugging
+  public string GetCurrentStateName()
+  {
+    return stateMachine.CurrentState?.GetType().Name ?? "Unknown";
+  }
+
+  // Debug method to get current jump count
+  public int GetCurrentJumps()
+  {
+    return currentJumps;
+  }
+
+  public IState GetState(PlayerState state) =>
+      states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
+
+  private void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Rock"))
+    {
+      // More precise ground detection for better platformer feel
+      foreach (ContactPoint2D contact in collision.contacts)
+      {
+        Vector2 normal = contact.normal;
+        if (normal.y > 0.7f) // Only consider it ground if normal points mostly upward
+        {
+          groundContactCount++;
+          if (!isGrounded)
+          {
+            // CRITICAL FIX: Multiple conditions to prevent immediate grounding
+            bool hasMinimumAirTime = (Time.time - lastJumpTime) > minAirborneTime;
+            bool isActuallyFalling = rb.linearVelocity.y <= 0.1f;
+            bool notJustJumped = !isJumping || hasMinimumAirTime;
+
+            if (isActuallyFalling && notJustJumped)
+            {
+              isGrounded = true;
+              Debug.Log($"=== PLAYER GROUNDED ===");
+              Debug.Log($"Y Velocity when grounded: {rb.linearVelocity.y}");
+              Debug.Log($"Air time: {Time.time - lastJumpTime:F2}s");
+              Debug.Log($"Contact normal: {normal}");
+
+              // DEAD CELLS: Reset jump state when landing
+              ResetJumpingState();
+
+              // Trigger landing state transition if we were falling
+              if (wasGroundedLastFrame == false && rb.linearVelocity.y < -1f)
+              {
+                // Let the state machine handle the landing transition
+              }
+            }
+            else
+            {
+              Debug.Log($"=== GROUND CONTACT IGNORED ===");
+              Debug.Log($"Y Velocity: {rb.linearVelocity.y}, Air time: {Time.time - lastJumpTime:F2}s");
+              Debug.Log($"Min air time passed: {hasMinimumAirTime}, Actually falling: {isActuallyFalling}");
+              Debug.Log($"Not just jumped: {notJustJumped}, Is jumping: {isJumping}");
+            }
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
+    if (collision.gameObject.CompareTag("IceSpike"))
+    {
+      playerStats.TakeDamage(10f);
+    }
+  }
+
+  private void OnCollisionExit2D(Collision2D collision)
+  {
+    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Rock"))
+    {
+      groundContactCount--;
+      if (groundContactCount <= 0)
+      {
+        groundContactCount = 0;
+        isGrounded = false;
+      }
+    }
+  }
 }

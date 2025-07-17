@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Animated_worm_0: 2807039003615535174
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

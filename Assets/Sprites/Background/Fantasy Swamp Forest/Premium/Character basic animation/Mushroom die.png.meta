@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mushroom die_0: 6357430105357656
+      Mushroom die_1: 2673668284386241380
+      Mushroom die_2: -5951019864393928851
+      Mushroom die_3: 4547357476140162835
+      Mushroom die_4: 3266047309274384723
+      Mushroom die_5: -3257359811087134445
+      Mushroom die_6: -6050831443266931503
+      Mushroom die_7: 1304041897187940290
+      Mushroom die_8: -7145757739190867521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mockup worms_0: 4359548056749231638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

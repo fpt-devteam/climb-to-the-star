@@ -459,7 +459,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Animated_props_0: 1667878814778645570
+      Animated_props_1: 3734556582888033028
+      Animated_props_10: 4461352206564612850
+      Animated_props_11: -5440018243132594488
+      Animated_props_12: -6456766104785122453
+      Animated_props_13: 1766207830372232095
+      Animated_props_2: 4109474181797013312
+      Animated_props_3: 5506089899515828765
+      Animated_props_4: -5400624902660286011
+      Animated_props_5: 6711942167061813122
+      Animated_props_6: -6352954409956802292
+      Animated_props_7: 19254525740883449
+      Animated_props_8: -2020696039647809353
+      Animated_props_9: -8855094631205739495
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
