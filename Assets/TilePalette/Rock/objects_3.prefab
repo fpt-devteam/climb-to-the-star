@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 639767779104574152}
   - component: {fileID: 8192484192107210534}
-  - component: {fileID: 2904732626696700352}
+  - component: {fileID: 6781919381902553577}
   m_Layer: 3
   m_Name: objects_3
   m_TagString: Ground
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 890210543
-  m_SortingLayer: 3
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 801786299, guid: c568092d7452f4cf9b5a6e629a61dcd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2904732626696700352
+--- !u!61 &6781919381902553577
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,11 +126,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 2.4375}
+    oldSize: {x: 1.5, y: 1.21875}
     newSize: {x: 3, y: 2.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3, y: 2.4375}
+  m_Size: {x: 1.5, y: 1.21875}
   m_EdgeRadius: 0

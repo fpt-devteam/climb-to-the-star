@@ -8,27 +8,16 @@ public enum GameState
     Playing,
     Paused,
     GameOver,
-    Victory,
 }
 
 public class GameManager : MonoBehaviour
 {
     [Header("Game Settings")]
-    [SerializeField]
-    private bool _isPaused = false;
-
-    [SerializeField]
-    private GameState _currentGameState = GameState.MainMenu;
-
     public static GameManager Instance { get; private set; }
-
-    public System.Action<GameState> OnGameStateChanged;
-    public System.Action<bool> OnPauseStateChanged;
-
-    public bool IsPaused => _isPaused;
-    public GameState CurrentGameState => _currentGameState;
-
-    #region Unity Lifecycle
+    public GameState CurrentGameState => currentGameState;
+    public bool IsPaused => isPaused;
+    private bool isPaused = false;
+    private GameState currentGameState;
 
     private void Awake()
     {
@@ -36,7 +25,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeManagers();
         }
         else
         {
@@ -49,32 +37,12 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.MainMenu);
     }
 
-    private void OnDestroy()
-    {
-        OnGameStateChanged = null;
-        OnPauseStateChanged = null;
-    }
-
-    #endregion
-
-    #region Initialization
-
-    private void InitializeManagers()
-    {
-        // handle
-    }
-
-    #endregion
-
-    #region Game State Management
-
     public void ChangeGameState(GameState newState)
     {
-        if (_currentGameState == newState)
+        if (currentGameState == newState)
             return;
 
-        GameState previousState = _currentGameState;
-        _currentGameState = newState;
+        currentGameState = newState;
 
         switch (newState)
         {
@@ -88,14 +56,9 @@ public class GameManager : MonoBehaviour
                 HandlePausedState();
                 break;
             case GameState.GameOver:
-                HandleGameOverState();
-                break;
-            case GameState.Victory:
-                HandleVictoryState();
+                RestartGame();
                 break;
         }
-
-        OnGameStateChanged?.Invoke(newState);
     }
 
     private void HandleMainMenuState()
@@ -116,75 +79,31 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private void HandleGameOverState()
-    {
-        SetPauseState(true);
-        Time.timeScale = 0f;
-    }
-
-    private void HandleVictoryState()
-    {
-        SetPauseState(true);
-        Time.timeScale = 0f;
-    }
-
-    #endregion
-
-    #region Pause Management
-
     public void TogglePause()
     {
-        if (_currentGameState == GameState.Playing)
+        isPaused = !isPaused;
+
+        if (currentGameState == GameState.Playing)
         {
             ChangeGameState(GameState.Paused);
         }
-        else if (_currentGameState == GameState.Paused)
+        else if (currentGameState == GameState.Paused)
         {
             ChangeGameState(GameState.Playing);
         }
     }
 
-    private void SetPauseState(bool isPaused)
-    {
-        if (_isPaused != isPaused)
-        {
-            _isPaused = isPaused;
-            OnPauseStateChanged?.Invoke(isPaused);
-        }
-    }
+    private void SetPauseState(bool isPaused) => this.isPaused = isPaused;
 
-    #endregion
+    public void GameOver() => ChangeGameState(GameState.GameOver);
 
-    #region Game Flow Methods
-
-    public void StartGame()
-    {
-        ChangeGameState(GameState.Playing);
-    }
+    public void StartGame() => ChangeGameState(GameState.Playing);
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoader.Instance.ReloadCurrentScene();
+        ChangeGameState(GameState.Playing);
     }
 
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
-
-    public void GameOver()
-    {
-        ChangeGameState(GameState.GameOver);
-    }
-
-    public void Victory()
-    {
-        ChangeGameState(GameState.Victory);
-    }
-
-    #endregion
+    public void QuitGame() => Application.Quit();
 }

@@ -137,6 +137,13 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("IceSpike"))
+        {
+            playerStats.TakeDamage(10f);
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
