@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeSceneOnClick: 1
-  sceneNameToLoad: BossScene
+  sceneNameToLoad: Level1Scene
 --- !u!1 &334254111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,6 +2407,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e149ad2ea34111e4caea50b4bf60c149, type: 3}
   - key: 3
     clip: {fileID: 8300000, guid: 89ec1a9664ad0b74281ee392e067bbdf, type: 3}
+  - key: 8
+    clip: {fileID: 8300000, guid: 92ce84f6733510b4e8ce250277ac65af, type: 3}
+  - key: 9
+    clip: {fileID: 8300000, guid: 2830419accdecc740b5a3fb9c8c1926f, type: 3}
+  - key: 9
+    clip: {fileID: 8300000, guid: 2830419accdecc740b5a3fb9c8c1926f, type: 3}
   audioMusicClips:
   - key: 0
     clip: {fileID: 8300000, guid: 0630738ee26520941a203e0fe2928c0a, type: 3}

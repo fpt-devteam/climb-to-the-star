@@ -12,6 +12,9 @@ public enum AudioSFXEnum
     PlayerHurt,
     EnemyAttack,
     EnemyHurt,
+    BossAttack,
+    BossHurt,
+    BossDeath,
 }
 
 public enum AudioMusicEnum

@@ -111,9 +111,6 @@ public class DashState : BasePlayerState
       trailRenderer.enabled = false;
       trailRenderer.emitting = false;
     }
-
-    // Clear external velocity control
-    movement.ClearExternalVelocityControl();
   }
 
   public override IState CheckTransitions()

@@ -10,6 +10,7 @@ public class BossDeathState : BaseBossState
       : base(context)
   {
     animator = context.GetComponent<Animator>();
+    AudioManager.Instance.PlaySFX(AudioSFXEnum.BossDeath);
   }
 
   public override void Enter()
@@ -25,6 +26,7 @@ public class BossDeathState : BaseBossState
     yield return new WaitForSeconds(1f);
     context.gameObject.SetActive(false);
     hasApplyAnimation = true;
+    GameManager.Instance.Victory();
   }
 }
 

@@ -45,6 +45,8 @@ public class BossStats : MonoBehaviour
   public bool IsHurt => immuneTimer > 0f;
   public bool IsEnraged => HealthPercentage <= enrageThreshold;
   public bool IsDead => currentHealth <= 0f;
+  public bool IsAlive => currentHealth > 0f;
+  public bool CanAttack => !IsImmune && !IsHurt && IsAlive;
 
   public GameObject MeleeAttackPoint => meleeAttackPoint;
   public GameObject ProjectilePrefab => projectilePrefab;
@@ -75,6 +77,19 @@ public class BossStats : MonoBehaviour
       return;
 
     healthBar.value = HealthPercentage;
+
+    if (HealthPercentage > HIGH_HEALTH_THRESHOLD)
+    {
+      healthBar.fillRect.GetComponent<Image>().color = Color.green;
+    }
+    else if (HealthPercentage > MEDIUM_HEALTH_THRESHOLD)
+    {
+      healthBar.fillRect.GetComponent<Image>().color = Color.yellow;
+    }
+    else
+    {
+      healthBar.fillRect.GetComponent<Image>().color = Color.red;
+    }
   }
 
   private void DeductHealth(float healthAmount)

@@ -58,7 +58,6 @@ public class BossController : MonoBehaviour
     }
 
     var distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-    Debug.Log($"Distance to Player: {distanceToPlayer}, Melee Attack Range: {bossStats.MeleeAttackRange}");
     return distanceToPlayer <= bossStats.MeleeAttackRange;
   }
 

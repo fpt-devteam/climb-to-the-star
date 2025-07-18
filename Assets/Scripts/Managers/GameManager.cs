@@ -8,6 +8,7 @@ public enum GameState
     Playing,
     Paused,
     GameOver,
+    Victory,
 }
 
 public class GameManager : MonoBehaviour
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 RestartGame();
                 break;
+            case GameState.Victory:
+                HandleVictoryState();
+                break;
         }
     }
 
@@ -74,6 +78,12 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandlePausedState()
+    {
+        SetPauseState(true);
+        Time.timeScale = 0f;
+    }
+
+    private void HandleVictoryState()
     {
         SetPauseState(true);
         Time.timeScale = 0f;
@@ -98,6 +108,8 @@ public class GameManager : MonoBehaviour
     public void GameOver() => ChangeGameState(GameState.GameOver);
 
     public void StartGame() => ChangeGameState(GameState.Playing);
+
+    public void Victory() => ChangeGameState(GameState.Victory);
 
     public void RestartGame()
     {

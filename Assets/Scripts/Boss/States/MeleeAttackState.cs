@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class MeleeAttackState : BaseBossState
 {
-  private float attackDuration;
+  private float attackCooldown = 1.5f;
+  private float attackDelay = 0.3f;
   private float attackRange;
-  private bool hasAppliedAnimation;
   private Coroutine animationCoroutine;
-  private bool hasAppliedDamage = false;
 
   private GameObject attackPoint;
   private Animator animator;
+  private bool isAttacking;
+  private float lastAttackTime;
 
   public MeleeAttackState(BossController context)
       : base(context)
@@ -21,16 +22,46 @@ public class MeleeAttackState : BaseBossState
 
   public override void Enter()
   {
-    hasAppliedAnimation = false;
-    hasAppliedDamage = false;
-    attackDuration = context.BossStats.AttackCooldown;
+    if (Time.time - lastAttackTime < attackCooldown)
+    {
+      return;
+    }
+
+    isAttacking = true;
+    lastAttackTime = Time.time;
+
+    attackCooldown = context.BossStats.AttackCooldown;
     attackRange = context.BossStats.MeleeAttackRange;
 
-    // AudioManager.Instance.PlaySFX(AudioSFXEnum.BossAttack);
     Debug.Log("Boss entering Melee Attack State");
     animator.Play("MeleeAttack");
-    animationCoroutine = context.StartCoroutine(WaitForAnimationCompletion());
-    PerformDamage();
+    context.StartCoroutine(PerformDelayedAttack());
+    context.StartCoroutine(ResetAttackState());
+  }
+
+  private IEnumerator ResetAttackState()
+  {
+    yield return new WaitForSeconds(1f);
+    isAttacking = false;
+  }
+
+  private IEnumerator PerformDelayedAttack()
+  {
+    yield return new WaitForSeconds(attackDelay);
+
+    if (context.BossStats.CanAttack)
+    {
+      PerformAttack();
+    }
+    else
+    {
+      Debug.Log("Enemy became hurt/immune during attack delay - attack cancelled");
+      isAttacking = false;
+    }
+  }
+  private void PerformAttack()
+  {
+    AudioManager.Instance.PlaySFX(AudioSFXEnum.BossAttack);
   }
 
   public override void Exit()
@@ -42,29 +73,6 @@ public class MeleeAttackState : BaseBossState
     }
   }
 
-  protected virtual void PerformDamage()
-  {
-    float baseDamage = context.BossStats.MeleeAttackDamage;
-    float finalDamage = baseDamage;
-
-    Collider2D collider = Physics2D.OverlapCircle(attackPoint.transform.position, context.BossStats.MeleeAttackRange, LayerMask.GetMask("Player"));
-
-    if (collider != null)
-    {
-      PlayerStats playerStats = collider.GetComponent<PlayerStats>();
-      if (playerStats != null)
-      {
-        playerStats.TakeDamage(finalDamage);
-      }
-    }
-  }
-
-  protected IEnumerator WaitForAnimationCompletion()
-  {
-    yield return new WaitForSeconds(attackDuration);
-    hasAppliedAnimation = true;
-  }
-
   public override IState CheckTransitions()
   {
     if (context.BossStats.IsHurt)
@@ -72,11 +80,17 @@ public class MeleeAttackState : BaseBossState
       return context.GetState(BossState.Hurt);
     }
 
-    if (hasAppliedAnimation)
+    if (isAttacking && !context.BossStats.CanAttack)
     {
+      isAttacking = false;
       return context.GetState(BossState.Idle);
     }
 
-    return null;
+    if (isAttacking)
+    {
+      return null;
+    }
+
+    return context.GetState(BossState.Idle);
   }
 }

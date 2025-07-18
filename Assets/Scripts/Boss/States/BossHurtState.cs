@@ -17,6 +17,8 @@ public class BossHurtState : BaseBossState
     public override void Enter()
     {
         Debug.Log("Boss entering Hurt State");
+        AudioManager.Instance.PlaySFX(AudioSFXEnum.BossHurt);
+
         isAppliedAnimation = false;
         animator.Play("Hurt");
         context.StartCoroutine(ExitHurtState());

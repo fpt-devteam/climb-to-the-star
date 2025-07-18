@@ -24,5 +24,6 @@ public class DieState : BasePlayerState
         yield return new WaitForSeconds(1f);
         hasApplyAnimation = true;
         Time.timeScale = 0f;
+        GameManager.Instance.GameOver();
     }
 }

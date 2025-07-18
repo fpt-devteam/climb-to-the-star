@@ -227,11 +227,8 @@ public abstract class BasePlayerAttackState : BasePlayerState
       EnemyStats enemyStats = collider.GetComponent<EnemyStats>();
       if (enemyStats != null)
       {
-        // DEAD CELLS: Apply damage
         enemyStats.TakeDamage(finalDamage);
-        Debug.Log($"Dealt {finalDamage} damage to {collider.name}");
 
-        // DEAD CELLS: Apply knockback effect
         EnemyKnockback knockback = collider.GetComponent<EnemyKnockback>();
         if (knockback != null)
         {
@@ -239,10 +236,24 @@ public abstract class BasePlayerAttackState : BasePlayerState
           knockback.ApplyKnockback(attackPoint.transform.position, knockbackMultiplier);
         }
 
-        // DEAD CELLS: Screen shake based on attack type
         ApplyScreenShake();
+        ApplyImpactEffects(collider.transform.position);
+      }
 
-        // DEAD CELLS: Impact visual effects
+      BossStats bossStats = collider.GetComponent<BossStats>();
+      if (bossStats != null)
+      {
+        bossStats.TakeDamage(finalDamage);
+
+        EnemyKnockback knockback = collider.GetComponent<EnemyKnockback>();
+
+        if (knockback != null)
+        {
+          float knockbackMultiplier = GetKnockbackMultiplier();
+          knockback.ApplyKnockback(attackPoint.transform.position, knockbackMultiplier);
+        }
+
+        ApplyScreenShake();
         ApplyImpactEffects(collider.transform.position);
       }
     }

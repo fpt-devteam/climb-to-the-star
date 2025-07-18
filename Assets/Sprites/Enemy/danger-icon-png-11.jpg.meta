@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      danger-icon-png-11_0: 3169499054253969585
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
