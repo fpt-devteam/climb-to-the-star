@@ -6298,6 +6298,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1639923654}
+    - target: {fileID: 25078711621334983, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
+      propertyPath: maxFallSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3044073108098859285, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6341,6 +6345,10 @@ PrefabInstance:
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122592651756924915, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
+      propertyPath: dashCooldownTime
+      value: 0.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

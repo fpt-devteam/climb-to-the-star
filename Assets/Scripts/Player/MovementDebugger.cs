@@ -46,7 +46,7 @@ public class MovementDebugger : MonoBehaviour
 
     if (movement != null)
     {
-      Vector2 currentVel = movement.GetCurrentVelocity();
+      Vector2 currentVel = movement.GetVelocity();
       GUILayout.Label($"Direct Vel: {currentVel:F2}", guiStyle);
       GUILayout.Label($"Direct H-Speed: {Mathf.Abs(currentVel.x):F2}", guiStyle);
     }
@@ -123,13 +123,8 @@ public class MovementDebugger : MonoBehaviour
       GUILayout.Space(5);
       GUILayout.Label("=== ENHANCED FEATURES ===", headerStyle);
       GUILayout.Label($"Can Coyote: {movement.CanCoyoteJump()}", guiStyle);
-      GUILayout.Label($"Jump Buffer: {movement.HasJumpBuffer()}", guiStyle);
+      GUILayout.Label($"Jump Buffer: {movement.HasBufferedJump()}", guiStyle);
       GUILayout.Label($"Jump Cut: {movement.IsJumpCut()}", guiStyle);
-
-      GUILayout.Space(5);
-      GUILayout.Label("=== LANDING MECHANICS ===", headerStyle);
-      GUILayout.Label($"Should Roll: {movement.ShouldRollOnLanding()}", guiStyle);
-      GUILayout.Label($"Landing Speed: {movement.GetLandingHorizontalSpeed():F2}", guiStyle);
     }
 
     GUILayout.EndArea();

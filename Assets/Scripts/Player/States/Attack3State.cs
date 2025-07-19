@@ -1,76 +1,93 @@
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Attack3 - SPIN ATTACK
+/// Duration: 766ms + 150ms grace period
+/// Part of professional Dead Cells-style combo chain system
+/// </summary>
 public class Attack3State : BasePlayerAttackState
 {
-  public Attack3State(PlayerController context)
-      : base(context)
+  public Attack3State(PlayerController context) : base(context)
   {
+    // SPIN ATTACK specifications
     animationName = "Attack_3";
-    animationDuration = 0.6f;       // USER SPECIFIED: 600ms exact duration
-    minAnimationDisplayTime = 0.45f; // REDUCED: Must be less than dash cancel time (80% of 0.6s = 0.48s)
-    comboWindow = 0.48f;              // Combo window opens before animation ends
-    earlyComboWindow = 0.25f;        // Early buffer for speed
-    attackRange = 0.7f;              // Even longer reach
-    damageMultiplier = 1.4f;         // Significant damage increase
+    animationDuration = 0.766f;        // 766ms as requested
+    comboGracePeriod = 0.15f;          // 150ms grace period
+    earlyComboWindow = animationDuration * 0.7f;  // Later combo window for spin
+    attackRange = 1.2f;                // Spin has wide range
+    damageMultiplier = 1.3f;           // Higher damage for area attack
 
-    // DEAD CELLS: Heavy attack - later dash cancel for commitment
-    dashCancelPercentage = 0.8f; // Allow dash after 80% for heavy attack
+    // Professional timing
+    minAnimationDisplayTime = animationDuration * 0.7f;    // Longer display for satisfying spin
+    dashCancelPercentage = 0.6f;       // Later dash cancel for commitment
+
+    Debug.Log($"Attack3 (SPIN) initialized - Duration: {animationDuration}s, Grace: {comboGracePeriod}s");
   }
 
   protected override float GetAttackMovementMultiplier()
   {
-    // Heavy attack - very limited movement
-    return 0.15f;
-  }
-
-  protected override float GetAttackRange()
-  {
-    // Attack3 has the longest range so far
-    return attackRange;
+    // Spin attack locks movement for commitment
+    return 0.2f; // 20% movement speed
   }
 
   protected override float GetKnockbackMultiplier()
   {
-    // Heavy attack - strong knockback
-    return 1.5f;
+    // Spin attack has strong knockback
+    return damageMultiplier * 1.5f;
   }
 
   protected override void ApplyScreenShake()
   {
-    // Heavy impact shake
-    CameraShake.HeavyHit();
+    // Spin attack creates medium screen shake
+    CameraShake.MediumHit();
   }
 
   public override IState CheckTransitions()
   {
-    // DEAD CELLS: Priority 0 - Dash cancel (highest priority for fluid combat)
-    if (CanDashCancel())
+    // Professional combo system - check after minimum animation time
+    if (hasMinAnimationTimePassed)
     {
-      Debug.Log("Attack3 -> Dash cancel triggered!");
-      return context.GetState(PlayerState.Dash);
+      // COMBO CHAIN: Attack3 -> Attack4 (Spin -> Special)
+      if (CanTransitionToNextAttack())
+      {
+        Debug.Log($"COMBO CHAIN: Attack3 (Spin) -> Attack4 (Special) at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Attack4);
+      }
+
+      // DASH CANCEL: Allow dash after 80% of animation
+      if (CanDashCancel() && context.IsDashing())
+      {
+        Debug.Log($"DASH CANCEL: Attack3 (Spin) canceled at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Dash);
+      }
     }
 
-    // Priority 1: Hurt state (highest priority)
-    if (context.IsHurt())
+    // Standard transitions after full animation + grace period
+    if (stateTimer >= animationDuration + comboGracePeriod)
     {
-      return context.GetState(PlayerState.Hurt);
+      // High priority actions
+      if (context.IsJumping())
+      {
+        return context.GetState(PlayerState.Air);
+      }
+
+      if (context.IsDashing())
+      {
+        return context.GetState(PlayerState.Dash);
+      }
+
+      // Return to appropriate movement state
+      if (context.IsGrounded)
+      {
+        return context.GetState(PlayerState.Locomotion);
+      }
+      else
+      {
+        return context.GetState(PlayerState.Air);
+      }
     }
 
-    // Priority 2: Combo to finisher attack
-    if (CanTransitionToNextAttack())
-    {
-      Debug.Log("Attack3 -> Attack4 (FINISHER) combo triggered");
-      return context.GetState(PlayerState.Attack4);
-    }
-
-    // Priority 3: Attack complete, return to locomotion
-    if (IsAttackComplete())
-    {
-      Debug.Log("Attack3 complete, returning to locomotion");
-      return context.GetState(PlayerState.Locomotion);
-    }
-
-    // Stay in current state
     return null;
   }
 }

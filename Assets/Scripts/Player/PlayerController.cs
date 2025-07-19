@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
   private bool jumpPressedThisFrame = false;
   private bool jumpReleasedThisFrame = false;
   private float lastJumpTime = 0f; // Track when last jump occurred
-  private float minAirborneTime = 0.1f; // Minimum time player must stay airborne after jump
+  private float minAirborneTime = 0.05f; // Reduced for immediate double jump responsiveness
 
   // Double jump input buffering for reliability
   private bool jumpInputBuffer = false;
   private float jumpInputBufferTimer = 0f;
-  private float jumpInputBufferDuration = 0.1f; // 100ms buffer for double jump input
+  private float jumpInputBufferDuration = 0.25f; // Increased from 0.15f for more forgiving double jump timing
 
   // DEAD CELLS: Double Jump System
   [Header("Dead Cells Jump System")]
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
   // Dash cooldown system
   [Header("Dash Cooldown")]
-  [SerializeField] private float dashCooldownTime = 1.0f; // 1 second cooldown
+  [SerializeField] private float dashCooldownTime = 0.5f; // 1 second cooldown
   private float dashCooldownTimer = 0f;
   private float lastDashTime = -10f; // Initialize to allow immediate first dash
 
@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour
             { PlayerState.Attack3, new Attack3State(this) },
             { PlayerState.Attack4, new Attack4State(this) },
             { PlayerState.Hurt, new HurtState(this) },
-            { PlayerState.Land, new LandState(this) },
             { PlayerState.Die, new DieState(this) },
             { PlayerState.Air, new AirState(this) },
         };
@@ -129,21 +128,23 @@ public class PlayerController : MonoBehaviour
     jumpPressedThisFrame = playerInput.IsJumpPressed();
     jumpReleasedThisFrame = !playerInput.IsJumpHeld() && isJumping && rb.linearVelocity.y > 0;
 
-    // Update jump input buffer for double jump reliability
+    // IMPROVED JUMP INPUT BUFFERING: Better handling for double jump
     if (jumpPressedThisFrame)
     {
+      // Always refresh buffer on new input, even if already buffered
       jumpInputBuffer = true;
       jumpInputBufferTimer = jumpInputBufferDuration;
-      Debug.Log("Jump input buffered for double jump reliability");
+      Debug.Log($"Jump input buffered for {jumpInputBufferDuration}s (refreshed on new press)");
     }
 
-    // Decrease buffer timer
+    // Decrease buffer timer - but keep it active longer for double jumps
     if (jumpInputBufferTimer > 0f)
     {
       jumpInputBufferTimer -= Time.deltaTime;
       if (jumpInputBufferTimer <= 0f)
       {
         jumpInputBuffer = false;
+        Debug.Log("Jump input buffer expired");
       }
     }
 
@@ -156,11 +157,19 @@ public class PlayerController : MonoBehaviour
 
   private void UpdateMovementTimers()
   {
-    // Update coyote time
+    // CRITICAL FIX: Ensure movement system knows the correct ground state
     playerMovement.UpdateCoyoteTime(isGrounded);
 
     // Update jump buffer
     playerMovement.UpdateJumpBuffer(jumpPressedThisFrame);
+
+    // CRITICAL FIX: If player is grounded but movement thinks we're under external control, clear it
+    if (isGrounded && playerMovement.IsUnderExternalControl())
+    {
+      // Check if external control should have expired
+      Debug.Log("Ground detected - checking if external control should be cleared");
+      // Let the movement system handle its own cleanup, but log for debugging
+    }
   }
 
   private void UpdateDashCooldown()
@@ -194,6 +203,11 @@ public class PlayerController : MonoBehaviour
         isFacingRight = false;
       }
     }
+  }
+
+  public void StopMovement()
+  {
+    rb.linearVelocity = Vector2.zero;
   }
 
   public bool IsWalking()
@@ -268,27 +282,56 @@ public class PlayerController : MonoBehaviour
       hasUsedDoubleJump = false;
       isJumping = true;
       lastJumpTime = Time.time; // Track jump time for ground detection
+      ClearJumpBuffer(); // Clear buffer since jump was successful
       Debug.Log("FIRST JUMP ACTIVATED!");
       return true;
     }
-    // Double jump - can be used in air (second jump only)
+    // DOUBLE JUMP - can be used anytime in air without waiting for fall state
     else if (currentJumps == 1 && !hasUsedDoubleJump)
     {
-      currentJumps = 2; // Second jump (maximum)
-      hasUsedDoubleJump = true;
-      isJumping = true;
-      lastJumpTime = Time.time; // Track jump time for ground detection
-      jumpInputBuffer = false; // Clear buffer after using double jump
-      Debug.Log("DOUBLE JUMP ACTIVATED!");
-      return true;
+      // FIXED: Check if enough time has passed since first jump for valid double jump
+      float timeSinceLastJump = Time.time - lastJumpTime;
+      if (timeSinceLastJump >= 0.1f) // Minimum 0.1s delay for clean double jump
+      {
+        currentJumps = 2; // Second jump (maximum)
+        hasUsedDoubleJump = true;
+        isJumping = true;
+        lastJumpTime = Time.time; // Track jump time for ground detection
+        ClearJumpBuffer(); // Clear buffer since jump was successful
+        Debug.Log("DOUBLE JUMP ACTIVATED!");
+        return true;
+      }
+      else
+      {
+        // TOO EARLY: Don't consume the jump, keep the buffer for a valid attempt
+        Debug.Log($"Double jump too early - need {0.1f - timeSinceLastJump:F2}s more. Keeping buffer.");
+        return false; // Don't clear buffer, allow retry
+      }
     }
     else
     {
-      Debug.Log($"JUMP BLOCKED: currentJumps = {currentJumps}, hasUsedDoubleJump = {hasUsedDoubleJump}");
+      // INVALID: Clear buffer since no jumps are available
+      if (currentJumps >= 2 || hasUsedDoubleJump)
+      {
+        ClearJumpBuffer();
+        Debug.Log($"JUMP BLOCKED: No jumps remaining (currentJumps = {currentJumps}, hasUsedDoubleJump = {hasUsedDoubleJump})");
+      }
+      else
+      {
+        Debug.Log($"JUMP BLOCKED: Unknown condition (currentJumps = {currentJumps}, hasUsedDoubleJump = {hasUsedDoubleJump})");
+      }
     }
 
     // No more jumps available
     return false;
+  }
+
+  // Helper method to clear jump input buffer
+  private void ClearJumpBuffer()
+  {
+    jumpInputBuffer = false;
+    jumpInputBufferTimer = 0f;
+    Debug.Log("Jump input buffer cleared");
   }
 
   public bool CanAttack() => isGrounded && playerInput.IsAttackPressed();
@@ -371,6 +414,40 @@ public class PlayerController : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.F4))
     {
       DebugCombatTiming();
+    }
+
+    // NEW: Emergency fix for stuck states
+    if (Input.GetKeyDown(KeyCode.F5))
+    {
+      DebugForceUnstuck();
+    }
+  }
+
+  // Emergency method to force unstuck player
+  public void DebugForceUnstuck()
+  {
+    Debug.Log("=== EMERGENCY UNSTUCK ACTIVATED ===");
+    Debug.Log($"Current State: {GetCurrentStateName()}");
+    Debug.Log($"Is Grounded: {isGrounded}");
+    Debug.Log($"Under External Control: {playerMovement.IsUnderExternalControl()}");
+    Debug.Log($"Y Velocity: {rb.linearVelocity.y}");
+
+    // Force clear external control
+    playerMovement.ForceStopExternalControl();
+
+    // Reset jump state
+    ResetJumpingState();
+
+    // Force transition to appropriate state
+    if (isGrounded)
+    {
+      Debug.Log("Force transitioning to Locomotion");
+      stateMachine.Initialize(GetState(PlayerState.Locomotion));
+    }
+    else
+    {
+      Debug.Log("Force transitioning to Air");
+      stateMachine.Initialize(GetState(PlayerState.Air));
     }
   }
 

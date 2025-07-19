@@ -11,5 +11,4 @@ public enum PlayerState
   Charge,
   Shield,
   Air,
-  Land,
 }

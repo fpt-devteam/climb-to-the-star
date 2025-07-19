@@ -1,98 +1,105 @@
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Attack4 - SPECIAL ATTACK
+/// Duration: 833.33ms + 150ms grace period
+/// Final attack in professional Dead Cells-style combo chain system
+/// </summary>
 public class Attack4State : BasePlayerAttackState
 {
-  public Attack4State(PlayerController context)
-      : base(context)
+  public Attack4State(PlayerController context) : base(context)
   {
+    // SPECIAL ATTACK specifications
     animationName = "Attack_4";
-    animationDuration = 0.7f;       // USER SPECIFIED: 700ms exact duration
-    minAnimationDisplayTime = 0.55f; // REDUCED: Must be less than dash cancel time (85% of 0.7s = 0.595s)
-    comboWindow = 0.58f;             // Combo window opens before animation ends
-    earlyComboWindow = 0.3f;         // Early buffer for speed
-    attackRange = 0.8f;              // Maximum reach
-    damageMultiplier = 1.8f;         // Finisher damage
+    animationDuration = 0.83333f;      // 833.33ms as requested
+    comboGracePeriod = 0.15f;          // 150ms grace period
+    earlyComboWindow = animationDuration * 0.7f;  // Late combo window for special
+    attackRange = 1.5f;                // Special has maximum range
+    damageMultiplier = 2.0f;           // Highest damage for finisher
 
-    // DEAD CELLS: Finisher attack - very late dash cancel for high commitment
-    dashCancelPercentage = 0.85f; // Allow dash after 85% for finisher attack
+    // Professional timing
+    minAnimationDisplayTime = animationDuration * 0.7f;    // Longest display for epic finisher
+    dashCancelPercentage = 0.85f;      // Very late dash cancel for full commitment
+
+    Debug.Log($"Attack4 (SPECIAL) initialized - Duration: {animationDuration}s, Grace: {comboGracePeriod}s");
   }
 
   protected override float GetAttackMovementMultiplier()
   {
-    // Finisher attack - player is locked in place for impact
-    return 0.05f; // Almost no movement
-  }
-
-  protected override float GetAttackRange()
-  {
-    // Attack4 has maximum range - finisher attack
-    return attackRange;
+    // Special attack completely locks movement for maximum impact
+    return 0.1f; // 10% movement speed
   }
 
   protected override float GetKnockbackMultiplier()
   {
-    // Finisher attack - maximum knockback
-    return 2.0f;
+    // Special attack has maximum knockback
+    return damageMultiplier * 2.0f;
   }
 
   protected override void ApplyScreenShake()
   {
-    // Finisher impact - maximum screen shake
-    CameraShake.FinisherAttack();
+    // Special attack creates heavy screen shake
+    CameraShake.HeavyHit();
   }
 
   protected override void ApplyImpactEffects(Vector3 hitPosition)
   {
-    // Finisher has enhanced visual effects
-    Vector3 impactDirection = (hitPosition - context.PlayerStats.AttackPoint.transform.position).normalized;
+    // Enhanced effects for special attack
+    base.ApplyImpactEffects(hitPosition);
 
-    // Multiple effects for finisher
+    // Additional visual effects for special attack
+    Vector3 impactDirection = (hitPosition - attackPoint.transform.position).normalized;
     ImpactEffects.SimpleFlash(hitPosition, Color.red, 0.3f);
-    ImpactEffects.CriticalHit(hitPosition, impactDirection);
     ImpactEffects.HitSparks(hitPosition, impactDirection);
 
-    Debug.Log("FINISHER IMPACT EFFECTS TRIGGERED!");
+    // You could add particle effects, lighting, etc. here
+    Debug.Log("SPECIAL ATTACK - Enhanced visual effects triggered!");
   }
 
   public override IState CheckTransitions()
   {
-    // DEAD CELLS: Priority 0 - Dash cancel (highest priority for fluid combat)
-    if (CanDashCancel())
+    // Professional combo system - check after minimum animation time
+    if (hasMinAnimationTimePassed)
     {
-      Debug.Log("Attack4 -> Dash cancel triggered!");
-      return context.GetState(PlayerState.Dash);
+      // NO MORE COMBOS: This is the final attack in the chain
+      // Only allow dash cancel for escape options
+
+      // DASH CANCEL: Allow dash after 85% of animation
+      if (CanDashCancel() && context.IsDashing())
+      {
+        Debug.Log($"DASH CANCEL: Attack4 (Special) canceled at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Dash);
+      }
     }
 
-    // Priority 1: Hurt state (highest priority)
-    if (context.IsHurt())
+    // Standard transitions after full animation + grace period
+    if (stateTimer >= animationDuration + comboGracePeriod)
     {
-      return context.GetState(PlayerState.Hurt);
+      Debug.Log("COMBO CHAIN COMPLETED - Special Attack finished!");
+
+      // High priority actions
+      if (context.IsJumping())
+      {
+        return context.GetState(PlayerState.Air);
+      }
+
+      if (context.IsDashing())
+      {
+        return context.GetState(PlayerState.Dash);
+      }
+
+      // Return to appropriate movement state
+      if (context.IsGrounded)
+      {
+        return context.GetState(PlayerState.Locomotion);
+      }
+      else
+      {
+        return context.GetState(PlayerState.Air);
+      }
     }
 
-    // Priority 2: SPECIAL - Loop back to Attack1 for infinite combo potential
-    if (CanTransitionToNextAttack())
-    {
-      Debug.Log("Attack4 -> Attack1 (COMBO LOOP) triggered - Infinite combo potential!");
-      return context.GetState(PlayerState.Attack1);
-    }
-
-    // Priority 3: Attack complete, return to locomotion
-    if (IsAttackComplete())
-    {
-      Debug.Log("Attack4 (FINISHER) complete, returning to locomotion");
-      return context.GetState(PlayerState.Locomotion);
-    }
-
-    // Stay in current state
     return null;
-  }
-
-  protected override void PerformDamage()
-  {
-    // Finisher attack has special effects
-    base.PerformDamage();
-
-    // DEAD CELLS: Extra visual feedback for finisher
-    Debug.Log("FINISHER ATTACK EXECUTED - Maximum damage and knockback!");
   }
 }

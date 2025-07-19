@@ -1,26 +1,34 @@
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Attack1 - SMASH ATTACK
+/// Duration: 733ms + 150ms grace period
+/// Part of professional Dead Cells-style combo chain system
+/// </summary>
 public class Attack1State : BasePlayerAttackState
 {
-  public Attack1State(PlayerController context)
-      : base(context)
+  public Attack1State(PlayerController context) : base(context)
   {
+    // SMASH ATTACK specifications
     animationName = "Attack_1";
-    animationDuration = 0.4f;       // USER SPECIFIED: 400ms exact duration
-    minAnimationDisplayTime = 0.25f; // REDUCED: Must be less than dash cancel time (70% of 0.4s = 0.28s)
-    comboWindow = 0.3f;              // Combo window opens before animation ends
-    earlyComboWindow = 0.15f;        // Early buffer for speed
-    attackRange = 0.5f;
-    damageMultiplier = 1.0f;
+    animationDuration = 0.733f;        // 733ms as requested
+    comboGracePeriod = 0.15f;          // 150ms grace period
+    earlyComboWindow = animationDuration * 0.7f;
+    attackRange = 0.8f;                // Smash has good range
+    damageMultiplier = 1.2f;           // Slightly stronger base attack
 
-    // DEAD CELLS: Light attack - early dash cancel for fast combat
-    dashCancelPercentage = 0.7f; // Allow dash after 70% for light attack
+    // Professional timing
+    minAnimationDisplayTime = animationDuration * 0.7f;   // Must see animation for 250ms
+    dashCancelPercentage = 0.6f;      // Can dash cancel after 75%
+
+    Debug.Log($"Attack1 (SMASH) initialized - Duration: {animationDuration}s, Grace: {comboGracePeriod}s");
   }
 
   protected override float GetAttackMovementMultiplier()
   {
-    // Light attack allows more movement
-    return 0.4f;
+    // Smash attack allows moderate movement for positioning
+    return 0.4f; // 40% movement speed
   }
 
   protected override float GetKnockbackMultiplier()
@@ -37,34 +45,49 @@ public class Attack1State : BasePlayerAttackState
 
   public override IState CheckTransitions()
   {
-    // DEAD CELLS: Priority 0 - Dash cancel (highest priority for fluid combat)
-    if (CanDashCancel())
+    // Professional combo system - check after minimum animation time
+    if (hasMinAnimationTimePassed)
     {
-      Debug.Log("Attack1 -> Dash cancel triggered!");
-      return context.GetState(PlayerState.Dash);
+      // COMBO CHAIN: Attack1 -> Attack2 (Smash -> Thrust)
+      if (CanTransitionToNextAttack())
+      {
+        Debug.Log($"COMBO CHAIN: Attack1 (Smash) -> Attack2 (Thrust) at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Attack2);
+      }
+
+      // DASH CANCEL: Allow dash after 75% of animation
+      if (CanDashCancel() && context.IsDashing())
+      {
+        Debug.Log($"DASH CANCEL: Attack1 (Smash) canceled at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Dash);
+      }
     }
 
-    // Priority 1: Hurt state (highest priority)
-    if (context.IsHurt())
+    // Standard transitions after full animation + grace period
+    if (stateTimer >= animationDuration + comboGracePeriod)
     {
-      return context.GetState(PlayerState.Hurt);
+      // High priority actions
+      if (context.IsJumping())
+      {
+        return context.GetState(PlayerState.Air);
+      }
+
+      if (context.IsDashing())
+      {
+        return context.GetState(PlayerState.Dash);
+      }
+
+      // Return to appropriate movement state
+      if (context.IsGrounded)
+      {
+        return context.GetState(PlayerState.Locomotion);
+      }
+      else
+      {
+        return context.GetState(PlayerState.Air);
+      }
     }
 
-    // Priority 2: Combo to next attack
-    if (CanTransitionToNextAttack())
-    {
-      Debug.Log("Attack1 -> Attack2 combo triggered");
-      return context.GetState(PlayerState.Attack2);
-    }
-
-    // Priority 3: Attack complete, return to locomotion
-    if (IsAttackComplete())
-    {
-      Debug.Log("Attack1 complete, returning to locomotion");
-      return context.GetState(PlayerState.Locomotion);
-    }
-
-    // Stay in current state
     return null;
   }
 }

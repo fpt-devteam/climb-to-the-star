@@ -22,6 +22,11 @@ public class KeyboardInput : IPlayerInput
 
   public float GetMovementInput() => Input.GetAxisRaw("Horizontal");
 
+  // NEW: Vertical input for 8-directional dashing
+  public float GetVerticalInput() => Input.GetAxisRaw("Vertical");
+
+  public Vector2 GetDirectionalInput() => new Vector2(GetMovementInput(), GetVerticalInput());
+
   public bool IsJumpPressed() => Input.GetKeyDown(jumpKey);
 
   public bool IsJumpHeld() => Input.GetKey(jumpKey);

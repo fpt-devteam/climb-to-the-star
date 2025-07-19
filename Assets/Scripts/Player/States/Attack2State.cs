@@ -1,26 +1,34 @@
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Attack2 - THRUST ATTACK
+/// Duration: 666.66ms + 150ms grace period
+/// Part of professional Dead Cells-style combo chain system
+/// </summary>
 public class Attack2State : BasePlayerAttackState
 {
-  public Attack2State(PlayerController context)
-      : base(context)
+  public Attack2State(PlayerController context) : base(context)
   {
+    // THRUST ATTACK specifications
     animationName = "Attack_2";
-    animationDuration = 0.5f;        // USER SPECIFIED: 500ms exact duration
-    minAnimationDisplayTime = 0.35f;  // REDUCED: Must be less than dash cancel time (75% of 0.5s = 0.375s)
-    comboWindow = 0.38f;             // Combo window opens before animation ends
-    earlyComboWindow = 0.2f;         // Early buffer for speed
-    attackRange = 0.6f;              // Longer reach
-    damageMultiplier = 1.2f;         // More damage
+    animationDuration = 0.66666f;      // 666.66ms as requested
+    comboGracePeriod = 0.15f;          // 150ms grace period
+    earlyComboWindow = animationDuration * 0.7f;  // Earlier combo window for fast thrust
+    attackRange = 1.0f;                // Thrust has longer range
+    damageMultiplier = 1.0f;           // Standard damage
 
-    // DEAD CELLS: Medium attack - standard dash cancel timing
-    dashCancelPercentage = 0.75f; // Allow dash after 75% for medium attack
+    // Professional timing
+    minAnimationDisplayTime = animationDuration * 0.7f;    // Faster animation, shorter min display
+    dashCancelPercentage = 0.6f;       // Earlier dash cancel for fast attack
+
+    Debug.Log($"Attack2 (THRUST) initialized - Duration: {animationDuration}s, Grace: {comboGracePeriod}s");
   }
 
   protected override float GetAttackMovementMultiplier()
   {
-    // Medium attack - less movement than light attack
-    return 0.25f;
+    // Thrust attack moves forward, allow good movement
+    return 0.6f; // 60% movement speed
   }
 
   protected override float GetAttackRange()
@@ -43,34 +51,49 @@ public class Attack2State : BasePlayerAttackState
 
   public override IState CheckTransitions()
   {
-    // DEAD CELLS: Priority 0 - Dash cancel (highest priority for fluid combat)
-    if (CanDashCancel())
+    // Professional combo system - check after minimum animation time
+    if (hasMinAnimationTimePassed)
     {
-      Debug.Log("Attack2 -> Dash cancel triggered!");
-      return context.GetState(PlayerState.Dash);
+      // COMBO CHAIN: Attack2 -> Attack3 (Thrust -> Spin)
+      if (CanTransitionToNextAttack())
+      {
+        Debug.Log($"COMBO CHAIN: Attack2 (Thrust) -> Attack3 (Spin) at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Attack3);
+      }
+
+      // DASH CANCEL: Allow dash after 70% of animation
+      if (CanDashCancel() && context.IsDashing())
+      {
+        Debug.Log($"DASH CANCEL: Attack2 (Thrust) canceled at {stateTimer:F3}s");
+        return context.GetState(PlayerState.Dash);
+      }
     }
 
-    // Priority 1: Hurt state (highest priority)
-    if (context.IsHurt())
+    // Standard transitions after full animation + grace period
+    if (stateTimer >= animationDuration + comboGracePeriod)
     {
-      return context.GetState(PlayerState.Hurt);
+      // High priority actions
+      if (context.IsJumping())
+      {
+        return context.GetState(PlayerState.Air);
+      }
+
+      if (context.IsDashing())
+      {
+        return context.GetState(PlayerState.Dash);
+      }
+
+      // Return to appropriate movement state
+      if (context.IsGrounded)
+      {
+        return context.GetState(PlayerState.Locomotion);
+      }
+      else
+      {
+        return context.GetState(PlayerState.Air);
+      }
     }
 
-    // Priority 2: Combo to next attack
-    if (CanTransitionToNextAttack())
-    {
-      Debug.Log("Attack2 -> Attack3 combo triggered");
-      return context.GetState(PlayerState.Attack3);
-    }
-
-    // Priority 3: Attack complete, return to locomotion
-    if (IsAttackComplete())
-    {
-      Debug.Log("Attack2 complete, returning to locomotion");
-      return context.GetState(PlayerState.Locomotion);
-    }
-
-    // Stay in current state
     return null;
   }
 }

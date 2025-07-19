@@ -36,7 +36,7 @@ public abstract class BasePlayerAttackState : BasePlayerState
   // DEAD CELLS: Dash cancel system
   [Header("Dead Cells Dash Cancel")]
   protected float dashCancelPercentage = 0.75f; // Allow dash after 75% of animation
-  protected bool canDashCancel = false; // Track if dash cancel is available
+  protected bool canDashCancel = true; // Track if dash cancel is available
 
   // Professional timing system
   protected float stateTimer = 0f;
