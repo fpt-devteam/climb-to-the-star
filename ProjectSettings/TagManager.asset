@@ -27,7 +27,7 @@ TagManager:
   - EnemyAttack
   - Trigger
   - Cell
-  - 
+  - Trap
   - 
   - 
   - 
@@ -69,6 +69,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2510430811
+    locked: 0
+  - name: Trap
+    uniqueID: 2468972671
     locked: 0
   - name: Ground
     uniqueID: 890210543

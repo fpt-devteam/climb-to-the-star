@@ -1721,6 +1721,10 @@ PrefabInstance:
       propertyPath: panelToOpen
       value: 
       objectReference: {fileID: 1666217287}
+    - target: {fileID: 791434411175693131, guid: 77ffcde2c26c5594eab564a86427b196, type: 3}
+      propertyPath: sceneNameToLoad
+      value: FinalScene
+      objectReference: {fileID: 0}
     - target: {fileID: 1561676553556041289, guid: 77ffcde2c26c5594eab564a86427b196, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

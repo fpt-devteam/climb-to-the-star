@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 3f78ab73d16690a4e9513f08b44702d5
+guid: 66e99ed857d8db74cb663ae33212f84e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3466847534962301492
-    second: Profile - Little Mooni_0
+      213: 9120327878231170204
+    second: Trap_Spike_0
+  - first:
+      213: 2786770492317036334
+    second: Trap_Spike_1
+  - first:
+      213: -7467406581430284751
+    second: Trap_Spike_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Profile - Little Mooni_0
+      name: Trap_Spike_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1256
-        height: 1000
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 43addd30777bc1030800000000000000
-      internalID: 3466847534962301492
+      spriteID: c9c9f0932e9e19e70800000000000000
+      internalID: 9120327878231170204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Spike_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2fe8117ff89ca620800000000000000
+      internalID: 2786770492317036334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trap_Spike_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 17
+        width: 32
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e0f6837417e5890800000000000000
+      internalID: -7467406581430284751
       vertices: []
       indices: 
       edges: []
@@ -147,8 +197,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Profile - Little Mooni_0: 3466847534962301492
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
