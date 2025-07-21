@@ -669,6 +669,15 @@ public class PlayerController : MonoBehaviour
     {
       playerStats.TakeDamage(10f);
     }
+    if (collision.gameObject.CompareTag("Water"))
+    {
+      GameManager.Instance.GameOver();
+    }
+    if (collision.gameObject.CompareTag("Trap"))
+    {
+      var damage = collision.GetComponent<BaseTrapStats>().GetDamage();
+      playerStats.TakeDamage(damage);
+    }
   }
 
   private void OnTriggerStay2D(Collider2D collision)

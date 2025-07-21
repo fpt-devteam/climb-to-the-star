@@ -96,8 +96,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b30a1b036ec024c488e51ccf1de8e312, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -285,7 +285,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2108312481
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3693878016822344075
@@ -362,8 +362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: 1.6799011, y: -0.0000047683716}
+  m_SizeDelta: {x: 3.36, y: -10.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6303834696468398612
 CanvasRenderer:
@@ -393,8 +393,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cb990f6c8ef88c349b0219e6486f76a5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -436,8 +436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.0379982, y: 0}
+  m_SizeDelta: {x: -6.136, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7444980230784677987
 GameObject:
@@ -521,7 +521,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2108312481
-  m_SortingLayer: 5
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: -3121812679155337768, guid: 57d6350582d20d146b6453b9c2267f56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -661,6 +661,6 @@ MonoBehaviour:
   moveSpeed: 2
   attackRange: 1.5
   attackCooldown: 1.5
-  patrolDistance: 3
+  patrolDistance: 2
   healthBar: {fileID: 8273084271563870637}
   attackPoint: {fileID: 1525496462258597936}

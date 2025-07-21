@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6611219340217454869}
   - component: {fileID: 5390074125733978745}
   - component: {fileID: 3195321352409018736}
-  - component: {fileID: 5970450513557817543}
+  - component: {fileID: 5284212214257851363}
+  - component: {fileID: -4660533133651485681}
   m_Layer: 11
   m_Name: Spear
   m_TagString: Trap
@@ -27,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6460489009376496399}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.72, y: 2.88, z: 0.08207369}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,8 +112,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &5970450513557817543
-PolygonCollider2D:
+--- !u!61 &5284212214257851363
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,11 +142,11 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.47576183}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -155,12 +156,18 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.15625, y: 0.9375}
-      - {x: -0.28125, y: 0.8125}
-      - {x: -0.28125, y: 0}
-      - {x: 0.28125, y: 0}
-      - {x: 0.28125, y: 0.8125}
-      - {x: 0.15625, y: 0.9375}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 0.5625, y: 0.95152366}
+  m_EdgeRadius: 0
+--- !u!114 &-4660533133651485681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460489009376496399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf171492442e77478f49c9cff35f842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
