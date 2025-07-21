@@ -26283,9 +26283,7 @@ MonoBehaviour:
   damage: 10
   speed: 10
   canMove: 1
-  pointLst:
-  - {fileID: 1496025734}
-  - {fileID: 559366817}
+  pointLst: {fileID: 0}
 --- !u!1 &807825632
 GameObject:
   m_ObjectHideFlags: 0
@@ -28104,9 +28102,7 @@ MonoBehaviour:
   damage: 10
   speed: 10
   canMove: 1
-  pointLst:
-  - {fileID: 1686172275}
-  - {fileID: 169617442}
+  pointLst: {fileID: 0}
 --- !u!1001 &1238914109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45792,7 +45788,7 @@ Transform:
   m_GameObject: {fileID: 1929474098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.383392, y: -4.68421, z: -9.948916}
+  m_LocalPosition: {x: -32.80164, y: -4.68573, z: -9.948916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
