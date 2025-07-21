@@ -15,6 +15,7 @@ TagManager:
   - Wall
   - EnemyAttack
   - Cell
+  - Trap
   layers:
   - Default
   - TransparentFX

@@ -671,6 +671,15 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+  private void OnTriggerStay2D(Collider2D collision)
+  {
+    if (collision.gameObject.CompareTag("Trap"))
+    {
+      var damage = collision.GetComponent<BaseTrapStats>().GetDamage();
+      playerStats.TakeDamage(damage);
+    }
+  }
+
   private void OnCollisionExit2D(Collision2D collision)
   {
     if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Rock"))
