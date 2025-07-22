@@ -2,11 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using TMPro;
 
 public class BossEncounterTrigger : MonoBehaviour
 {
   [Header("Boss Setup")]
   [SerializeField] private Slider bossSlider;
+  [SerializeField] private TextMeshProUGUI bossText;
+
 
 
   [Header("Audio Settings")]
@@ -28,14 +31,20 @@ public class BossEncounterTrigger : MonoBehaviour
     if (collision.CompareTag("Player"))
     {
       AudioManager.Instance.PlayMusic(bossMusic);
+      GetComponent<Collider2D>().enabled = false;
+      bossText.gameObject.SetActive(true);
 
       SwapCamera(bossCamera);
-
-      GetComponent<Collider2D>().enabled = false;
-
       if (bossSlider != null) bossSlider.gameObject.SetActive(true);
 
+      StartCoroutine(WaitForPlayer(collision));
     }
+  }
+
+  private IEnumerator WaitForPlayer(Collider2D collision)
+  {
+    yield return new WaitForSeconds(2f);
+    bossText.gameObject.SetActive(false);
   }
 
   private void SwapCamera(CinemachineVirtualCamera newCamera)
@@ -46,4 +55,3 @@ public class BossEncounterTrigger : MonoBehaviour
     framingTransposer = currentCamera.GetComponent<CinemachineFramingTransposer>();
   }
 }
-
