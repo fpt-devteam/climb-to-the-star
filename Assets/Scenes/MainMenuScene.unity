@@ -1593,7 +1593,7 @@ PrefabInstance:
       objectReference: {fileID: 1666217287}
     - target: {fileID: 791434411175693131, guid: 77ffcde2c26c5594eab564a86427b196, type: 3}
       propertyPath: sceneNameToLoad
-      value: CaveScene
+      value: ForestScene
       objectReference: {fileID: 0}
     - target: {fileID: 2687133040771526197, guid: 77ffcde2c26c5594eab564a86427b196, type: 3}
       propertyPath: panelToOpen

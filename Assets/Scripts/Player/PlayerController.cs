@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
   private IPlayerInput playerInput;
   private Rigidbody2D rb;
 
+  [SerializeField] private Transform teleportTarget; // For teleportation functionality
+
   private StateMachine stateMachine;
   private Dictionary<PlayerState, IState> states;
   private IPlayerMovement playerMovement;
@@ -98,6 +100,20 @@ public class PlayerController : MonoBehaviour
 
   private void Update()
   {
+
+    if (Input.GetKeyDown(KeyCode.F))
+    {
+      Debug.Log("Teleporting to target position");
+      if (teleportTarget != null)
+      {
+        transform.position = teleportTarget.position;
+      }
+      else
+      {
+        Debug.LogWarning("Teleport target not set!");
+      }
+    }
+
     // Update input tracking for enhanced jump features
     UpdateInputTracking();
 

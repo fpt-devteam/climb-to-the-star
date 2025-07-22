@@ -9,7 +9,7 @@ public class BossController : MonoBehaviour
   private Animator animator;
 
   private StateMachine stateMachine;
-  private Dictionary<BossState, IState> states;
+  private Dictionary<BossState, IState> states = new Dictionary<BossState, IState>();
   private bool isFacingLeft = true;
 
   public BossStats BossStats => bossStats;

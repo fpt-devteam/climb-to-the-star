@@ -10,7 +10,7 @@ public class BossDeathState : BaseBossState
       : base(context)
   {
     animator = context.GetComponent<Animator>();
-    AudioManager.Instance.PlaySFX(AudioSFXEnum.BossDeath);
+    // AudioManager.Instance.PlaySFX(AudioSFXEnum.BossDeath);
   }
 
   public override void Enter()
