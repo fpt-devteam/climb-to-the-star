@@ -39,6 +39,7 @@ public class EnemyPatrolState : BaseEnemyState
     Vector2 patrolTarget = context.IsFacingRight
         ? context.RightPatrolPoint
         : context.LeftPatrolPoint;
+
     float distanceToTarget = Vector2.Distance(context.transform.position, patrolTarget);
 
     if (distanceToTarget <= patrolPointReachedThreshold)

@@ -7293,7 +7293,7 @@ Transform:
   m_GameObject: {fileID: 609846843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 88.566574, y: 1.44897, z: -9.948916}
+  m_LocalPosition: {x: -55.18347, y: 1.7964699, z: -9.948916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7391,7 +7391,7 @@ GameObject:
   - component: {fileID: 638076071}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Cloud
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62188,7 +62188,7 @@ Transform:
   m_GameObject: {fileID: 1679003137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 136.07346, y: -20.24621, z: -10.964951}
+  m_LocalPosition: {x: -33.276543, y: -19.036211, z: -10.964951}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63576,11 +63576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 101.55
+      value: -67.8
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.59
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4831566687913385807, guid: 68bb3287bc466bf44b41d064098473c4, type: 3}
       propertyPath: m_LocalPosition.z

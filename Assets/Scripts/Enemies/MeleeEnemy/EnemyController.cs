@@ -113,7 +113,7 @@ public class EnemyController : MonoBehaviour
     isFacingRight = facingRight;
 
     transform.localScale = new Vector3(
-        isFacingRight ? 1f : -1f,
+        isFacingRight ? 1f * transform.localScale.x : -1f * transform.localScale.x,
         transform.localScale.y,
         transform.localScale.z
     );
