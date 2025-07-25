@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5520220414835186945}
   - component: {fileID: 7659201713270913364}
   - component: {fileID: 6053929428522195817}
+  - component: {fileID: 2886610498875980086}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -121,9 +122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 2886610498875980086}
+        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -133,6 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2886610498875980086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245725049363812394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb8989fc5ef99a46a72301a6ae50586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2762652700534849906
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeSceneOnClick: 1
-  sceneNameToLoad: FinalScene
+  sceneNameToLoad: ForestScene
 --- !u!1 &5131137855626800858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1175,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 234658989780271845}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 234658989780271845}
         m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
         m_MethodName: OnClick

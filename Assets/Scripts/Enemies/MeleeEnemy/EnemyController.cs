@@ -6,18 +6,15 @@ public class EnemyController : MonoBehaviour
   [Header("Component References")]
   private EnemyStats enemyStats;
   private Rigidbody2D rb;
-
-  // DEAD CELLS: Knockback system integration
   private EnemyKnockback knockbackComponent;
 
-  [SerializeField]
-  private GameObject startPosition;
+  [SerializeField] private bool isFacingRight = true;
+  [SerializeField] private GameObject startPosition;
   private Vector2 leftPatrolPoint;
   private Vector2 rightPatrolPoint;
   private StateMachine stateMachine;
   private Dictionary<EnemyState, IState> states;
   private PlayerStats player;
-  private bool isFacingRight = true;
 
   public bool IsFacingRight => isFacingRight;
   public EnemyStats EnemyStats => enemyStats;
@@ -25,7 +22,6 @@ public class EnemyController : MonoBehaviour
   public Vector2 LeftPatrolPoint => leftPatrolPoint;
   public Vector2 RightPatrolPoint => rightPatrolPoint;
 
-  // DEAD CELLS: Check if enemy can perform actions (not knocked back/stunned)
   public bool CanPerformActions => knockbackComponent == null || knockbackComponent.CanPerformActions();
 
   private void Awake()
@@ -34,12 +30,10 @@ public class EnemyController : MonoBehaviour
     enemyStats = GetComponent<EnemyStats>();
     player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
-    // DEAD CELLS: Initialize knockback component
     knockbackComponent = GetComponent<EnemyKnockback>();
     if (knockbackComponent == null)
     {
       knockbackComponent = gameObject.AddComponent<EnemyKnockback>();
-      Debug.Log($"EnemyController: Added EnemyKnockback component to {gameObject.name}");
     }
 
     states = new Dictionary<EnemyState, IState>
@@ -53,10 +47,8 @@ public class EnemyController : MonoBehaviour
     stateMachine = new StateMachine();
     stateMachine.Initialize(GetState(EnemyState.Patrol));
 
-    leftPatrolPoint =
-        (Vector2)startPosition.transform.position + Vector2.left * enemyStats.PatrolDistance;
-    rightPatrolPoint =
-        (Vector2)startPosition.transform.position + Vector2.right * enemyStats.PatrolDistance;
+    leftPatrolPoint = (Vector2)startPosition.transform.position + Vector2.left * enemyStats.PatrolDistance;
+    rightPatrolPoint = (Vector2)startPosition.transform.position + Vector2.right * enemyStats.PatrolDistance;
   }
 
   private void Update()
@@ -67,11 +59,6 @@ public class EnemyController : MonoBehaviour
   private void FixedUpdate()
   {
     stateMachine.FixedUpdate();
-    if (IsPlayerInAttackRange())
-    {
-      Vector2 direction = player.transform.position - transform.position;
-      ChangeDirection(direction.x > 0);
-    }
   }
 
   public void SetPlayer(PlayerStats player) => this.player = player;
@@ -84,41 +71,21 @@ public class EnemyController : MonoBehaviour
     float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
     bool inRange = distanceToPlayer <= enemyStats.AttackRange;
 
-    // PROFESSIONAL: Add debug info for attack capability
-    if (inRange && !enemyStats.CanAttack)
-    {
-      Debug.Log($"Player in range but enemy {gameObject.name} cannot attack (hurt/immune)");
-    }
-
     return inRange;
   }
 
   public void MoveTowards(Vector2 targetPosition)
   {
-    // DEAD CELLS: Don't move if being knocked back or stunned
-    if (knockbackComponent != null && !knockbackComponent.CanMove)
-    {
-      return;
-    }
+    if (knockbackComponent != null && !knockbackComponent.CanMove) return;
 
-    transform.position = Vector2.MoveTowards(
-        transform.position,
-        targetPosition,
-        enemyStats.MoveSpeed * Time.fixedDeltaTime
-    );
+    transform.position = Vector2.MoveTowards(transform.position, targetPosition, enemyStats.MoveSpeed * Time.fixedDeltaTime);
   }
 
   public void ChangeDirection(bool facingRight)
   {
     isFacingRight = facingRight;
-
-    transform.localScale = new Vector3(
-        isFacingRight ? 1f * transform.localScale.x : -1f * transform.localScale.x,
-        transform.localScale.y,
-        transform.localScale.z
-    );
+    transform.localScale = new Vector3(isFacingRight ? 1f : -1f, transform.localScale.y, transform.localScale.z);
   }
 
-  public IState GetState(EnemyState state) =>
-      states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
+  public IState GetState(EnemyState state) => states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;
 }

@@ -21,9 +21,10 @@ public class BossSearchState : BaseBossState
   public override void FixedUpdate()
   {
     var playerPosition = context.PlayerTransform.position;
-    var direction = (playerPosition - context.transform.position).normalized;
+    var targetPosition = new Vector3(playerPosition.x, context.transform.position.y, context.transform.position.z);
+    var direction = (targetPosition - context.transform.position).normalized;
 
-    context.MoveTowards(playerPosition);
+    context.MoveTowards(targetPosition);
 
     var isFacingLeft = direction.x < 0;
     context.SetFacingDirection(isFacingLeft);

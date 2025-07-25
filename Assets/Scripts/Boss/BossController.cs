@@ -63,8 +63,7 @@ public class BossController : MonoBehaviour
 
   public void MoveTowards(Vector2 target)
   {
-    Vector2 direction = (target - (Vector2)transform.position).normalized;
-    rb.linearVelocity = direction * bossStats.MoveSpeed;
+    transform.position = Vector2.MoveTowards(transform.position, target, bossStats.MoveSpeed * Time.fixedDeltaTime);
   }
 
   public IState GetState(BossState state) => states.TryGetValue(state, out IState stateInstance) ? stateInstance : null;

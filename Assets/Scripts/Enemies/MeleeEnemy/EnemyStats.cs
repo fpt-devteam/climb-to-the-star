@@ -6,44 +6,27 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour
 {
   [Header("Health Settings")]
-  [SerializeField]
-  private float maxHealth = 100f;
-
-  [SerializeField]
-  private float currentHealth = 100f;
-
-  [SerializeField]
-  private float immuneDuration = 0.5f;
+  [SerializeField] private float maxHealth = 100f;
+  [SerializeField] private float currentHealth = 100f;
+  [SerializeField] private float immuneDuration = 0.5f;
 
   [Header("Combat Stats")]
-  [SerializeField]
-  private float attackDamage = 7f;
-
-  [SerializeField]
-  private float moveSpeed = 4f;
-
-  [SerializeField]
-  private float attackRange = 1.5f;
-
-  [SerializeField]
-  private float attackCooldown = 1.5f;
+  [SerializeField] private float attackDamage = 7f;
+  [SerializeField] private float moveSpeed = 4f;
+  [SerializeField] private float attackRange = 1.5f;
+  [SerializeField] private float attackCooldown = 1.5f;
 
   [Header("Patrol Settings")]
-  [SerializeField]
-  private float patrolDistance = 3f;
+  [SerializeField] private float patrolDistance = 3f;
 
   [Header("UI References")]
-  [SerializeField]
-  private Slider healthBar;
-
-  [SerializeField]
-  private GameObject attackPoint;
+  [SerializeField] private Slider healthBar;
+  [SerializeField] private GameObject attackPoint;
 
   private const float HIGH_HEALTH_THRESHOLD = 0.6f;
   private const float MEDIUM_HEALTH_THRESHOLD = 0.3f;
   private float immuneTimer = 0f;
 
-  // Professional blinking system using modular component
   private ImmunityBlinker immunityBlinker;
 
   public GameObject AttackPoint => attackPoint;
@@ -59,10 +42,7 @@ public class EnemyStats : MonoBehaviour
   public bool IsImmune => immuneTimer > 0f;
   public bool IsHurt => immuneTimer > 0f;
   public bool IsDead => currentHealth <= 0f;
-
   public float HealthPercentage => currentHealth / maxHealth;
-
-  // NEW: Professional attack prevention during immunity
   public bool CanAttack => !IsImmune && !IsHurt && IsAlive;
 
   public void Die()
@@ -83,7 +63,6 @@ public class EnemyStats : MonoBehaviour
     if (immunityBlinker == null)
     {
       immunityBlinker = gameObject.AddComponent<ImmunityBlinker>();
-      Debug.Log($"EnemyStats: Added ImmunityBlinker component to {gameObject.name}");
     }
   }
 
@@ -97,7 +76,6 @@ public class EnemyStats : MonoBehaviour
   {
     if (immuneTimer > 0f)
     {
-      // Start blinking if we have immunity and aren't already blinking
       if (immunityBlinker != null && !immunityBlinker.IsBlinking)
       {
         immunityBlinker.StartBlinking();
@@ -105,7 +83,6 @@ public class EnemyStats : MonoBehaviour
 
       immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
 
-      // Stop blinking when immunity ends
       if (immuneTimer <= 0f && immunityBlinker != null && immunityBlinker.IsBlinking)
       {
         immunityBlinker.StopBlinking();
@@ -120,11 +97,6 @@ public class EnemyStats : MonoBehaviour
 
     DeductHealth(damageAmount);
     immuneTimer = immuneDuration;
-
-    // DEAD CELLS: Light screen shake when enemy takes damage
-    CameraShake.Shake(0.2f, 0.1f);
-
-    Debug.Log($"Enemy {gameObject.name} took {damageAmount} damage, immunity started for {immuneDuration}s");
   }
 
   public void DeductHealth(float damageAmount)
@@ -133,11 +105,6 @@ public class EnemyStats : MonoBehaviour
       return;
 
     currentHealth = Mathf.Max(0f, currentHealth - damageAmount);
-
-    if (currentHealth <= 0f)
-    {
-      Die();
-    }
   }
 
   private void UpdateHealthSlider()

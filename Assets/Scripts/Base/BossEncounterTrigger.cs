@@ -9,6 +9,8 @@ public class BossEncounterTrigger : MonoBehaviour
   [Header("Boss Setup")]
   [SerializeField] private Slider bossSlider;
   [SerializeField] private TextMeshProUGUI bossText;
+  [SerializeField] private GameObject boss;
+
 
 
 
@@ -33,6 +35,7 @@ public class BossEncounterTrigger : MonoBehaviour
       AudioManager.Instance.PlayMusic(bossMusic);
       GetComponent<Collider2D>().enabled = false;
       bossText.gameObject.SetActive(true);
+      boss.SetActive(true);
 
       SwapCamera(bossCamera);
       if (bossSlider != null) bossSlider.gameObject.SetActive(true);

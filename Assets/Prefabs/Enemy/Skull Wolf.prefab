@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: patrolDistance
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5043388411453759542, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
+      propertyPath: isFacingRight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6675606095874703204, guid: af1e451d5cfc0ee49bd9e5eff70bdfc9, type: 3}
       propertyPath: m_Controller
       value: 
